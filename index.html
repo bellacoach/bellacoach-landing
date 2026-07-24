@@ -70,6 +70,35 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .hero-note{margin-top:28px;font-size:14px;color:var(--muted)}
 .hero-note b{color:var(--ink);font-weight:600}
 
+/* MEET BELLA — audio intro (hero) */
+.meet{margin-top:30px;max-width:440px}
+.meet-row{display:flex;align-items:center;gap:8px 18px;flex-wrap:wrap}
+/* Play button — the draw. Gentle amber pulse when idle. */
+.meet-btn{display:inline-flex;align-items:center;gap:13px;padding:10px 20px 10px 11px;border-radius:999px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-family:'Inter',sans-serif;min-height:52px;transition:transform .15s,box-shadow .3s,border-color .25s;animation:meetPulse 2.2s ease-in-out infinite}
+.meet-btn:hover{transform:translateY(-1px);border-color:var(--amber)}
+.meet-btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.meet-btn.playing{animation:none;border-color:var(--amber)}
+.meet-ic{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--amber);color:#fff;flex:none}
+.meet-ic svg{width:18px;height:18px;margin-left:1px}
+.meet-btn.playing .meet-ic svg{margin-left:0}
+.meet-txt{display:flex;flex-direction:column;align-items:flex-start;line-height:1.2}
+.meet-title{display:inline-flex;align-items:center;gap:6px;font-family:'Fraunces',serif;font-weight:500;font-size:16px;color:var(--ink)}
+.meet-title .meet-spk{width:14px;height:14px;color:var(--amber-text)}
+.meet-meta{font-size:12.5px;color:var(--faint);font-variant-numeric:tabular-nums;margin-top:2px}
+.meet-read{display:inline-flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;color:var(--muted);padding:6px 4px;transition:color .2s}
+.meet-read:hover{color:var(--amber-text)}
+.meet-read:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:6px}
+.meet-read svg{width:14px;height:14px}
+.meet-progress{height:3px;border-radius:999px;background:var(--border-soft);margin-top:14px;overflow:hidden;opacity:0;transition:opacity .25s}
+.meet-progress.active{opacity:1}
+.meet-progress span{display:block;height:100%;width:0;background:var(--amber);border-radius:999px;transition:width .2s linear}
+.meet-transcript{margin-top:16px;padding-left:16px;border-left:2px solid var(--halo)}
+.meet-transcript p{font-size:14.5px;line-height:1.6;color:var(--muted);margin-bottom:10px}
+.meet-transcript p:last-child{margin-bottom:0}
+/* Slow soft glow — no flashing, no color cycle (a11y). Also killed by the global
+   prefers-reduced-motion rule below. */
+@keyframes meetPulse{0%,100%{box-shadow:0 0 0 0 rgba(180,83,9,0)}50%{box-shadow:0 0 0 6px rgba(180,83,9,.10),0 8px 22px -6px rgba(180,83,9,.30)}}
+
 /* ROLEPLAY CARD (now in hero) */
 .demo{position:relative}
 .demo::before{content:"";position:absolute;width:64px;height:64px;border-radius:16px 16px 0 0;transform:rotate(45deg);top:-22px;right:38px;
@@ -226,6 +255,32 @@ footer{border-top:1px solid var(--border);padding:54px 0 46px;background:var(--c
         <a href="#" class="btn-solid" data-demo>Book a demo</a>
         <a href="#how" class="link-arrow">See how it works &#8594;</a>
       </div>
+
+      <!-- Meet Bella — audio intro. Never autoplays; audio loads on first tap. -->
+      <div class="meet reveal d3">
+        <div class="meet-row">
+          <button type="button" class="meet-btn" id="meetBtn" aria-pressed="false" aria-label="Play Bella&#8217;s intro, about 28 seconds">
+            <span class="meet-ic" id="meetIc" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="meet-txt">
+              <span class="meet-title"><svg class="meet-spk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.8 5.2a9 9 0 0 1 0 13.6"/></svg>Meet Bella</span>
+              <span class="meet-meta" id="meetMeta">&#183; 28 sec</span>
+            </span>
+          </button>
+          <button type="button" class="meet-read" id="meetRead" aria-expanded="false" aria-controls="meetTranscript">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5h16M4 10h16M4 15h10"/></svg>
+            <span class="meet-read-lbl">Read instead</span>
+          </button>
+        </div>
+        <div class="meet-progress" id="meetProg" aria-hidden="true"><span id="meetFill"></span></div>
+        <div class="meet-transcript" id="meetTranscript" hidden>
+          <p>Hi, I&#8217;m Bella. Your real-time dental coach.</p>
+          <p>I help treatment coordinators get better at the conversation that matters most: the one where a parent decides yes or no on their child&#8217;s care.</p>
+          <p>Learn the fundamentals, one step at a time. Practice with an AI parent who pushes back just like the real thing. Ask me anything before you walk into a tough case. And watch your real numbers move as you get sharper.</p>
+          <p>Practice the conversation before it counts.</p>
+        </div>
+        <audio id="meetAudio" src="/audio/bella-intro.mp3" preload="none"></audio>
+      </div>
+
       <p class="hero-note reveal d4"><b>Practice the conversation before it counts.</b></p>
     </div>
 
@@ -394,6 +449,25 @@ form.addEventListener('submit',async(e)=>{
     else{btn.textContent=orig;btn.disabled=false;alert('Something went wrong — please try again or email us directly.');}
   }catch(err){btn.textContent=orig;btn.disabled=false;alert('Network error — please try again.');}
 });
+
+// Meet Bella audio player — play/pause, live progress, transcript toggle.
+(function(){
+  const a=document.getElementById('meetAudio');
+  if(!a) return;
+  const btn=document.getElementById('meetBtn'),ic=document.getElementById('meetIc'),meta=document.getElementById('meetMeta');
+  const prog=document.getElementById('meetProg'),fill=document.getElementById('meetFill');
+  const readBtn=document.getElementById('meetRead'),readLbl=readBtn.querySelector('.meet-read-lbl'),tr=document.getElementById('meetTranscript');
+  const PLAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  const PAUSE='<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+  const fmt=(s)=>{if(!isFinite(s)||s<0)s=0;const m=Math.floor(s/60),x=Math.floor(s%60);return m+':'+String(x).padStart(2,'0');};
+  // play() can reject (autoplay policy / decode) — fail soft.
+  btn.addEventListener('click',()=>{ if(a.paused){a.play().catch(()=>{});} else {a.pause();} });
+  a.addEventListener('play',()=>{btn.classList.add('playing');ic.innerHTML=PAUSE;btn.setAttribute('aria-pressed','true');btn.setAttribute('aria-label','Pause Bella’s intro');prog.classList.add('active');});
+  a.addEventListener('pause',()=>{btn.classList.remove('playing');ic.innerHTML=PLAY;btn.setAttribute('aria-pressed','false');btn.setAttribute('aria-label','Play Bella’s intro, about 28 seconds');});
+  a.addEventListener('ended',()=>{a.currentTime=0;fill.style.width='0%';meta.innerHTML='· 28 sec';prog.classList.remove('active');});
+  a.addEventListener('timeupdate',()=>{const d=a.duration||0;if(d>0){fill.style.width=(a.currentTime/d*100)+'%';meta.textContent=fmt(a.currentTime)+' / '+fmt(d);}});
+  readBtn.addEventListener('click',()=>{const hidden=tr.hasAttribute('hidden');if(hidden){tr.removeAttribute('hidden');readBtn.setAttribute('aria-expanded','true');readLbl.textContent='Hide transcript';}else{tr.setAttribute('hidden','');readBtn.setAttribute('aria-expanded','false');readLbl.textContent='Read instead';}});
+})();
 </script>
 </body>
 </html>
