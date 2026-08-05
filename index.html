@@ -4,6 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Bella — Practice the conversation before it counts</title>
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
@@ -44,8 +45,9 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .nav-outer.scrolled .pill{max-width:880px;background:rgba(255,255,255,.92);box-shadow:0 12px 34px -16px rgba(28,25,23,.22);padding:8px 12px 8px 14px}
 /* app-exact brand lockup */
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.brand img{height:52px;width:52px;display:block;flex:none;transition:height .45s,width .45s}
-.nav-outer.scrolled .brand img{height:46px;width:46px}
+/* Sub-mark is PORTRAIT (handle drops below the B) — height-led, width auto. */
+.brand img{height:46px;width:auto;display:block;flex:none;transition:height .45s}
+.nav-outer.scrolled .brand img{height:40px}
 .b-text{display:flex;flex-direction:column;gap:3px;justify-content:center}
 .brand .b-name{font-family:'Fraunces',serif;font-weight:400;font-size:20px;color:var(--ink);line-height:1}
 .brand .b-eyebrow{font-family:'Inter',sans-serif;font-weight:400;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);line-height:1}
@@ -178,7 +180,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 footer{border-top:1px solid var(--border);padding:54px 0 46px;background:var(--card)}
 .foot-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:30px;padding-bottom:36px;border-bottom:1px solid var(--border)}
 .foot-brand{display:flex;align-items:center;gap:12px}
-.foot-brand img{height:54px;width:54px}
+.foot-brand img{height:48px;width:auto}
 .foot-brand .b-name{font-family:'Fraunces',serif;font-weight:400;font-size:19px;color:var(--ink);line-height:1}
 .foot-brand .b-eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);line-height:1}
 .foot-tag{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--muted);margin-top:14px}
@@ -232,7 +234,7 @@ footer{border-top:1px solid var(--border);padding:54px 0 46px;background:var(--c
 <div class="nav-outer" id="nav">
   <div class="pill">
     <a href="/" class="brand">
-      <img src="/bella-logo.png" alt="Bella"/>
+      <img src="/bella-submark.svg" alt="Bella"/>
       <span class="b-text"><span class="b-name serif">Bella</span><span class="b-eyebrow">Real Time Dental Coach</span></span>
     </a>
     <div class="nav-links">
@@ -379,7 +381,7 @@ footer{border-top:1px solid var(--border);padding:54px 0 46px;background:var(--c
     <div class="foot-top">
       <div>
         <div class="foot-brand">
-          <img src="/bella-logo.png" alt=""/>
+          <img src="/bella-submark.svg" alt=""/>
           <span class="b-text"><span class="b-name serif">Bella</span><span class="b-eyebrow">Real Time Dental Coach</span></span>
         </div>
         <div class="foot-tag">Practice the conversation before it counts.</div>
