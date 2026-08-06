@@ -1,0 +1,22 @@
+# Build briefs and working notes (internal, not part of the site). Mirrors the
+# same patterns the app repo ignores — these are how a feature was reasoned
+# about, not a description of what shipped, so when they disagree with the
+# HTML, the HTML is right. phase4-pricing-prompt.txt is the one in this repo.
+*-prompt.txt
+*_SPEC.txt
+*_REVIEW.txt
+
+# Vercel CLI local state
+.vercel
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.sw?
+
+# Deliberately NOT ignored here: node_modules, dist, .env. This site is
+# hand-written static HTML with inline styles — no package.json, no build step,
+# no secrets. Add those rules if that ever stops being true.
