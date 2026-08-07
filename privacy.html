@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Privacy Policy — Bella</title>
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<meta name="description" content="How Bella collects, uses, and shares information on bellacoach.com and in the Bella coaching app.">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fafaf9; --card:#ffffff; --soft:#f5f5f4;
+  --ink:#1c1917; --text:#292524; --muted:#57534e; --faint:#78716c;
+  --amber:#b45309; --amber-strong:#78350f; --amber-text:#92400e; --amber-soft:#fef6e7;
+  --border:#e7e5e4; --border-soft:#f5f5f4; --halo:#e7ce92;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Fraunces',serif}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+a{color:var(--amber-text)}
+
+/* nav — mirrors index.html */
+.nav-outer{position:fixed;top:0;left:0;right:0;z-index:50;padding:18px 0;transition:padding .45s}
+.nav-outer.scrolled{padding:10px 0}
+.pill{max-width:1180px;margin:0 auto;background:rgba(255,255,255,.86);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:999px;padding:10px 16px 10px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px;box-shadow:0 2px 20px rgba(28,25,23,.05)}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.brand img{height:46px;width:auto;display:block;flex:none;transition:height .45s}
+.nav-outer.scrolled .brand img{height:40px}
+.b-text{display:flex;flex-direction:column;gap:3px;justify-content:center}
+.brand .b-name{font-family:'Fraunces',serif;font-weight:400;font-size:20px;color:var(--ink);line-height:1}
+.brand .b-eyebrow{font-family:'Inter',sans-serif;font-weight:400;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);line-height:1}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{white-space:nowrap;color:var(--muted);text-decoration:none;font-size:14.5px;font-weight:500;transition:color .25s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.cta{background:var(--ink);color:#fff;padding:10px 20px;border-radius:999px}
+@media(max-width:900px){.nav-links a:not(.cta){display:none}}
+
+/* document */
+.doc{padding:150px 0 80px}
+.doc h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(34px,5vw,52px);color:var(--ink);line-height:1.1;margin:0 0 14px}
+.doc .eyebrow{display:inline-block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-text);margin-bottom:18px}
+.doc .updated{color:var(--faint);font-size:14px;margin:0 0 40px}
+.doc-body{max-width:760px}
+.doc h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(22px,2.6vw,28px);color:var(--ink);margin:48px 0 14px;line-height:1.25}
+.doc h3{font-size:16px;font-weight:600;color:var(--ink);margin:28px 0 8px}
+.doc p,.doc li{color:var(--text)}
+.doc ul{padding-left:22px}
+.doc li{margin-bottom:8px}
+.lead{font-size:17.5px;color:var(--muted)}
+
+/* subprocessor table */
+.tablewrap{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--border);border-radius:14px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--border-soft);vertical-align:top}
+th{font-weight:600;color:var(--ink);background:var(--soft);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+
+/* callouts */
+.note{background:var(--amber-soft);border:1px solid var(--halo);border-radius:14px;padding:20px 24px;margin:24px 0}
+.note p{margin:0;color:var(--amber-strong);font-size:15px}
+
+/* footer */
+footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;background:var(--card)}
+.foot-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--faint);font-size:13.5px}
+.foot-bottom a{color:var(--faint);text-decoration:none}
+.foot-bottom a:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<div class="nav-outer" id="nav">
+  <div class="pill">
+    <a href="/" class="brand">
+      <img src="/bella-submark.svg" alt="Bella"/>
+      <span class="b-text"><span class="b-name serif">Bella</span><span class="b-eyebrow">Real Time Dental Coach</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="/#why">Why Bella</a>
+      <a href="/#how">How it works</a>
+      <a href="/pricing">Pricing</a>
+      <a href="https://app.bellacoach.com">Sign in</a>
+    </div>
+  </div>
+</div>
+
+<main class="doc">
+  <div class="wrap doc-body">
+    <span class="eyebrow">Legal</span>
+    <h1>Privacy Policy</h1>
+    <p class="updated">Effective August 6, 2026 · Last updated August 6, 2026</p>
+
+    <!--
+      MAINTENANCE NOTES (not shown to visitors)
+
+      Still outstanding:
+        1. Postal address. Visitors are pointed at email for now. Note that
+           CAN-SPAM requires a physical address inside marketing EMAIL itself,
+           which this page does not satisfy — sort a PO Box or virtual mailbox
+           before sending any marketing campaign.
+        2. Attorney review. Lower priority for this page than for the BAA you
+           will sign with practices, and the Terms of Service. Those two carry
+           the real liability; this one is comparatively low risk.
+        3. Terms of Service does not exist. The footer link is still dead.
+
+      Entity is a sole proprietorship. Revisit this page's "Who we are" section
+      if an LLC is formed.
+
+      Retention periods and the privacy-rights section state deliberate choices,
+      not placeholders. Rights are honored for everyone regardless of location —
+      chosen because it is cheaper than per-state logic and scales into
+      compliance rather than needing a rewrite. Revenue thresholds for CCPA and
+      the Colorado/Virginia/Connecticut laws are not currently met.
+    -->
+
+    <p class="lead">This policy explains what Bella collects, why, and who we share it with. It covers our website at bellacoach.com and the Bella coaching application at app.bellacoach.com.</p>
+
+    <h2>Who we are</h2>
+    <p>Bella is operated by Nick Fairbanks, doing business as Bella Coach ("Bella," "we," "us"). We provide AI-powered coaching software for dental treatment coordinators.</p>
+    <p>The best way to reach us about anything in this policy — including a request to access or delete your information — is by email at <a href="mailto:bellacoach.app@gmail.com">bellacoach.app@gmail.com</a>. We will provide a postal address on request.</p>
+
+    <h2>The short version</h2>
+    <ul>
+      <li>We collect what you send us through our contact form, and standard analytics about how people use our website.</li>
+      <li>We use a Meta (Facebook) advertising pixel on our website. We do not use it in the application.</li>
+      <li>Bella is a tool for dental staff, not for patients. It is not intended for patients to use directly.</li>
+      <li>Where a practice enables patient-data features, that data is governed by a signed Business Associate Agreement, and it is never sent to our AI providers.</li>
+      <li>We do not sell personal information.</li>
+    </ul>
+
+    <h2>Information we collect</h2>
+
+    <h3>When you contact us through this website</h3>
+    <p>Our "Book a walkthrough" form collects your name, email address, practice name, role, and anything you write in the notes field. Submissions are delivered to us through Formspree. We use this only to respond to you and to follow up about Bella.</p>
+
+    <h3>Automatically, when you browse this website</h3>
+    <ul>
+      <li><strong>Advertising and analytics.</strong> We use the Meta Pixel, which records page views and reports them to Meta along with your IP address, browser and device information, and referring page. Meta may combine this with information it already holds about you to measure and target advertising.</li>
+      <li><strong>Server logs.</strong> Our host, Vercel, records standard request logs including IP address, user agent, and requested URL.</li>
+      <li><strong>Fonts.</strong> Our pages load typefaces from Google Fonts, which means your browser contacts Google and discloses your IP address on each page load.</li>
+    </ul>
+
+    <h3>When you use the Bella application</h3>
+    <ul>
+      <li><strong>Account information</strong> — name, email address, role, and the practice or office you belong to.</li>
+      <li><strong>Coaching activity</strong> — practice roleplay conversations, scores, case reviews, and progress history generated as staff use the product.</li>
+      <li><strong>Treatment and financial records</strong> — only in workspaces where a practice has enabled those features. See <em>Patient information</em> below.</li>
+    </ul>
+
+    <h2>Patient information</h2>
+    <p>Bella is built for dental staff to rehearse and review conversations. It is not a patient-facing product and patients do not have accounts.</p>
+    <p>Some features let a practice record real treatment estimates, which can contain patient information. Those features are off by default and are enabled only for practices that have signed a Business Associate Agreement with us. Where they are enabled:</p>
+    <ul>
+      <li>Patient information is stored in our database under access controls that restrict it to authorized staff at that practice.</li>
+      <li><strong>Patient information is never sent to our AI providers.</strong> Where the product uses AI over practice performance, it receives de-identified figures only — dollar amounts, percentages, and counts — never names, dates of birth, or contact details.</li>
+      <li>Our case-review feature is designed without any field for a patient name, date of birth, or contact information.</li>
+    </ul>
+    <p>If you are a patient and believe a practice has entered your information into Bella, contact that practice directly. They control that record, and we act on their instructions.</p>
+
+    <h2>Who we share information with</h2>
+    <p>We do not sell personal information. We share it with the service providers below, each of which processes it on our behalf:</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Provider</th><th>Purpose</th><th>Applies to</th></tr></thead>
+        <tbody>
+          <tr><td>Meta Platforms</td><td>Advertising and conversion measurement</td><td>Website only</td></tr>
+          <tr><td>Formspree</td><td>Delivers contact-form submissions</td><td>Website only</td></tr>
+          <tr><td>Google Fonts</td><td>Serves typefaces</td><td>Website only</td></tr>
+          <tr><td>Vercel</td><td>Hosting and server logs</td><td>Website and application</td></tr>
+          <tr><td>Supabase</td><td>Database, authentication, and file storage</td><td>Application only</td></tr>
+          <tr><td>Anthropic</td><td>AI coaching, roleplay, and feedback</td><td>Application only</td></tr>
+          <tr><td>ElevenLabs</td><td>Text-to-speech audio</td><td>Application only</td></tr>
+          <tr><td>Resend</td><td>Transactional email, such as invitations</td><td>Application only</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>We may also disclose information where required by law, or in connection with a merger, acquisition, or sale of assets.</p>
+
+    <div class="note">
+      <p><strong>Note on AI providers.</strong> We do not permit our AI providers to train their models on your content, and patient information is never included in what we send them.</p>
+    </div>
+
+    <h2>Cookies and tracking</h2>
+    <p>The Meta Pixel sets cookies on this website in order to recognize returning visitors and attribute advertising. You can limit this in several ways:</p>
+    <ul>
+      <li>Adjust your Meta ad preferences at <a href="https://www.facebook.com/adpreferences" target="_blank" rel="noopener">facebook.com/adpreferences</a>.</li>
+      <li>Block third-party cookies in your browser settings.</li>
+      <li>Enable your browser's tracking-protection or "Do Not Track" feature. Note that we do not currently respond to Do Not Track signals.</li>
+    </ul>
+    <p>The Bella application does not use advertising or analytics trackers. It uses only the cookies required to keep you signed in.</p>
+
+    <h2>How long we keep information</h2>
+    <ul>
+      <li><strong>Contact-form submissions</strong> — 24 months from the date you contact us.</li>
+      <li><strong>Account and coaching records</strong> — for the life of the subscription, plus 90 days after it ends.</li>
+      <li><strong>Treatment and financial records</strong> — governed by the Business Associate Agreement with that practice and by the practice's own retention obligations, which may be longer than the periods above.</li>
+      <li><strong>Server logs</strong> — retained on our infrastructure providers' standard schedules.</li>
+    </ul>
+    <p>Practices may request deletion of their workspace data at any time, and you may ask us to delete your personal information at any time using the contact details above.</p>
+
+    <h2>Security</h2>
+    <p>Data is encrypted in transit and at rest by our infrastructure providers. Access to production data is restricted, and access to patient information within the application is enforced per practice and per role at the database level. No system is perfectly secure, and we cannot guarantee absolute security.</p>
+
+    <h2>Your choices and rights</h2>
+    <p>Some privacy laws grant these rights only to residents of particular states or countries. We do not draw that line. <strong>We honor the following requests from anyone who asks, wherever you live:</strong></p>
+    <ul>
+      <li><strong>Access</strong> — ask what personal information we hold about you.</li>
+      <li><strong>Correction</strong> — ask us to fix information that is wrong.</li>
+      <li><strong>Deletion</strong> — ask us to delete your personal information.</li>
+      <li><strong>Opt out of advertising</strong> — see <em>Cookies and tracking</em> above.</li>
+    </ul>
+    <p>Email <a href="mailto:bellacoach.app@gmail.com">bellacoach.app@gmail.com</a> and we will respond within 30 days. We will not charge you or treat you differently for making a request. You may unsubscribe from marketing email at any time using the link in the message.</p>
+    <p>We do not sell your personal information, and we do not share it for cross-context behavioral advertising beyond the advertising cookies described above.</p>
+    <p>If your information was entered into Bella by a dental practice, that practice controls that record. We will refer your request to them and help them act on it.</p>
+
+    <h2>Children</h2>
+    <p>Bella is a workplace tool for dental professionals. It is not directed to children and we do not knowingly collect personal information from children through this website or the application.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>We may update this policy from time to time. When we do, we will revise the "last updated" date above. Material changes will be communicated to account holders directly.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this policy or about your information: <a href="mailto:bellacoach.app@gmail.com">bellacoach.app@gmail.com</a>.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-bottom">
+    <div>© 2026 Bella · bellacoach.com</div>
+    <div><a href="/privacy">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<script>
+  var nav = document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 40); }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+
+</body>
+</html>
