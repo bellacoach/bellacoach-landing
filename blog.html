@@ -23,59 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#fafaf9; --card:#ffffff; --soft:#f5f5f4;
-  --ink:#1c1917; --text:#292524; --muted:#57534e; --faint:#78716c;
-  --amber:#b45309; --amber-strong:#78350f; --amber-text:#92400e; --amber-soft:#fef6e7;
-  --border:#e7e5e4; --border-soft:#f5f5f4; --halo:#e7ce92;
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
-.serif{font-family:'Fraunces',serif}
-.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
-a{color:var(--amber-text)}
-
-.nav-outer{position:fixed;top:0;left:0;right:0;z-index:50;padding:18px 0;transition:padding .45s}
-.nav-outer.scrolled{padding:10px 0}
-.pill{max-width:1180px;margin:0 auto;background:rgba(255,255,255,.86);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:999px;padding:10px 16px 10px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px;box-shadow:0 2px 20px rgba(28,25,23,.05)}
-.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
-.brand img{height:46px;width:auto;display:block;flex:none;transition:height .45s}
-.nav-outer.scrolled .brand img{height:40px}
-.b-text{display:flex;flex-direction:column;gap:3px;justify-content:center}
-.brand .b-name{font-family:'Fraunces',serif;font-weight:400;font-size:20px;color:var(--ink);line-height:1}
-.brand .b-eyebrow{font-family:'Inter',sans-serif;font-weight:400;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);line-height:1}
-.nav-links{display:flex;gap:30px;align-items:center}
-.nav-links a{white-space:nowrap;color:var(--muted);text-decoration:none;font-size:14.5px;font-weight:500;transition:color .25s}
-.nav-links a:hover{color:var(--ink)}
-.nav-links a.cta{background:var(--ink);color:#fff !important;padding:10px 20px;border-radius:999px}
-@media(max-width:900px){.nav-links a:not(.cta){display:none}}
-
-.blog-head{padding:150px 0 10px;text-align:center}
-.blog-head .eyebrow{display:inline-block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-text);margin-bottom:18px}
-.blog-head h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(36px,5.5vw,58px);color:var(--ink);line-height:1.05;margin:0 auto 18px;max-width:16ch}
-.blog-head p{max-width:60ch;margin:0 auto;color:var(--muted);font-size:17.5px}
-
-.posts{padding:56px 0 40px;display:grid;gap:22px;max-width:820px;margin:0 auto}
-.post-card{display:block;text-decoration:none;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:30px 34px;transition:border-color .25s,box-shadow .25s,transform .25s}
-.post-card:hover{border-color:var(--halo);box-shadow:0 14px 40px -22px rgba(28,25,23,.35);transform:translateY(-2px)}
-.post-card .meta{display:flex;gap:12px;align-items:center;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
-.post-card .tag{color:var(--amber-text)}
-.post-card h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(21px,2.4vw,27px);color:var(--ink);line-height:1.25;margin:0 0 10px}
-.post-card p{margin:0;color:var(--muted);font-size:15.5px}
-
-.empty{max-width:820px;margin:0 auto;padding:10px 0 30px;color:var(--faint);font-size:15px;text-align:center}
-
-.cta-band{background:var(--amber-soft);border-top:1px solid var(--halo);border-bottom:1px solid var(--halo);padding:56px 0;text-align:center;margin-top:40px}
-.cta-band h3{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(22px,3vw,30px);color:var(--ink);margin:0 0 10px}
-.cta-band p{color:var(--amber-strong);margin:0 0 22px;font-size:16px}
-.cta-band a{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;padding:14px 28px;border-radius:999px;font-weight:600;font-size:15px}
-
-footer{border-top:1px solid var(--border);padding:44px 0 40px;background:var(--card)}
-.foot-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--faint);font-size:13.5px}
-.foot-bottom a{color:var(--faint);text-decoration:none}
-.foot-bottom a:hover{color:var(--ink)}
-</style>
+<link rel="stylesheet" href="/blog.css">
 </head>
 <body>
 
@@ -120,14 +68,20 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;background:var(--c
   WHY THERE IS NO BUILD STEP: this repo is hand-written static HTML with no
   package.json, and static HTML has no include mechanism — doing the shared
   shell in JS would hide it from crawlers, which defeats the point. So the
-  nav, footer and CSS are duplicated per file. That is a deliberate trade,
-  cheap at low volume.
+  nav and footer MARKUP is duplicated per file. CSS is not: it lives in
+  /blog.css, extracted once the post count passed one, because duplicating
+  ~130 lines of it per post was the bulk of the boilerplate. A linked
+  stylesheet is not a build step.
 
   MIGRATION TRIGGER: at roughly 15 posts, or the first time a nav change
   means editing more than a dozen files, move to Eleventy. Posts are
   structured identically to make that migration mechanical. Do not let it
   drift past that point — the cost is linear in post count and the pain
-  arrives all at once.
+  arrives all at once. At 11 posts we are already close.
+
+  THE INDEX AND THE SITEMAP MUST AGREE. Both were generated from one list,
+  so a post cannot appear in one and not the other. If you hand-edit either,
+  check the other.
 -->
 
 <main class="posts">
@@ -136,9 +90,69 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;background:var(--c
     <h2>What to say when a parent says “I need to think about it”</h2>
     <p>It is rarely about thinking. Four things that sentence usually means, and how to find out which one you are hearing — without pressuring anyone.</p>
   </a>
+
+  <a class="post-card" href="/blog/when-to-stop-selling-and-get-the-doctor">
+    <div class="meta"><span class="tag">The role</span><span>·</span><span>August 6, 2026</span></div>
+    <h2>When to stop selling and get the doctor</h2>
+    <p>Some objections are financial. Some are clinical. Working a clinical objection as a coordinator is the fastest way to lose a family for good.</p>
+  </a>
+
+  <a class="post-card" href="/blog/bonus-structures-that-dont-distort-behavior">
+    <div class="meta"><span class="tag">The role</span><span>·</span><span>August 5, 2026</span></div>
+    <h2>Bonus structures that do not distort behaviour</h2>
+    <p>Pay a coordinator on case acceptance and you will get case acceptance — including the cases that should not have been accepted.</p>
+  </a>
+
+  <a class="post-card" href="/blog/hiring-a-treatment-coordinator">
+    <div class="meta"><span class="tag">The role</span><span>·</span><span>August 3, 2026</span></div>
+    <h2>What to look for when hiring a treatment coordinator</h2>
+    <p>Most practices hire for dental experience and end up disappointed. The traits that actually predict a good coordinator, and how to test for them.</p>
+  </a>
+
+  <a class="post-card" href="/blog/when-the-child-isnt-in-pain">
+    <div class="meta"><span class="tag">Presentation</span><span>·</span><span>July 29, 2026</span></div>
+    <h2>Presenting treatment when the child is not in pain</h2>
+    <p>The hardest case in pediatric dentistry: a parent looking at a happy, comfortable child while you explain a two thousand dollar plan.</p>
+  </a>
+
+  <a class="post-card" href="/blog/stop-handing-over-the-printout">
+    <div class="meta"><span class="tag">Presentation</span><span>·</span><span>July 24, 2026</span></div>
+    <h2>Stop handing over the printout</h2>
+    <p>The treatment plan printout is a summary of a conversation, not a substitute for one. What happens when you lead with paper.</p>
+  </a>
+
+  <a class="post-card" href="/blog/value-before-price">
+    <div class="meta"><span class="tag">Presentation</span><span>·</span><span>July 20, 2026</span></div>
+    <h2>Build the value before you say the price. Actually do it.</h2>
+    <p>Everyone agrees with this in principle and almost nobody does it in the room. What it looks like in a real presentation.</p>
+  </a>
+
+  <a class="post-card" href="/blog/the-silence-after-you-say-the-number">
+    <div class="meta"><span class="tag">Objections</span><span>·</span><span>July 14, 2026</span></div>
+    <h2>The silence after you say the number</h2>
+    <p>Most coordinators lose the case in the four seconds after they state the price. What happens when you let the pause sit.</p>
+  </a>
+
+  <a class="post-card" href="/blog/ppo-hmo-explained-without-jargon">
+    <div class="meta"><span class="tag">Insurance</span><span>·</span><span>July 11, 2026</span></div>
+    <h2>How to explain PPO and HMO without using the words PPO or HMO</h2>
+    <p>Parents do not care what their plan is called. They care what it pays. A plain-language way through the insurance conversation.</p>
+  </a>
+
+  <a class="post-card" href="/blog/can-we-just-do-the-one-tooth">
+    <div class="meta"><span class="tag">Objections</span><span>·</span><span>July 8, 2026</span></div>
+    <h2>“Can we just do the one tooth?”</h2>
+    <p>Phasing treatment is legitimate. Cherry-picking is not. How to tell which one a parent is asking for.</p>
+  </a>
+
+  <a class="post-card" href="/blog/let-me-check-with-my-husband">
+    <div class="meta"><span class="tag">Objections</span><span>·</span><span>July 2, 2026</span></div>
+    <h2>“Let me check with my husband”</h2>
+    <p>Usually true, usually fatal. The case does not die in your office — it dies at a kitchen table you are not sitting at.</p>
+  </a>
 </main>
 
-<p class="empty">More soon. Two posts a month.</p>
+<p class="empty">Two posts a month.</p>
 
 <section class="cta-band">
   <div class="wrap">
