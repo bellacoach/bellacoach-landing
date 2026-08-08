@@ -175,6 +175,25 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .q-attr .nm{font-weight:600;font-size:15px;color:var(--ink)}
 .q-attr .rl{font-size:14px;color:var(--muted)}
 
+/* Testimonial carousel.
+   Degrades on purpose: with a single slide the controls hide themselves and
+   this renders exactly like the static quote it replaced. Add a .q-slide and
+   it becomes a carousel — no other change needed. */
+.q-track{position:relative}
+.q-slide{opacity:0;visibility:hidden;position:absolute;inset:0;transition:opacity .5s cubic-bezier(.16,1,.3,1)}
+.q-slide.on{opacity:1;visibility:visible;position:relative}
+.q-ctrls{display:flex;align-items:center;gap:18px;margin-top:44px}
+.q-ctrls[hidden]{display:none}
+.q-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:.25s;flex:none}
+.q-btn:hover{border-color:var(--amber);color:var(--amber-text)}
+.q-btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.q-btn svg{width:17px;height:17px}
+.q-dots{display:flex;gap:9px}
+.q-dot{width:8px;height:8px;padding:0;border-radius:50%;border:none;background:var(--border);cursor:pointer;transition:.25s}
+.q-dot[aria-current="true"]{background:var(--amber);width:22px;border-radius:999px}
+.q-dot:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.q-slide{transition:none}}
+
 /* METHOD */
 .method{padding:90px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center}
 .method .lbl{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:32px}
@@ -428,13 +447,53 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
   </div>
 </section>
 
+<!--
+  TESTIMONIAL CAROUSEL
+
+  ADDING A QUOTE: copy a .q-slide block, change the text, the .nm (name and
+  title) and the .rl (practice). The initial letter in .ba is just the first
+  letter of the practice name. Everything else — dots, arrows, auto-advance,
+  keyboard nav — adapts to however many slides exist.
+
+  WITH ONE SLIDE the controls hide themselves and this renders exactly like
+  the static quote it replaced. That is deliberate: it means the carousel can
+  ship before there are enough testimonials to rotate, without looking broken.
+
+  ONLY REAL QUOTES GO HERE. Do not add a placeholder, a paraphrase, or an
+  "example" testimonial, even temporarily — a fabricated quote attributed to a
+  named person at a named practice is a fake review, and for a vendor asking
+  dental groups to sign a BAA it is the single worst kind of thing to be
+  caught doing. An empty carousel is fine. An invented one is not.
+
+  Evelyn Lahiji's quote below is real and predates this carousel.
+
+  NOT adding Review or AggregateRating schema. Google does not show rich
+  results for self-serving reviews — testimonials you publish about yourself
+  on your own site — and marking them up anyway risks a manual action. If
+  review stars are ever wanted, they have to come from a third-party platform.
+-->
 <section class="quote-s">
   <div class="wrap">
     <span class="q-flag reveal">What partners are saying</span>
-    <p class="bigquote reveal d1">The coordinators who rehearse in Bella walk into the consult <span class="g">ready.</span> You can hear it in the first thirty seconds.</p>
-    <div class="q-attr reveal d2">
-      <div class="ba" style="background:linear-gradient(135deg,var(--amber),var(--amber-strong));color:#fff;display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;font-size:16px">B</div>
-      <div><div class="nm">Evelyn Lahiji, COO</div><div class="rl">Children&#8217;s Dental FunZone</div></div>
+
+    <div class="q-track reveal d1" id="qTrack" aria-roledescription="carousel" aria-label="Customer testimonials">
+      <div class="q-slide on" role="group" aria-roledescription="slide" aria-label="1 of 1">
+        <p class="bigquote">The coordinators who rehearse in Bella walk into the consult <span class="g">ready.</span> You can hear it in the first thirty seconds.</p>
+        <div class="q-attr">
+          <div class="ba" style="background:linear-gradient(135deg,var(--amber),var(--amber-strong));color:#fff;display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;font-size:16px">C</div>
+          <div><div class="nm">Evelyn Lahiji, COO</div><div class="rl">Children&#8217;s Dental FunZone</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-ctrls reveal d2" id="qCtrls" hidden>
+      <button class="q-btn" id="qPrev" type="button" aria-label="Previous testimonial">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="q-dots" id="qDots"></div>
+      <button class="q-btn" id="qNext" type="button" aria-label="Next testimonial">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
     </div>
   </div>
 </section>
@@ -547,6 +606,85 @@ form.addEventListener('submit',async(e)=>{
   a.addEventListener('ended',()=>{a.currentTime=0;fill.style.width='0%';meta.innerHTML='· 28 sec';prog.classList.remove('active');});
   a.addEventListener('timeupdate',()=>{const d=a.duration||0;if(d>0){fill.style.width=(a.currentTime/d*100)+'%';meta.textContent=fmt(a.currentTime)+' / '+fmt(d);}});
   readBtn.addEventListener('click',()=>{const hidden=tr.hasAttribute('hidden');if(hidden){tr.removeAttribute('hidden');readBtn.setAttribute('aria-expanded','true');readLbl.textContent='Hide transcript';}else{tr.setAttribute('hidden','');readBtn.setAttribute('aria-expanded','false');readLbl.textContent='Read instead';}});
+})();
+</script>
+
+<script>
+/* Testimonial carousel. Reads however many .q-slide elements exist and
+   configures itself — adding a quote needs no change here.
+
+   With one slide it hides the controls and does nothing, so the section
+   renders as a plain static quote rather than a carousel with no second
+   destination. */
+(function(){
+  var track = document.getElementById('qTrack');
+  if (!track) return;
+  var slides = Array.prototype.slice.call(track.querySelectorAll('.q-slide'));
+  var ctrls  = document.getElementById('qCtrls');
+  if (slides.length < 2) return;               // controls stay hidden
+  ctrls.hidden = false;
+
+  var dotsWrap = document.getElementById('qDots');
+  var i = 0, timer = null;
+  var DELAY = 7000;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  slides.forEach(function(s, n){
+    s.setAttribute('aria-label', (n + 1) + ' of ' + slides.length);
+    var d = document.createElement('button');
+    d.type = 'button';
+    d.className = 'q-dot';
+    d.setAttribute('aria-label', 'Testimonial ' + (n + 1));
+    d.addEventListener('click', function(){ go(n); restart(); });
+    dotsWrap.appendChild(d);
+  });
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function go(n){
+    i = (n + slides.length) % slides.length;
+    slides.forEach(function(s, k){ s.classList.toggle('on', k === i); });
+    dots.forEach(function(d, k){ d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+  }
+  function next(){ go(i + 1); }
+  function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+  /* Auto-advance is suppressed entirely under reduced-motion — movement the
+     reader did not ask for is the thing that setting exists to prevent. */
+  function restart(){ stop(); if (!reduce) timer = setInterval(next, DELAY); }
+
+  document.getElementById('qPrev').addEventListener('click', function(){ go(i - 1); restart(); });
+  document.getElementById('qNext').addEventListener('click', function(){ next(); restart(); });
+
+  /* Pause while the reader is engaged, so a quote never slides away mid-sentence. */
+  track.addEventListener('mouseenter', stop);
+  track.addEventListener('mouseleave', restart);
+  ctrls.addEventListener('focusin', stop);
+  ctrls.addEventListener('focusout', restart);
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden) stop(); else restart();
+  });
+
+  /* Arrow keys work when the carousel controls have focus. */
+  ctrls.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowLeft')  { go(i - 1); restart(); }
+    if (e.key === 'ArrowRight') { next();    restart(); }
+  });
+
+  /* Touch swipe. 40px threshold, and horizontal intent must beat vertical so
+     it never hijacks a scroll. */
+  var x0 = null, y0 = null;
+  track.addEventListener('touchstart', function(e){
+    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+  }, { passive: true });
+  track.addEventListener('touchend', function(e){
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    var dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : go(i - 1); restart(); }
+    x0 = y0 = null;
+  }, { passive: true });
+
+  go(0);
+  restart();
 })();
 </script>
 </body>
