@@ -71,13 +71,14 @@
       <img src="/bella-submark.svg" alt="Bella"/>
       <span class="b-text"><span class="b-name serif">Bella</span><span class="b-eyebrow">Real Time Dental Coach</span></span>
     </a>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="/#why">Why Bella</a>
       <a href="/#how">How it works</a>
       <a href="/pricing">Pricing</a>
       <a href="/blog">Blog</a>
       <a href="https://app.bellacoach.com">Sign in</a>
     </div>
+      <button type="button" class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
 </div>
 
@@ -232,5 +233,19 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
+
+<script>
+/* Mobile nav toggle. Closes on outside-click, Esc, and link tap so the panel
+   never survives a navigation to an in-page anchor. */
+(function(){
+  var b=document.getElementById('navBurger'), l=document.getElementById('navLinks');
+  if(!b||!l)return;
+  function set(open){l.classList.toggle('is-open',open);b.setAttribute('aria-expanded',open?'true':'false')}
+  b.addEventListener('click',function(e){e.stopPropagation();set(!l.classList.contains('is-open'))});
+  document.addEventListener('click',function(e){if(!l.contains(e.target)&&!b.contains(e.target))set(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});
+  l.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});
+})();
+</script>
 </body>
 </html>
