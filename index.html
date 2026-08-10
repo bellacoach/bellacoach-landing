@@ -149,10 +149,30 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
    visitor unprompted. preload="metadata" keeps the 14MB off the initial page load
    — the first frame is bright enough to stand in as the poster, so no separate
    poster image is needed. */
-.whyvid{margin:58px auto 0;max-width:900px}
+/* Text and video sit side by side. The video takes the larger share (1.45fr) so
+   it stays big enough to actually watch; the copy column drops its 42ch cap and
+   the heading steps down a size so it fills its column instead of leaving the
+   dead space that a 42ch heading + full-width video underneath produced. */
+.whygrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.45fr);gap:52px;align-items:center}
+.whygrid .s-head{max-width:none}
+.whygrid .s-head h2{font-size:clamp(28px,2.9vw,38px)}
+.whygrid .s-head p{font-size:17px}
+.whyvid{margin:0;max-width:none}
 .whyvid-el{display:block;width:100%;height:auto;aspect-ratio:16/9;background:var(--ink);border:1px solid var(--border);border-radius:20px;box-shadow:0 24px 60px -28px rgba(28,25,23,.45)}
-.whyvid-cap{margin-top:16px;text-align:center;font-size:14px;line-height:1.6;color:var(--faint)}
-@media(max-width:880px){.whyvid{margin-top:38px}.whyvid-el{border-radius:14px}}
+.whyvid-cap{margin-top:14px;font-size:14px;line-height:1.6;color:var(--faint)}
+/* Stack below 1120px. The wrap caps at 1180px, so the side-by-side video can
+   never exceed ~620px however wide the screen gets; below ~1120px it drops
+   under 585px, which is too small to watch. Under that width the section
+   becomes the full-width layout instead — copy across the top (no 42ch cap, so
+   no dead column) with the video full width beneath, which is bigger than the
+   side-by-side video would have been at the same viewport. */
+@media(max-width:1120px){
+  .whygrid{grid-template-columns:1fr;gap:34px}
+  .whygrid .s-head h2{font-size:clamp(30px,3.9vw,46px)}
+  .whygrid .s-head p{font-size:18px}
+  .whyvid-cap{text-align:center}
+}
+@media(max-width:880px){.whyvid-el{border-radius:14px}}
 .card{background:var(--card);padding:36px 32px;transition:background .3s}
 .card:hover{background:var(--amber-soft)}
 .card .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:22px;background:var(--amber-soft);border:1px solid var(--border)}
@@ -456,6 +476,7 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
 
 <section id="why" class="s-pad">
   <div class="wrap">
+    <div class="whygrid">
     <div class="s-head reveal">
       <span class="eyebrow">Why Bella</span>
       <h2>Case acceptance turns on <span class="g">one conversation</span> — and most teams never get to practice it.</h2>
@@ -468,6 +489,7 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
       </video>
       <figcaption class="whyvid-cap">One minute on why treatment coordinators need reps before the case conversation, not after.</figcaption>
     </figure>
+    </div>
   </div>
 </section>
 
