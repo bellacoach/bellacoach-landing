@@ -72,7 +72,27 @@
       <span class="b-text"><span class="b-name serif">Bella</span><span class="b-eyebrow">Real Time Dental Coach</span></span>
     </a>
     <div class="nav-links" id="navLinks">
-      <a href="/#why">Why Bella</a>
+      <div class="nav-dd" id="navProductsWrap">
+        <button type="button" class="nav-dd__btn" id="navProducts" aria-expanded="false" aria-controls="navProductsMenu">Products <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="nav-dd__menu" id="navProductsMenu" role="menu">
+          <a class="nav-dd__item" role="menuitem" href="/">
+            <span class="nav-dd__name">Bella Coach</span>
+            <span class="nav-dd__desc">Real-time AI coaching that helps treatment coordinators present treatment and handle objections.</span>
+          </a>
+          <a class="nav-dd__item" role="menuitem" href="#" data-demo>
+            <span class="nav-dd__name">Bella Treatment Desk</span>
+            <span class="nav-dd__desc">Estimates, treatment follow-ups and case-acceptance tracking, in one place.</span>
+          </a>
+          <span class="nav-dd__item nav-dd__item--soon" role="menuitem" aria-disabled="true">
+            <span class="nav-dd__name">Bella Onboard <span class="nav-dd__soon">Coming soon</span></span>
+            <span class="nav-dd__desc">Structured training that gets a new hire productive without tying up your best person.</span>
+          </span>
+          <span class="nav-dd__item nav-dd__item--soon" role="menuitem" aria-disabled="true">
+            <span class="nav-dd__name">Bella Credentials <span class="nav-dd__soon">Coming soon</span></span>
+            <span class="nav-dd__desc">Track provider credentialing and payer enrollment so nothing lapses unnoticed.</span>
+          </span>
+        </div>
+      </div>
       <a href="/#how">How it works</a>
       <a href="/pricing">Pricing</a>
       <a href="/blog">Blog</a>
@@ -246,6 +266,16 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
   document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});
   l.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});
 })();
+(function(){
+  var btn=document.getElementById('navProducts'), wrap=document.getElementById('navProductsWrap');
+  if(!btn||!wrap)return;
+  function set(open){wrap.classList.toggle('is-open',open);btn.setAttribute('aria-expanded',open?'true':'false')}
+  btn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();set(!wrap.classList.contains('is-open'))});
+  document.addEventListener('click',function(e){if(!wrap.contains(e.target))set(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){set(false);btn.blur()}});
+  wrap.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});
+})();
+
 </script>
 </body>
 </html>

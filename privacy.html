@@ -62,6 +62,39 @@ a{color:var(--amber-text)}
    Literal colors, not var(), because these rules ship into four stylesheets
    that do not all define the same custom properties. */
 .pill{position:relative}
+
+/* The nav row is centred in a pill whose height comes from the BRAND LOGO,
+   so the row sits well above the pill edge. Stretching it (items stay centred
+   via align-items) makes 100% on the dropdown mean the pill, which is what the
+   menu needs to clear. */
+.nav-links{align-self:stretch}
+/* --- Products dropdown ----------------------------------------------------
+   Click, not hover: hover menus are unusable on a touch screen and skippable by
+   keyboard, and this menu is the only route to three of the four products. */
+.nav-dd{position:relative;display:flex;align-items:center;align-self:stretch}
+.nav-dd__btn{display:inline-flex;align-items:center;gap:5px;background:none;border:0;padding:0;margin:0;font:inherit;font-size:14.5px;font-weight:500;color:var(--muted);cursor:pointer;white-space:nowrap;transition:color .25s}
+.nav-dd__btn:hover,.nav-dd.is-open .nav-dd__btn{color:var(--ink)}
+.nav-dd__btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .22s}
+.nav-dd.is-open .nav-dd__btn svg{transform:rotate(180deg)}
+.nav-dd__menu{position:absolute;top:calc(100% + 20px);left:50%;transform:translateX(-50%);width:360px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:7px;box-shadow:0 22px 48px -22px rgba(28,25,23,.34);display:none;z-index:100}
+.nav-dd.is-open .nav-dd__menu{display:block}
+.nav-dd__item{display:block;padding:11px 13px;border-radius:11px;text-decoration:none}
+a.nav-dd__item:hover{background:#faf9f8}
+.nav-dd__name{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;color:var(--ink);line-height:1.3}
+.nav-dd__desc{display:block;margin-top:3px;font-size:12.5px;line-height:1.5;color:var(--muted);white-space:normal}
+/* Not yet buildable, and it says so rather than looking clickable. */
+.nav-dd__item--soon{cursor:default}
+.nav-dd__item--soon .nav-dd__name{color:var(--muted)}
+.nav-dd__soon{font-size:10px;letter-spacing:.07em;text-transform:uppercase;font-weight:600;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:2px 7px;white-space:nowrap}
+@media(max-width:880px){
+  /* Inside the burger menu the dropdown is just a nested list — an absolutely
+     positioned panel inside an already-absolute menu would sit off-screen. */
+  .nav-dd{display:block}
+  .nav-dd__btn{width:100%;justify-content:space-between;padding:12px 14px;font-size:15px}
+  .nav-dd__menu{position:static;transform:none;width:auto;border:0;box-shadow:none;padding:0 0 6px;background:transparent}
+  .nav-dd__item{padding:9px 14px 9px 24px}
+  .nav-dd__desc{display:none}
+}
 .nav-burger{display:none;align-items:center;justify-content:center;width:38px;height:38px;flex:0 0 auto;border:1px solid #e7e5e4;border-radius:999px;background:#fff;color:#1c1917;cursor:pointer;padding:0}
 .nav-burger svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round}
 @media(max-width:880px){
@@ -123,7 +156,27 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
       <span class="b-text"><span class="b-name serif">Bella</span><span class="b-eyebrow">Real Time Dental Coach</span></span>
     </a>
     <div class="nav-links" id="navLinks">
-      <a href="/#why">Why Bella</a>
+      <div class="nav-dd" id="navProductsWrap">
+        <button type="button" class="nav-dd__btn" id="navProducts" aria-expanded="false" aria-controls="navProductsMenu">Products <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="nav-dd__menu" id="navProductsMenu" role="menu">
+          <a class="nav-dd__item" role="menuitem" href="/">
+            <span class="nav-dd__name">Bella Coach</span>
+            <span class="nav-dd__desc">Real-time AI coaching that helps treatment coordinators present treatment and handle objections.</span>
+          </a>
+          <a class="nav-dd__item" role="menuitem" href="#" data-demo>
+            <span class="nav-dd__name">Bella Treatment Desk</span>
+            <span class="nav-dd__desc">Estimates, treatment follow-ups and case-acceptance tracking, in one place.</span>
+          </a>
+          <span class="nav-dd__item nav-dd__item--soon" role="menuitem" aria-disabled="true">
+            <span class="nav-dd__name">Bella Onboard <span class="nav-dd__soon">Coming soon</span></span>
+            <span class="nav-dd__desc">Structured training that gets a new hire productive without tying up your best person.</span>
+          </span>
+          <span class="nav-dd__item nav-dd__item--soon" role="menuitem" aria-disabled="true">
+            <span class="nav-dd__name">Bella Credentials <span class="nav-dd__soon">Coming soon</span></span>
+            <span class="nav-dd__desc">Track provider credentialing and payer enrollment so nothing lapses unnoticed.</span>
+          </span>
+        </div>
+      </div>
       <a href="/#how">How it works</a>
       <a href="/pricing">Pricing</a>
       <a href="/blog">Blog</a>
@@ -304,6 +357,16 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
   document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});
   l.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});
 })();
+(function(){
+  var btn=document.getElementById('navProducts'), wrap=document.getElementById('navProductsWrap');
+  if(!btn||!wrap)return;
+  function set(open){wrap.classList.toggle('is-open',open);btn.setAttribute('aria-expanded',open?'true':'false')}
+  btn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();set(!wrap.classList.contains('is-open'))});
+  document.addEventListener('click',function(e){if(!wrap.contains(e.target))set(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){set(false);btn.blur()}});
+  wrap.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});
+})();
+
 </script>
 </body>
 </html>
