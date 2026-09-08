@@ -328,6 +328,206 @@ a.nav-dd__item:hover{background:#faf9f8}
   .nav-links a:hover{background:#faf9f8}
   .nav-links a.cta{margin-top:4px;text-align:center}
 }
+/* =============================================================================
+   LANDING v2 — hero + pillars
+   Layouts follow the Tailwind UI references; the palette, type and motion are
+   Bella's. Nothing here is Tailwind — the reference was for composition only.
+   ============================================================================= */
+
+/* ---------- Hero (centred, full-bleed) ------------------------------------ */
+.heroV2 {
+  position: relative;
+  min-height: 92vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 168px 0 96px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* The photograph. Sits UNDER a cream wash rather than being darkened, because
+   the brand is warm and light — the usual dark-scrim treatment would fight it.
+   Swap the url() when the real shot lands; the gradient alone is a usable
+   placeholder, so a missing file degrades to a warm wash rather than a hole. */
+.heroV2__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2400 1400' width='2400' height='1400' role='img' aria-label=''%3E%3Cdefs%3E%3ClinearGradient id='ground' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFF8EC'/%3E%3Cstop offset='0.55' stop-color='%23F7EFE2'/%3E%3Cstop offset='1' stop-color='%23EFE4D3'/%3E%3C/linearGradient%3E%3CradialGradient id='window' cx='0.26' cy='0.16' r='0.72'%3E%3Cstop offset='0' stop-color='%23FFFDF7' stop-opacity='0.95'/%3E%3Cstop offset='0.45' stop-color='%23FDF3E0' stop-opacity='0.55'/%3E%3Cstop offset='1' stop-color='%23FDF3E0' stop-opacity='0'/%3E%3C/radialGradient%3E%3ClinearGradient id='amberWash' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23B45309' stop-opacity='0.16'/%3E%3Cstop offset='1' stop-color='%23B45309' stop-opacity='0'/%3E%3C/linearGradient%3E%3ClinearGradient id='roseWash' x1='1' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%239F1239' stop-opacity='0.11'/%3E%3Cstop offset='1' stop-color='%239F1239' stop-opacity='0'/%3E%3C/linearGradient%3E%3Cfilter id='soft' x='-25%25' y='-25%25' width='150%25' height='150%25'%3E%3CfeGaussianBlur stdDeviation='72'/%3E%3C/filter%3E%3Cfilter id='softer' x='-30%25' y='-30%25' width='160%25' height='160%25'%3E%3CfeGaussianBlur stdDeviation='130'/%3E%3C/filter%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' seed='7'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='2400' height='1400' fill='url(%23ground)'/%3E%3Crect width='2400' height='1400' fill='url(%23window)'/%3E%3Cg filter='url(%23soft)' opacity='0.55'%3E%3Crect x='120' y='-60' width='520' height='900' rx='40' fill='%23FFFFFF' opacity='0.75'/%3E%3Crect x='1560' y='180' width='700' height='1100' rx='52' fill='%23E8DCC8' opacity='0.7'/%3E%3Crect x='820' y='620' width='1400' height='420' rx='36' fill='%23F3E7D4' opacity='0.85'/%3E%3C/g%3E%3Cg filter='url(%23softer)'%3E%3Cellipse cx='520' cy='1080' rx='620' ry='330' fill='url(%23amberWash)'/%3E%3Cellipse cx='1980' cy='360' rx='560' ry='340' fill='url(%23roseWash)'/%3E%3C/g%3E%3Cg filter='url(%23soft)' opacity='0.42'%3E%3Ccircle cx='880' cy='700' r='96' fill='%23C9B79B'/%3E%3Cpath d='M740 1000c0-96 63-166 140-166s140 70 140 166z' fill='%23C9B79B'/%3E%3Ccircle cx='1520' cy='672' r='104' fill='%23B9A488'/%3E%3Cpath d='M1366 1000c0-104 69-180 154-180s154 76 154 180z' fill='%23B9A488'/%3E%3C/g%3E%3Crect width='2400' height='1400' filter='url(%23grain)' opacity='0.045'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center 38%;
+  opacity: 0.22;
+  /* A slow drift, so the page is never completely still. Transform only. */
+  animation: heroDrift 38s ease-in-out infinite alternate;
+}
+@keyframes heroDrift {
+  from { transform: scale(1.06) translate3d(0, 0, 0); }
+  to   { transform: scale(1.13) translate3d(0, -1.4%, 0); }
+}
+
+/* Warm wash: opaque at the edges so the nav and the following section meet it
+   cleanly, thinnest behind the headline where the photo should read. */
+.heroV2__wash {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(120% 90% at 50% 42%, rgba(250, 250, 249, 0.55) 0%, rgba(250, 250, 249, 0.9) 58%, var(--bg) 100%),
+    linear-gradient(180deg, var(--bg) 0%, rgba(250, 250, 249, 0) 22%, rgba(250, 250, 249, 0) 72%, var(--bg) 100%);
+}
+
+.heroV2__inner { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+/* Announcement pill */
+.heroV2__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 8px 7px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(180, 83, 9, 0.22);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(6px);
+  font-size: 13.5px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.heroV2__pill:hover { border-color: rgba(180, 83, 9, 0.5); transform: translateY(-1px); }
+.heroV2__pill b { color: var(--ink); font-weight: 600; }
+.heroV2__pill .tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: var(--amber-soft);
+  color: var(--amber-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+.heroV2__pill .tag svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.4; }
+
+.heroV2 h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(42px, 6.4vw, 78px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: 30px 0 0;
+  text-wrap: balance;
+}
+.heroV2 h1 em { font-style: italic; color: var(--amber); }
+
+.heroV2__lead {
+  font-size: clamp(17px, 2vw, 20px);
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 62ch;
+  margin: 26px auto 0;
+  text-wrap: pretty;
+}
+
+.heroV2__actions {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 38px;
+}
+
+/* ---------- Load-in motion -----------------------------------------------
+   The hero is above the fold, so an IntersectionObserver would fire everything
+   at once on arrival. A load stagger gives it a sequence instead. */
+.heroV2 .rise {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  animation: heroRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.heroV2 .rise.r1 { animation-delay: 0.05s; }
+.heroV2 .rise.r2 { animation-delay: 0.17s; }
+.heroV2 .rise.r3 { animation-delay: 0.29s; }
+.heroV2 .rise.r4 { animation-delay: 0.41s; }
+.heroV2 .rise.r5 { animation-delay: 0.55s; }
+@keyframes heroRise { to { opacity: 1; transform: none; } }
+
+/* ---------- Pillars (centred 2x2) ----------------------------------------- */
+.pillars { padding: 116px 0; }
+.pillars__head { max-width: 720px; margin: 0 auto; text-align: center; }
+.pillars__head h2 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(32px, 4.4vw, 50px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 16px 0 0;
+  text-wrap: balance;
+}
+.pillars__head p {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 20px auto 0;
+  max-width: 58ch;
+  text-wrap: pretty;
+}
+
+.pillars__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 44px 56px;
+  max-width: 980px;
+  margin: 72px auto 0;
+}
+.pillar { display: grid; grid-template-columns: 46px 1fr; gap: 20px; align-items: start; }
+.pillar__ic {
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(150deg, var(--amber), var(--amber-strong));
+  color: #fff;
+  box-shadow: 0 8px 20px -8px rgba(180, 83, 9, 0.55);
+}
+.pillar__ic svg { width: 21px; height: 21px; stroke: currentColor; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.pillar h3 {
+  font-size: 17.5px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 9px 0 0;
+  letter-spacing: -0.005em;
+}
+.pillar p { font-size: 15px; line-height: 1.65; color: var(--muted); margin: 9px 0 0; text-wrap: pretty; }
+.pillar em { font-style: normal; color: var(--amber-text); font-weight: 600; }
+
+/* ---------- Scroll reveal, with stagger ------------------------------------
+   The page already has .reveal; these add a per-child delay so a grid arrives
+   as a sequence rather than a block. */
+.stagger > * { opacity: 0; transform: translate3d(0, 22px, 0); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
+.stagger.in > * { opacity: 1; transform: none; }
+.stagger.in > *:nth-child(1) { transition-delay: 0.04s; }
+.stagger.in > *:nth-child(2) { transition-delay: 0.13s; }
+.stagger.in > *:nth-child(3) { transition-delay: 0.22s; }
+.stagger.in > *:nth-child(4) { transition-delay: 0.31s; }
+
+@media (max-width: 880px) {
+  .heroV2 { min-height: auto; padding: 132px 0 76px; }
+  .pillars { padding: 84px 0; }
+  .pillars__grid { grid-template-columns: 1fr; gap: 38px; margin-top: 54px; }
+}
+
+/* Motion is decoration here; the content stands without it. */
+@media (prefers-reduced-motion: reduce) {
+  .heroV2__bg { animation: none; }
+  .heroV2 .rise { opacity: 1; transform: none; animation: none; }
+  .stagger > * { opacity: 1; transform: none; transition: none; }
+}
+
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -463,17 +663,35 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
   </div>
 </div>
 
-<header class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow reveal">AI sales coaching for dental teams</span>
-      <h1 class="reveal d1">Your dental treatment coordinators get <span class="g">one shot</span> at the conversation that decides the case.</h1>
-      <p class="hero-lead reveal d2">Bella lets treatment coordinators rehearse the hard treatment-plan conversations against a realistic AI patient — and scores every rep against your own methodology.</p>
-      <div class="hero-actions reveal d3">
-        <a href="#" class="btn-solid" data-demo>Book a demo</a>
-        <a href="#how" class="link-arrow">See how it works &#8594;</a>
-      </div>
+<header class="heroV2">
+  <!-- Placeholder until the real photograph lands. A missing file degrades to
+       the warm wash below rather than a broken box. -->
+  <div class="heroV2__bg" aria-hidden="true"></div>
+  <div class="heroV2__wash" aria-hidden="true"></div>
 
+  <div class="heroV2__inner">
+    <a class="heroV2__pill rise r1" href="#voice">
+      <span class="tag">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><path d="M12 18v4"/></svg>
+        New
+      </span>
+      <span><b>Bella Voice</b> &#8212; coach the consult that actually happened</span>
+    </a>
+
+    <h1 class="rise r2">Practice the conversation <em>before it counts.</em></h1>
+
+    <p class="heroV2__lead rise r3">
+      Your treatment coordinators get one shot at the conversation that decides the
+      case. Bella lets them rehearse it against a patient who pushes back like the
+      real thing &#8212; then coaches them on the consults they actually had.
+    </p>
+
+    <div class="heroV2__actions rise r4">
+      <a href="#" class="btn-solid" data-demo>Book a demo</a>
+      <a href="#how" class="link-arrow">See how it works &#8594;</a>
+    </div>
+
+    <div class="rise r5" style="margin-top:40px;display:flex;justify-content:center">
       <!-- Meet Bella — audio intro. Never autoplays; audio loads on first tap. -->
       <div class="meet reveal d3">
         <div class="meet-row">
@@ -498,30 +716,79 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
         </div>
         <audio id="meetAudio" src="/audio/bella-intro.mp3" preload="none"></audio>
       </div>
+    </div>
+  </div>
+</header>
 
-      <p class="hero-note reveal d4"><b>Practice the conversation before it counts.</b></p>
+<section id="pillars" class="pillars">
+  <div class="wrap">
+    <div class="pillars__head reveal">
+      <span class="eyebrow">What Bella does</span>
+      <h2>Four things that move case acceptance</h2>
+      <p>
+        Not a course your team watches once. A loop they run every week &#8212;
+        rehearse, present, review, improve.
+      </p>
     </div>
 
-    <div class="demo reveal d2">
-      <div class="card-demo">
-        <div class="cd-head">
-          <div class="cd-ava">P</div>
-          <div><div class="cd-who">Price-focused parent</div><div class="cd-meta">Live roleplay · PPO 50% · Crown</div></div>
+    <div class="pillars__grid reveal stagger">
+      <div class="pillar">
+        <div class="pillar__ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <div class="cd-body">
-          <div class="b parent"><div class="spk">Parent</div><div class="bub">Yeah, go ahead — but up front, how much is this going to run me?</div></div>
-          <div class="b coord"><div class="spk">Coordinator</div><div class="bub">Totally fair to ask. Let&#8217;s look at exactly what your plan covers first, then there won&#8217;t be any surprises.</div></div>
-          <div class="b parent"><div class="spk">Parent</div><div class="bub">…okay. That actually makes me feel better.</div></div>
+        <div>
+          <h3>Rehearse against a patient who pushes back</h3>
+          <p>
+            Personas across difficulty levels, every specialty, unlimited reps. A live
+            warmth meter shows how the room is actually going &#8212; so a coordinator
+            learns to read it, not just recite answers.
+          </p>
         </div>
-        <div class="cd-score">
-          <div class="ba" style="background:linear-gradient(135deg,var(--amber),var(--amber-strong));color:#fff;display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;font-size:14px">B</div>
-          <div class="n">4.6</div>
-          <div class="tx"><b>Bella&#8217;s score: Strong.</b> Led with value before price. Matched the parent&#8217;s fear, didn&#8217;t flinch on the number.</div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar__ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><path d="M12 18v4"/><path d="M8 22h8"/></svg>
+        </div>
+        <div>
+          <h3>Coach the consult that actually happened</h3>
+          <p>
+            With everyone&#8217;s consent, Bella listens to a real presentation and tells
+            the coordinator where it turned &#8212; quoting their own words back.
+            <em>You can tell someone what went wrong, or let them hear it.</em>
+          </p>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar__ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M9 11h2"/></svg>
+        </div>
+        <div>
+          <h3>Build the estimate at the chair</h3>
+          <p>
+            Treatment, insurance, patient portion and monthly options in one view, priced
+            from your own fee schedule. Follow-ups and collections tracked against the
+            case, not a sticky note.
+          </p>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar__ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>
+        </div>
+        <div>
+          <h3>See what it did to case acceptance</h3>
+          <p>
+            Every presentation ties back to whether the case was accepted and paid, by
+            coordinator and by office. The number you are trying to move, measured where it moves.
+          </p>
         </div>
       </div>
     </div>
   </div>
-</header>
+</section>
 
 <section id="why" class="s-pad">
   <div class="wrap">

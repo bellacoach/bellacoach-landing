@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1400" width="2400" height="1400" role="img" aria-label="">
+  <!-- Hero backdrop, authored rather than stock: warm light falling across a
+       room, abstracted. It sits at low opacity under a cream wash, so it is
+       read as depth and light rather than as a photograph. Swap for a real
+       shot when one exists; nothing else depends on it. -->
+  <defs>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF8EC"/>
+      <stop offset="0.55" stop-color="#F7EFE2"/>
+      <stop offset="1" stop-color="#EFE4D3"/>
+    </linearGradient>
+
+    <radialGradient id="window" cx="0.26" cy="0.16" r="0.72">
+      <stop offset="0" stop-color="#FFFDF7" stop-opacity="0.95"/>
+      <stop offset="0.45" stop-color="#FDF3E0" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FDF3E0" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="amberWash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#B45309" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#B45309" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="roseWash" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9F1239" stop-opacity="0.11"/>
+      <stop offset="1" stop-color="#9F1239" stop-opacity="0"/>
+    </linearGradient>
+
+    <filter id="soft" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="72"/>
+    </filter>
+    <filter id="softer" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="130"/>
+    </filter>
+
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="7"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="2400" height="1400" fill="url(#ground)"/>
+
+  <!-- Light entering from the upper left, the way a treatment room reads at
+       mid-morning. Everything else is shaped by where this falls. -->
+  <rect width="2400" height="1400" fill="url(#window)"/>
+
+  <!-- Soft architectural planes: a wall edge, a counter line, a doorway. Kept
+       abstract so it never competes with the headline sitting on top. -->
+  <g filter="url(#soft)" opacity="0.55">
+    <rect x="120" y="-60" width="520" height="900" rx="40" fill="#FFFFFF" opacity="0.75"/>
+    <rect x="1560" y="180" width="700" height="1100" rx="52" fill="#E8DCC8" opacity="0.7"/>
+    <rect x="820" y="620" width="1400" height="420" rx="36" fill="#F3E7D4" opacity="0.85"/>
+  </g>
+
+  <!-- Two warm pools, one amber one rose, to keep the field from going flat. -->
+  <g filter="url(#softer)">
+    <ellipse cx="520" cy="1080" rx="620" ry="330" fill="url(#amberWash)"/>
+    <ellipse cx="1980" cy="360" rx="560" ry="340" fill="url(#roseWash)"/>
+  </g>
+
+  <!-- A suggestion of two people across a desk. Deliberately unresolved: at
+       hero opacity this reads as presence, and it never pretends to be a
+       photograph of anyone real. -->
+  <g filter="url(#soft)" opacity="0.42">
+    <circle cx="880" cy="700" r="96" fill="#C9B79B"/>
+    <path d="M740 1000c0-96 63-166 140-166s140 70 140 166z" fill="#C9B79B"/>
+    <circle cx="1520" cy="672" r="104" fill="#B9A488"/>
+    <path d="M1366 1000c0-104 69-180 154-180s154 76 154 180z" fill="#B9A488"/>
+  </g>
+
+  <!-- Grain, so the gradients never band on a wide display. -->
+  <rect width="2400" height="1400" filter="url(#grain)" opacity="0.045"/>
+</svg>
