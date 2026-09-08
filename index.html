@@ -116,25 +116,6 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .demo{position:relative}
 .demo::before{content:"";position:absolute;width:64px;height:64px;border-radius:16px 16px 0 0;transform:rotate(45deg);top:-22px;right:38px;
   background:linear-gradient(135deg,#f4a6b8,#f6c896,#a8dfc1,#9fc9e8,#c9b3e0);opacity:.16}
-.card-demo{background:var(--card);border:1px solid var(--border);border-radius:22px;overflow:hidden;box-shadow:0 30px 64px -34px rgba(28,25,23,.36);position:relative}
-.cd-head{display:flex;align-items:center;gap:12px;padding:20px 24px;border-bottom:1px solid var(--border)}
-.cd-ava{width:42px;height:42px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#c9b3e0,#9fc9e8);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;color:#fff;font-size:15px}
-.cd-who{font-weight:600;font-size:15px;color:var(--ink)}
-.cd-meta{font-size:12px;letter-spacing:.04em;color:var(--faint)}
-.cd-body{padding:24px}
-.b{margin-bottom:14px;max-width:88%}
-.b.parent .spk{}
-.b .spk{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
-.b .bub{font-size:14.5px;line-height:1.45;padding:13px 16px;border-radius:14px}
-.b.parent .bub{background:var(--soft);border:1px solid var(--border);border-bottom-left-radius:5px}
-.b.coord{margin-left:auto}
-.b.coord .spk{color:#fff;opacity:.65;text-align:left}
-.b.coord .bub{background:var(--ink);color:#fff;border-bottom-right-radius:5px}
-.cd-score{display:flex;align-items:center;gap:13px;padding:18px 24px;margin:0 16px 16px;border-radius:14px;background:linear-gradient(90deg,rgba(168,223,193,.34),rgba(159,201,232,.28))}
-.cd-score .ba{width:34px;height:34px;border-radius:50%;background-size:cover;background-position:top center;border:1.5px solid #fff;box-shadow:0 2px 7px rgba(0,0,0,.14);flex:none}
-.cd-score .n{font-family:'Fraunces',serif;font-weight:700;font-size:23px;color:var(--ink)}
-.cd-score .tx{font-size:13px;color:var(--muted)}
-.cd-score .tx b{color:var(--ink)}
 
 /* SECTIONS */
 .s-pad{padding:118px 0}
@@ -653,8 +634,7 @@ a.nav-dd__item:hover{background:#faf9f8}
   overflow: hidden;
   background: var(--bg);
   display: grid;
-  place-items: center;
-  padding: 14px;
+  place-items: stretch;
 }
 .mbook__cam {
   position: absolute;
@@ -668,42 +648,27 @@ a.nav-dd__item:hover{background:#faf9f8}
 
 /* The app shell inside the screen, so it reads as the product rather than a
    card floating on a field. */
-.mbook__app { display: grid; grid-template-rows: 22px 1fr; gap: 8px; width: 100%; height: 100%; min-height: 0; }
-.mbook__chrome { display: flex; align-items: center; gap: 5px; padding: 0 2px; }
-.mbook__chrome i { width: 7px; height: 7px; border-radius: 50%; background: #ded8d1; }
-.mbook__chrome i:nth-child(1) { background: #e0a99a; }
-.mbook__chrome i:nth-child(2) { background: #e3cb9c; }
-.mbook__chrome i:nth-child(3) { background: #b3d3bd; }
-.mbook__chrome span { margin: 0 auto; font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
-.mbook__body { display: grid; grid-template-columns: 76px 1fr; gap: 9px; min-height: 0; }
-.mbook__rail { background: var(--soft); border-radius: 8px; padding: 10px 9px; display: flex; flex-direction: column; gap: 7px; }
-.mbook__rail i { display: block; height: 5px; border-radius: 999px; background: #ded8d1; }
-.mbook__rail i.w1 { width: 84%; } .mbook__rail i.w2 { width: 62%; } .mbook__rail i.w3 { width: 72%; }
-.mbook__rail i.on { background: var(--amber); opacity: .9; }
-.mbook__rail .mark { font-family: 'Fraunces', serif; font-size: 12px; color: var(--ink); margin-bottom: 5px; }
-/* The card is the same one the rest of the page uses, sized to fill the pane
-   rather than floating in it — a product screen with a lot of empty canvas is
-   the thing that reads as a mock. */
-.mbook__view { display: grid; place-items: center; min-width: 0; min-height: 0; }
-.mbook__view .card-demo { width: 100%; transform: scale(.94); transform-origin: center; box-shadow: none; border-radius: 14px; }
-.mbook__view .cd-head { padding: 9px 13px; gap: 9px; }
-.mbook__view .cd-ava { width: 26px; height: 26px; font-size: 11px; }
-.mbook__view .cd-who { font-size: 12px; }
-.mbook__view .cd-meta { font-size: 9.5px; }
-.mbook__view .cd-body { padding: 10px 13px 2px; }
-.mbook__view .b { margin-bottom: 7px; max-width: 94%; }
-.mbook__view .b .spk { font-size: 8px; margin-bottom: 3px; letter-spacing: .12em; }
-.mbook__view .b .bub { font-size: 11px; line-height: 1.38; padding: 8px 11px; border-radius: 10px; }
-.mbook__view .cd-score { padding: 8px 12px; margin: 0 10px 10px; gap: 9px; border-radius: 10px; }
-.mbook__view .cd-score .ba { width: 24px; height: 24px; }
-.mbook__view .cd-score .n { font-size: 17px; }
-.mbook__view .cd-score .tx { font-size: 10px; line-height: 1.35; }
+/* ---- The screen's contents ------------------------------------------------
+   A real screenshot of the app, not a rebuild. A hand-built miniature cannot
+   carry the product's own logo or hold up at this size — the type ends up at
+   4-7px and reads as mush — so the shot does the work.
 
-/* Both halves of the laptop body dissolve once the screen has taken the frame,
-   over roughly p 0.20 -> 0.28. calc() may return values outside 0..1; opacity
-   clamps them, which is what makes the plain linear ramp safe here. */
-.mbook__lidback,
-.mbook__base { opacity: calc(3.4 - var(--p) * 12); }
+   object-position: left top matches the original component, which anchors the
+   same way. The screen is 4:3 (32rem x 24rem), so a wider capture is cropped
+   from the right; the source should be captured near 4:3 to avoid that. */
+.mbook__shotwrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+}
+.mbook__shot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+}
 
 /* ---- The deck: 22rem tall, not a bar -------------------------------------- */
 .mbook__base {
@@ -1246,34 +1211,11 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
         <div class="mbook__screenwrap" id="mbookScreen">
           <span class="mbook__cam" aria-hidden="true"></span>
           <div class="mbook__screen">
-            <div class="mbook__app">
-              <div class="mbook__chrome" aria-hidden="true">
-                <i></i><i></i><i></i><span>Bella &middot; Role-play</span>
-              </div>
-              <div class="mbook__body">
-              <div class="mbook__rail" aria-hidden="true">
-                <span class="mark">Bella</span>
-                <i class="w1 on"></i><i class="w2"></i><i class="w3"></i><i class="w2"></i><i class="w1"></i><i class="w3"></i>
-              </div>
-              <div class="mbook__view">
-<div class="card-demo">
-        <div class="cd-head">
-          <div class="cd-ava">P</div>
-          <div><div class="cd-who">Price-focused parent</div><div class="cd-meta">Live roleplay · PPO 50% · Crown</div></div>
-        </div>
-        <div class="cd-body">
-          <div class="b parent"><div class="spk">Parent</div><div class="bub">Yeah, go ahead — but up front, how much is this going to run me?</div></div>
-          <div class="b coord"><div class="spk">Coordinator</div><div class="bub">Totally fair to ask. Let&#8217;s look at exactly what your plan covers first, then there won&#8217;t be any surprises.</div></div>
-          <div class="b parent"><div class="spk">Parent</div><div class="bub">…okay. That actually makes me feel better.</div></div>
-        </div>
-        <div class="cd-score">
-          <div class="ba" style="background:linear-gradient(135deg,var(--amber),var(--amber-strong));color:#fff;display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:600;font-size:14px">B</div>
-          <div class="n">4.6</div>
-          <div class="tx"><b>Bella&#8217;s score: Strong.</b> Led with value before price. Matched the parent&#8217;s fear, didn&#8217;t flinch on the number.</div>
-        </div>
-      </div>
-              </div>
-              </div>
+            <div class="mbook__shotwrap">
+              <img class="mbook__shot"
+                   src="images/app-dashboard.png"
+                   alt="The Bella dashboard: a rail of practice, treatment and progress tools beside the day's coaching thought and the morning huddle."
+                   loading="lazy" decoding="async">
             </div>
           </div>
         </div>
@@ -1295,7 +1237,7 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
         <div class="mbook__pad"></div>
         <div class="mbook__lip"></div>
       </div>
-      <p class="mbook__cap"><b>A live rep.</b> The patient pushes back, the meter reads the room, and the score lands the moment it ends.</p>
+      <p class="mbook__cap"><b>The whole rail, one screen.</b> Practice, treatment and progress in a single place &mdash; with the morning&#8217;s huddle already written before anyone walks in.</p>
     </div>
   </div>
 </section>
