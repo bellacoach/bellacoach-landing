@@ -538,8 +538,8 @@ a.nav-dd__item:hover{background:#faf9f8}
    taken from the real component rather than approximated:
 
      lid back   12rem x 32rem, rotateX(-25deg), transform-origin BOTTOM
-     screen     20rem x 32rem, transform-origin TOP, over the lid back
-                scaleX 1.2 -> 1.5, scaleY 0.6 -> 1.5, rotateX -28deg -> 0
+     screen     768 x 374 (authored at final size), transform-origin TOP,
+                scaleX 0.8 -> 1.0, scaleY 0.4 -> 1.0, rotateX -28deg -> 0
      base       22rem x 32rem
      perspective 800px
 
@@ -612,39 +612,30 @@ a.nav-dd__item:hover{background:#faf9f8}
 /* The screen. Unfolds from the top edge and grows as it comes up. */
 .mbook__screenwrap {
   position: absolute;
-  inset: 0;
-  height: 20rem;
-  width: 32rem;
-  border-radius: 16px;
-  padding: 8px;
-  background: #100d0a;
+  top: 0;
+  left: -128px;
+  width: 768px;
+  height: 374px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--bg);
+  box-shadow: 0 38px 74px -38px rgba(28, 25, 23, .42);
   transform-origin: top;
   transform-style: preserve-3d;
   transform:
     translateY(calc(var(--p) * 1100px))
-    scaleX(calc(1.2 + 0.3 * var(--q)))
-    scaleY(calc(0.6 + 0.9 * var(--q)))
+    scaleX(calc(0.8 + 0.2 * var(--q)))
+    scaleY(calc(0.4 + 0.6 * var(--q)))
     rotateX(calc(-28deg + 28deg * var(--r)));
-  will-change: transform;
 }
 .mbook__screen {
   position: absolute;
-  inset: 8px;
-  border-radius: 10px;
+  inset: 0;
   overflow: hidden;
-  background: var(--bg);
   display: grid;
   place-items: stretch;
 }
-.mbook__cam {
-  position: absolute;
-  top: 3px; left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: #3a332c;
-}
+.mbook__cam { display: none; }
 
 /* The app shell inside the screen, so it reads as the product rather than a
    card floating on a field. */
@@ -772,12 +763,12 @@ a.nav-dd__item:hover{background:#faf9f8}
 
 .mbook__cap {
   text-align: center;
-  margin-top: -36px;
+  margin-top: -142px;
   transform: translateY(calc(var(--p) * 1100px));
   will-change: transform;
   font-size: 14.5px;
   color: var(--muted);
-  opacity: var(--q);
+  opacity: calc(var(--q) * 2 - 1);
 }
 .mbook__cap b { color: var(--ink); font-weight: 600; }
 
@@ -798,7 +789,7 @@ a.nav-dd__item:hover{background:#faf9f8}
 
 @media (prefers-reduced-motion: reduce) {
   .mbook__track { min-height: 0; padding-bottom: 60px; }
-  .mbook__screenwrap { transform: scaleX(1.5) scaleY(1.5) rotateX(0deg); }
+  .mbook__screenwrap { transform: none; }
   .mbook__cap { opacity: 1; transform: none; margin-top: 28px; }
   .mbook__lidback, .mbook__base { opacity: 1; }
   .arcband::before { opacity: 0.6; }
