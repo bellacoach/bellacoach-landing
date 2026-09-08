@@ -765,7 +765,7 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
 
       <div class="roi-field">
         <label class="roi-label" for="roi-prod">
-          Monthly production
+          Monthly production per coordinator
           <output id="roi-prod-out" for="roi-prod">$50,000</output>
         </label>
         <input class="roi-range" type="range" id="roi-prod"
@@ -809,9 +809,12 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
 
   <p class="roi-foot">
     This is your arithmetic, not a forecast &#8212; the improvement figure is the one
-    you choose. It assumes the improvement applies to treatment your coordinators
-    present, and compares against Bella&#8217;s per-user price at the tier selected.
-    It excludes setup, and counts production rather than collections.
+    you choose. Production is <strong>per coordinator</strong>, so the return and
+    the cost both scale with seats: a second coordinator brings their own cases,
+    not a second share of the same ones. It assumes the improvement applies to
+    treatment those coordinators present, compares against Bella&#8217;s per-user
+    price at the tier selected, excludes setup, and counts production rather than
+    collections.
   </p>
 </section>
 
@@ -937,7 +940,13 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
     var l = parseFloat(lift.value);
     var s = parseInt(seats.value, 10);
     var cost = PRICE[tier] * s;
-    var gain = p * (l / 100);
+    /* Per coordinator, so it scales with seats. Reading the slider as the
+       OFFICE total and then multiplying by seats would claim a practice can
+       double its revenue by buying a second licence — two coordinators split
+       the same production, they do not each bring another office. Read as
+       per-coordinator, both sides of the sum scale together and the ratio
+       stays honest. */
+    var gain = p * (l / 100) * s;
 
     prodOut.textContent  = usd0.format(p);
     liftOut.textContent  = (Number.isInteger(l) ? l : l.toFixed(1)) + '%';
