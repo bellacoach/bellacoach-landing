@@ -552,14 +552,25 @@ a.nav-dd__item:hover{background:#faf9f8}
 .arcband--tight { height: 96px; }
 
 /* ---------- MacBook scroll ------------------------------------------------
-   Hand-built. The Aceternity original is React + Framer Motion + Tailwind and
-   cannot be installed into a static page; this is the same mechanic in ~60
-   lines of CSS driven by one custom property.
+   Ported from Aceternity's MacbookScroll (React + Framer Motion + Tailwind),
+   which cannot be installed into a static page. Geometry and transforms are
+   taken from the real component rather than approximated:
 
-   JS writes --p (0..1) once per frame; every transform below is derived from
-   it in CSS. One property write per frame beats animating six elements. */
+     lid back   12rem x 32rem, rotateX(-25deg), transform-origin BOTTOM
+     screen     24rem x 32rem, transform-origin TOP, over the lid back
+                scaleX 1.2 -> 1.5, scaleY 0.6 -> 1.5, rotateX -28deg -> 0
+     base       22rem x 32rem
+     perspective 800px
+
+   The first attempt got the mechanic wrong in two ways that mattered: one lid
+   rotating from the bottom instead of two with the screen unfolding from the
+   top, and a 15px base instead of a 352px deck — which is why it read as a
+   rectangle on a stick rather than a laptop.
+
+   JS writes --q (0..1 across the opening) and --p (0..1 across the whole
+   track); every transform below derives from those. */
 .mbook { position: relative; }
-.mbook__head { max-width: 760px; margin: 0 auto; text-align: center; padding: 0 24px; }
+.mbook__head { max-width: 760px; margin: 0 auto 62px; text-align: center; padding: 0 24px; }
 .mbook__head h2 {
   font-family: 'Fraunces', Georgia, serif;
   font-weight: 500;
@@ -571,123 +582,208 @@ a.nav-dd__item:hover{background:#faf9f8}
   text-wrap: balance;
 }
 .mbook__head p {
-  font-size: 17px;
-  line-height: 1.65;
-  color: var(--muted);
-  margin: 20px auto 0;
-  max-width: 56ch;
-  text-wrap: pretty;
+  font-size: 17px; line-height: 1.65; color: var(--muted);
+  margin: 20px auto 0; max-width: 56ch; text-wrap: pretty;
 }
 
-/* The track is the scroll budget. The stage sticks inside it, so the lid has
-   distance to open across without the page feeling stalled. */
-.mbook__track { height: 210vh; position: relative; margin-top: -6vh; }
-.mbook__stage {
-  position: sticky;
-  top: 0;
-  height: 100vh;
+.mbook__track {
+  --q: 0; --r: 0; --p: 0;
+  min-height: 2220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  perspective: 800px;
+  padding: 150px 0 0;
+  overflow: hidden;
+}
+
+/* The unit carries the responsive scale, the way the original does. */
+.mbook__unit { width: 32rem; transform: scale(1); transform-origin: top center; }
+
+.mbook__lidwrap { position: relative; perspective: 800px; }
+
+/* The closed lid, seen from behind. Static. */
+.mbook__lidback {
+  position: relative;
+  height: 12rem;
+  width: 32rem;
+  border-radius: 16px;
+  padding: 8px;
+  background: #100d0a;
+  transform: perspective(800px) rotateX(-25deg) translateZ(0);
+  transform-origin: bottom;
+  transform-style: preserve-3d;
+}
+.mbook__lidback span {
+  position: absolute;
+  inset: 0;
   display: grid;
   place-items: center;
-  perspective: 1600px;
-  perspective-origin: 50% 62%;
-}
-.mbook__unit {
-  --p: 0;
-  width: min(880px, 82vw);
-  transform: scale(calc(0.78 + 0.22 * var(--p)));
-  transform-origin: center 58%;
-  will-change: transform;
+  border-radius: 10px;
+  background: #100d0a;
+  box-shadow: 0 2px 0 2px #241f19 inset;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 26px;
+  color: rgba(255, 255, 255, .82);
 }
 
-.mbook__lid {
-  position: relative;
-  aspect-ratio: 16 / 10;
-  border-radius: 16px 16px 4px 4px;
-  background: linear-gradient(170deg, #2b2523, #17130f);
-  padding: 12px 12px 16px;
-  transform-origin: bottom center;
-  /* Closed at 0, open at 1. -88deg reads as shut without clipping through the
-     base the way a full -90 does. */
-  transform: rotateX(calc(-88deg * (1 - var(--p))));
-  box-shadow: 0 40px 80px -30px rgba(28, 25, 23, 0.55);
+/* The screen. Unfolds from the top edge and grows as it comes up. */
+.mbook__screenwrap {
+  position: absolute;
+  inset: 0;
+  height: 24rem;
+  width: 32rem;
+  border-radius: 16px;
+  padding: 8px;
+  background: #100d0a;
+  transform-origin: top;
+  transform-style: preserve-3d;
+  transform:
+    translateY(calc(var(--p) * 1100px))
+    scaleX(calc(1.2 + 0.3 * var(--q)))
+    scaleY(calc(0.6 + 0.9 * var(--q)))
+    rotateX(calc(-28deg + 28deg * var(--r)));
   will-change: transform;
 }
 .mbook__screen {
-  position: relative;
-  height: 100%;
-  border-radius: 8px;
+  position: absolute;
+  inset: 8px;
+  border-radius: 10px;
   overflow: hidden;
   background: var(--bg);
   display: grid;
   place-items: center;
-  padding: 22px;
-  /* The contents only exist once the lid is far enough open to see them; this
-     also stops the card being readable upside-down through the back. */
-  opacity: calc((var(--p) - 0.45) * 2.4);
+  padding: 14px;
 }
-/* The screen should read as the app, not as a card floating on a field. A
-   slim rail gives it chrome and uses the width the card was leaving empty. */
-.mbook__app { display: grid; grid-template-columns: 128px 1fr; gap: 18px; width: 100%; height: 100%; }
-.mbook__rail { background: var(--soft); border-radius: 10px; padding: 14px 12px; display: flex; flex-direction: column; gap: 9px; }
-.mbook__rail i { display: block; height: 8px; border-radius: 999px; background: #ded8d1; }
-.mbook__rail i.w1 { width: 84%; } .mbook__rail i.w2 { width: 62%; } .mbook__rail i.w3 { width: 72%; }
-.mbook__rail i.on { background: var(--amber); opacity: .85; }
-.mbook__rail .mark { font-family: 'Fraunces', serif; font-size: 15px; color: var(--ink); margin-bottom: 8px; }
-.mbook__view { display: grid; place-items: center; min-width: 0; overflow: hidden; }
-/* Scaled to fit the lid rather than clipped by it — measured at 428x565 in a
-   812x478 area, which overflowed by 87px. */
-.mbook__view .card-demo { width: 100%; max-width: 430px; transform: scale(.76); transform-origin: center; }
 .mbook__cam {
   position: absolute;
-  top: 5px; left: 50%;
+  top: 3px; left: 50%;
   transform: translateX(-50%);
-  width: 6px; height: 6px;
+  z-index: 2;
+  width: 5px; height: 5px;
   border-radius: 50%;
-  background: #3a3230;
+  background: #3a332c;
 }
 
+/* The app shell inside the screen, so it reads as the product rather than a
+   card floating on a field. */
+.mbook__app { display: grid; grid-template-rows: 22px 1fr; gap: 8px; width: 100%; height: 100%; min-height: 0; }
+.mbook__chrome { display: flex; align-items: center; gap: 5px; padding: 0 2px; }
+.mbook__chrome i { width: 7px; height: 7px; border-radius: 50%; background: #ded8d1; }
+.mbook__chrome i:nth-child(1) { background: #e0a99a; }
+.mbook__chrome i:nth-child(2) { background: #e3cb9c; }
+.mbook__chrome i:nth-child(3) { background: #b3d3bd; }
+.mbook__chrome span { margin: 0 auto; font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
+.mbook__body { display: grid; grid-template-columns: 76px 1fr; gap: 9px; min-height: 0; }
+.mbook__rail { background: var(--soft); border-radius: 8px; padding: 10px 9px; display: flex; flex-direction: column; gap: 7px; }
+.mbook__rail i { display: block; height: 5px; border-radius: 999px; background: #ded8d1; }
+.mbook__rail i.w1 { width: 84%; } .mbook__rail i.w2 { width: 62%; } .mbook__rail i.w3 { width: 72%; }
+.mbook__rail i.on { background: var(--amber); opacity: .9; }
+.mbook__rail .mark { font-family: 'Fraunces', serif; font-size: 12px; color: var(--ink); margin-bottom: 5px; }
+/* The card is the same one the rest of the page uses, sized to fill the pane
+   rather than floating in it — a product screen with a lot of empty canvas is
+   the thing that reads as a mock. */
+.mbook__view { display: grid; place-items: center; min-width: 0; min-height: 0; }
+.mbook__view .card-demo { width: 100%; transform: scale(.94); transform-origin: center; box-shadow: none; border-radius: 14px; }
+.mbook__view .cd-head { padding: 9px 13px; gap: 9px; }
+.mbook__view .cd-ava { width: 26px; height: 26px; font-size: 11px; }
+.mbook__view .cd-who { font-size: 12px; }
+.mbook__view .cd-meta { font-size: 9.5px; }
+.mbook__view .cd-body { padding: 10px 13px 2px; }
+.mbook__view .b { margin-bottom: 7px; max-width: 94%; }
+.mbook__view .b .spk { font-size: 8px; margin-bottom: 3px; letter-spacing: .12em; }
+.mbook__view .b .bub { font-size: 11px; line-height: 1.38; padding: 8px 11px; border-radius: 10px; }
+.mbook__view .cd-score { padding: 8px 12px; margin: 0 10px 10px; gap: 9px; border-radius: 10px; }
+.mbook__view .cd-score .ba { width: 24px; height: 24px; }
+.mbook__view .cd-score .n { font-size: 17px; }
+.mbook__view .cd-score .tx { font-size: 10px; line-height: 1.35; }
+
+/* Both halves of the laptop body dissolve once the screen has taken the frame,
+   over roughly p 0.20 -> 0.28. calc() may return values outside 0..1; opacity
+   clamps them, which is what makes the plain linear ramp safe here. */
+.mbook__lidback,
+.mbook__base { opacity: calc(3.4 - var(--p) * 12); }
+
+/* ---- The deck: 22rem tall, not a bar -------------------------------------- */
 .mbook__base {
-  height: 15px;
-  border-radius: 0 0 14px 14px;
-  background: linear-gradient(180deg, #241f1c, #12100e);
-  box-shadow: 0 26px 44px -22px rgba(28, 25, 23, 0.6);
   position: relative;
+  z-index: -10;
+  height: 22rem;
+  width: 32rem;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #1c1916;
 }
-.mbook__base::after {
+/* The dark strip above the keyboard. */
+.mbook__bar { position: relative; height: 40px; width: 100%; }
+.mbook__bar::after {
   content: '';
-  position: absolute;
-  top: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 96px; height: 5px;
-  border-radius: 0 0 6px 6px;
-  background: #0d0b0a;
+  position: absolute; inset-inline: 0; margin: 0 auto;
+  height: 16px; width: 80%;
+  background: #050505;
+}
+.mbook__row { position: relative; display: flex; }
+.mbook__spk {
+  margin: 0 auto; height: 100%; width: 10%; overflow: hidden;
+  background-image: radial-gradient(circle, #0a0a0a 0.6px, transparent 0.7px);
+  background-size: 3px 3px;
+  min-height: 128px;
+}
+.mbook__keys {
+  margin: 0 auto; width: 80%;
+  height: 128px;
+  border-radius: 5px;
+  background-color: #0d0c0b;
+  background-image:
+    repeating-linear-gradient(90deg, #2a2724 0 calc(100%/15 - 2px), transparent calc(100%/15 - 2px) calc(100%/15)),
+    repeating-linear-gradient(180deg, #2a2724 0 calc(100%/5 - 2px), transparent calc(100%/5 - 2px) calc(100%/5));
+}
+.mbook__pad {
+  margin: 12px auto; height: 116px; width: 40%;
+  border-radius: 12px;
+  box-shadow: 0 0 1px 1px rgba(255, 255, 255, .09) inset;
+}
+.mbook__lip {
+  position: absolute; inset-inline: 0; bottom: 0; margin: 0 auto;
+  height: 8px; width: 80px;
+  border-radius: 24px 24px 0 0;
+  background: linear-gradient(180deg, #050505, #1c1916);
 }
 
-/* Caption rides along, arriving only once the screen is legible. */
 .mbook__cap {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 60px;
+  transform: translateY(calc(var(--p) * 1100px));
+  will-change: transform;
   font-size: 14.5px;
   color: var(--muted);
-  opacity: calc((var(--p) - 0.6) * 3);
+  opacity: var(--q);
 }
 .mbook__cap b { color: var(--ink); font-weight: 600; }
 
-@media (max-width: 880px) {
-  .mbook__track { height: 170vh; }
-  .mbook__unit { width: 88vw; }
+/* The original scales the whole assembly rather than reflowing it, because the
+   geometry is fixed in rem. Same approach here. */
+@media (max-width: 1000px) {
+  .mbook__unit  { transform: scale(.84); }
+  .mbook__track { min-height: 1870px; padding-top: 160px; }
+}
+@media (max-width: 720px) {
+  .mbook__unit  { transform: scale(.62); }
+  .mbook__track { min-height: 1530px; padding-top: 90px; }
+}
+@media (max-width: 520px) {
+  .mbook__unit  { transform: scale(.44); }
+  .mbook__track { min-height: 1150px; padding-top: 70px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* Open, still, and fully legible — the section still says what it says. */
-  .mbook__track { height: auto; margin-top: 0; }
-  .mbook__stage { position: static; height: auto; padding: 40px 0 0; }
-  .mbook__unit { transform: none; }
-  .mbook__lid { transform: none; }
-  .mbook__screen, .mbook__cap { opacity: 1; }
+  .mbook__track { min-height: 0; padding-bottom: 60px; }
+  .mbook__screenwrap { transform: scaleX(1.5) scaleY(1.5) rotateX(0deg); }
+  .mbook__cap { opacity: 1; transform: none; }
+  .mbook__lidback, .mbook__base { opacity: 1; }
   .arcband::before { opacity: 0.6; }
 }
-
 
 /* ---------- Bento ---------------------------------------------------------
    Three columns, mixed heights: the differentiated capabilities, each with a
@@ -1084,21 +1180,24 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
 <div class="arcband" aria-hidden="true"></div>
 
 <section id="how" class="mbook">
-  <div class="mbook__head reveal">
-    <span class="eyebrow">The product</span>
-    <h2>Open it up and it is one loop, not four tools</h2>
-    <p>Rehearse, present, review, improve. A coordinator lives in one place and
-       every part of it feeds the next.</p>
-  </div>
-
   <div class="mbook__track" id="mbookTrack">
-    <div class="mbook__stage">
-      <div class="mbook__unit" id="mbookUnit">
-        <div class="mbook__lid">
+    <div class="mbook__head reveal">
+      <span class="eyebrow">The product</span>
+      <h2>Open it up and it is one loop, not four tools</h2>
+      <p>Rehearse, present, review, improve. A coordinator lives in one place and
+         every part of it feeds the next.</p>
+    </div>
+    <div class="mbook__unit">
+      <div class="mbook__lidwrap">
+        <div class="mbook__lidback" aria-hidden="true"><span>Bella</span></div>
+        <div class="mbook__screenwrap" id="mbookScreen">
           <span class="mbook__cam" aria-hidden="true"></span>
           <div class="mbook__screen">
-
             <div class="mbook__app">
+              <div class="mbook__chrome" aria-hidden="true">
+                <i></i><i></i><i></i><span>Bella &middot; Role-play</span>
+              </div>
+              <div class="mbook__body">
               <div class="mbook__rail" aria-hidden="true">
                 <span class="mark">Bella</span>
                 <i class="w1 on"></i><i class="w2"></i><i class="w3"></i><i class="w2"></i><i class="w1"></i><i class="w3"></i>
@@ -1121,12 +1220,22 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
         </div>
       </div>
               </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="mbook__base"></div>
-        <p class="mbook__cap"><b>A live rep.</b> The patient pushes back, the meter reads the room, and the score lands the moment it ends.</p>
       </div>
+      <div class="mbook__base" aria-hidden="true">
+        <div class="mbook__bar"></div>
+        <div class="mbook__row">
+          <div class="mbook__spk"></div>
+          <div class="mbook__keys"></div>
+          <div class="mbook__spk"></div>
+        </div>
+        <div class="mbook__pad"></div>
+        <div class="mbook__lip"></div>
+      </div>
+      <p class="mbook__cap"><b>A live rep.</b> The patient pushes back, the meter reads the room, and the score lands the moment it ends.</p>
     </div>
   </div>
 </section>
@@ -1405,45 +1514,42 @@ onScroll();window.addEventListener('scroll',onScroll,{passive:true});
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14,rootMargin:'0px 0px -7% 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* MacBook scroll.
-   JS does one job: write --p (0..1) onto the unit once per frame. Every
-   transform is derived from it in CSS, so this never touches layout and never
-   animates six elements by hand.
+/* MacBook scroll driver.
+   Mirrors the original's three ranges rather than one: the lid SCALES over the
+   first 30% of the track, ROTATES open between 12% and 30%, and the screen
+   keeps travelling for the whole of it. Three custom properties, one write per
+   frame each; every transform is derived from them in CSS, so this never
+   touches layout.
 
-   Reads are batched inside the rAF callback rather than in the scroll handler,
-   which is what keeps it off the main-thread critical path. */
+   Progress is measured the way Framer's ["start start", "end start"] offset
+   does — 0 when the track's top reaches the viewport top, 1 when its bottom
+   does — because the geometry above was tuned against that curve. */
 (function () {
   var track = document.getElementById('mbookTrack');
-  var unit = document.getElementById('mbookUnit');
-  if (!track || !unit) return;
+  if (!track) return;
 
-  // Reduced motion gets the open, static laptop from CSS; driving --p would
-  // fight it.
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    unit.style.setProperty('--p', '1');
-    return;
-  }
+  // Reduced motion gets the open, static laptop from CSS; driving it would
+  // fight that.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var ticking = false;
-  var last = -1;
+  var ticking = false, lastQ = -1, lastR = -1, lastP = -1;
 
   function frame() {
     ticking = false;
     var r = track.getBoundingClientRect();
-    // Progress across the portion of the track that actually scrolls past.
-    var travel = r.height - window.innerHeight;
-    if (travel <= 0) return;
-    var p = (0 - r.top) / travel;
+    if (r.height <= 0) return;
+
+    var p = (0 - r.top) / r.height;
     p = p < 0 ? 0 : p > 1 ? 1 : p;
-    // The lid should be open well before the track ends, so the screen has
-    // time to be read rather than arriving as the section leaves.
-    p = p / 0.62;
-    if (p > 1) p = 1;
-    // Ease out, so it opens quickly then settles.
-    p = 1 - Math.pow(1 - p, 2.4);
-    if (Math.abs(p - last) < 0.002) return;
-    last = p;
-    unit.style.setProperty('--p', p.toFixed(4));
+
+    var q = p / 0.3;                       // scale, 0 -> 0.3
+    q = q > 1 ? 1 : q;
+    var rot = (p - 0.12) / 0.18;           // rotate, 0.12 -> 0.3
+    rot = rot < 0 ? 0 : rot > 1 ? 1 : rot;
+
+    if (Math.abs(q - lastQ) > 0.002) { lastQ = q; track.style.setProperty('--q', q.toFixed(4)); }
+    if (Math.abs(rot - lastR) > 0.002) { lastR = rot; track.style.setProperty('--r', rot.toFixed(4)); }
+    if (Math.abs(p - lastP) > 0.002) { lastP = p; track.style.setProperty('--p', p.toFixed(4)); }
   }
 
   function onScroll() {
