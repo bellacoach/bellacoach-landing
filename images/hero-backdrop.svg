@@ -1,74 +1,79 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1400" width="2400" height="1400" role="img" aria-label="">
-  <!-- Hero backdrop, authored rather than stock: warm light falling across a
-       room, abstracted. It sits at low opacity under a cream wash, so it is
-       read as depth and light rather than as a photograph. Swap for a real
-       shot when one exists; nothing else depends on it. -->
+  <!-- Hero backdrop, authored rather than stock.
+       Concentric arcs spreading from the lower left: a voice crossing a room.
+       On-brand for a product about conversations, and abstract enough that it
+       never competes with the headline sitting on it.
+
+       The first attempt failed because every tone sat within ~10% of every
+       other and was then blurred by 130px — invisible by construction. This one
+       carries real tonal separation and blurs only what should recede. -->
   <defs>
-    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FFF8EC"/>
-      <stop offset="0.55" stop-color="#F7EFE2"/>
-      <stop offset="1" stop-color="#EFE4D3"/>
+    <linearGradient id="ground" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#FFFDF8"/>
+      <stop offset="0.45" stop-color="#FBF3E6"/>
+      <stop offset="1" stop-color="#F0E2CC"/>
     </linearGradient>
 
-    <radialGradient id="window" cx="0.26" cy="0.16" r="0.72">
-      <stop offset="0" stop-color="#FFFDF7" stop-opacity="0.95"/>
-      <stop offset="0.45" stop-color="#FDF3E0" stop-opacity="0.55"/>
-      <stop offset="1" stop-color="#FDF3E0" stop-opacity="0"/>
+    <radialGradient id="dawn" cx="0.14" cy="0.86" r="0.95">
+      <stop offset="0" stop-color="#F5C98E" stop-opacity="0.85"/>
+      <stop offset="0.35" stop-color="#EEB77A" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#EEB77A" stop-opacity="0"/>
     </radialGradient>
 
-    <linearGradient id="amberWash" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#B45309" stop-opacity="0.16"/>
-      <stop offset="1" stop-color="#B45309" stop-opacity="0"/>
+    <radialGradient id="dusk" cx="0.9" cy="0.12" r="0.8">
+      <stop offset="0" stop-color="#D9A0A8" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#D9A0A8" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Arcs fade out as they travel, the way a voice does. -->
+    <linearGradient id="fade" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#B45309" stop-opacity="0.78"/>
+      <stop offset="0.55" stop-color="#B45309" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#B45309" stop-opacity="0.05"/>
     </linearGradient>
 
-    <linearGradient id="roseWash" x1="1" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#9F1239" stop-opacity="0.11"/>
-      <stop offset="1" stop-color="#9F1239" stop-opacity="0"/>
-    </linearGradient>
-
-    <filter id="soft" x="-25%" y="-25%" width="150%" height="150%">
-      <feGaussianBlur stdDeviation="72"/>
-    </filter>
-    <filter id="softer" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="130"/>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="26"/>
     </filter>
 
     <filter id="grain">
-      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="7"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="11"/>
       <feColorMatrix type="saturate" values="0"/>
     </filter>
   </defs>
 
   <rect width="2400" height="1400" fill="url(#ground)"/>
+  <rect width="2400" height="1400" fill="url(#dawn)"/>
+  <rect width="2400" height="1400" fill="url(#dusk)"/>
 
-  <!-- Light entering from the upper left, the way a treatment room reads at
-       mid-morning. Everything else is shaped by where this falls. -->
-  <rect width="2400" height="1400" fill="url(#window)"/>
-
-  <!-- Soft architectural planes: a wall edge, a counter line, a doorway. Kept
-       abstract so it never competes with the headline sitting on top. -->
-  <g filter="url(#soft)" opacity="0.55">
-    <rect x="120" y="-60" width="520" height="900" rx="40" fill="#FFFFFF" opacity="0.75"/>
-    <rect x="1560" y="180" width="700" height="1100" rx="52" fill="#E8DCC8" opacity="0.7"/>
-    <rect x="820" y="620" width="1400" height="420" rx="36" fill="#F3E7D4" opacity="0.85"/>
+  <!-- The voice. Rings from a source off-canvas at lower left, widening as they
+       cross. Stroked, not filled, so the field stays open. -->
+  <g fill="none" stroke="url(#fade)" stroke-linecap="round">
+    <circle cx="-120" cy="1560" r="520"  stroke-width="16"/>
+    <circle cx="-120" cy="1560" r="760"  stroke-width="13"/>
+    <circle cx="-120" cy="1560" r="1010" stroke-width="11"/>
+    <circle cx="-120" cy="1560" r="1270" stroke-width="9"/>
+    <circle cx="-120" cy="1560" r="1540" stroke-width="7.5"/>
+    <circle cx="-120" cy="1560" r="1820" stroke-width="6"/>
+    <circle cx="-120" cy="1560" r="2110" stroke-width="5"/>
+    <circle cx="-120" cy="1560" r="2410" stroke-width="4"/>
+    <circle cx="-120" cy="1560" r="2720" stroke-width="3"/>
   </g>
 
-  <!-- Two warm pools, one amber one rose, to keep the field from going flat. -->
-  <g filter="url(#softer)">
-    <ellipse cx="520" cy="1080" rx="620" ry="330" fill="url(#amberWash)"/>
-    <ellipse cx="1980" cy="360" rx="560" ry="340" fill="url(#roseWash)"/>
+  <!-- Two soft masses for depth, blurred just enough to recede behind the
+       arcs without dissolving. -->
+  <g filter="url(#soft)">
+    <ellipse cx="1880" cy="1180" rx="620" ry="300" fill="#E4CDA8" opacity="0.55"/>
+    <ellipse cx="330" cy="240" rx="480" ry="260" fill="#FFFFFF" opacity="0.8"/>
   </g>
 
-  <!-- A suggestion of two people across a desk. Deliberately unresolved: at
-       hero opacity this reads as presence, and it never pretends to be a
-       photograph of anyone real. -->
-  <g filter="url(#soft)" opacity="0.42">
-    <circle cx="880" cy="700" r="96" fill="#C9B79B"/>
-    <path d="M740 1000c0-96 63-166 140-166s140 70 140 166z" fill="#C9B79B"/>
-    <circle cx="1520" cy="672" r="104" fill="#B9A488"/>
-    <path d="M1366 1000c0-104 69-180 154-180s154 76 154 180z" fill="#B9A488"/>
-  </g>
+  <!-- Light pooling where the headline sits, so the type always has ground. -->
+  <ellipse cx="1200" cy="620" rx="900" ry="470" fill="url(#glow)"/>
 
-  <!-- Grain, so the gradients never band on a wide display. -->
-  <rect width="2400" height="1400" filter="url(#grain)" opacity="0.045"/>
+  <rect width="2400" height="1400" filter="url(#grain)" opacity="0.05"/>
 </svg>
