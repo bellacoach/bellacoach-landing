@@ -793,8 +793,8 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
         <div class="roi-ticks"><span>1</span><span>6</span><span>12</span></div>
         <div class="roi-tier">
           <span>Compare against</span>
-          <button type="button" id="roi-tier-ss" aria-pressed="true">Self-Serve</button>
-          <button type="button" id="roi-tier-cu" aria-pressed="false">Customization</button>
+          <button type="button" id="roi-tier-ss" aria-pressed="false">Self-Serve</button>
+          <button type="button" id="roi-tier-cu" aria-pressed="true">Customization</button>
         </div>
       </div>
     </div>
@@ -916,7 +916,10 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
   var btnCU    = document.getElementById('roi-tier-cu');
 
   var PRICE = { ss: 250, cu: 500 };
-  var tier = 'ss';
+  /* Customization is the featured tier and the one most visitors land on, so
+     the comparison defaults there. Defaulting to Self-Serve would quietly halve
+     the cost side of the sum and flatter the result. */
+  var tier = 'cu';
 
   var usd0 = new Intl.NumberFormat('en-US', {
     style: 'currency', currency: 'USD', maximumFractionDigits: 0
