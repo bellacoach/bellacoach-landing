@@ -723,26 +723,79 @@ a.nav-dd__item:hover{background:#faf9f8}
   height: 16px; width: 80%;
   background: #050505;
 }
-.mbook__row { position: relative; display: flex; }
+.mbook__row { position: relative; display: flex; align-items: stretch; margin-top: 2px; }
 .mbook__spk {
-  margin: 0 auto; height: 100%; width: 10%; overflow: hidden;
-  background-image: radial-gradient(circle, #0a0a0a 0.6px, transparent 0.7px);
+  margin: 0 auto; height: auto; width: 10%; overflow: hidden;
+  background-image: radial-gradient(circle, #0a0806 0.5px, transparent 0.6px);
   background-size: 3px 3px;
-  min-height: 128px;
 }
+
+/* ---- The keypad ----------------------------------------------------------
+   Every key is a real element, as in the component. The stand-in here used to
+   be two repeating-linear-gradients, which at this size read as a smudge and
+   was the main reason the deck looked unfinished next to the original.
+
+   Sizes are the original's fixed pixels — 24px keys, 2px gaps, 40 for
+   esc/tab/delete, 45/46 caps/return, 58 shift, 32 command, 131 space — so each
+   row lands near 380px inside the 80% column. Flex sizing would drift the rows
+   out of alignment with each other, which is exactly what a keyboard cannot do. */
 .mbook__keys {
-  margin: 0 auto; width: 80%;
-  height: 128px;
-  border-radius: 5px;
-  background-color: #0d0c0b;
-  background-image:
-    repeating-linear-gradient(90deg, #2a2724 0 calc(100%/15 - 2px), transparent calc(100%/15 - 2px) calc(100%/15)),
-    repeating-linear-gradient(180deg, #2a2724 0 calc(100%/5 - 2px), transparent calc(100%/5 - 2px) calc(100%/5));
+  margin: 0 4px; width: 80%;
+  border-radius: 6px;
+  background: #0b0908;
+  padding: 4px;
+  transform: translateZ(0);
 }
+.mbk-row { display: flex; gap: 2px; width: 100%; flex-shrink: 0; margin-bottom: 2px; }
+.mbk-row:last-child { margin-bottom: 0; }
+.mbk {
+  flex: none;
+  border-radius: 4px;
+  padding: .5px;
+  background: rgba(255, 255, 255, .09);   /* the backlit edge */
+}
+.mbk > span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+  border-radius: 3.5px;
+  background: #17130f;
+  box-shadow: 0 -0.5px 2px 0 #0d0b09 inset, -0.5px 0 2px 0 #0d0b09 inset;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 5px;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, .78);
+  overflow: hidden;
+}
+.mbk > span > b { font-weight: 400; display: block; }
+.mbk--w40  > span { width: 40px; }
+.mbk--caps > span { width: 45px; }
+.mbk--ret  > span { width: 46px; }
+.mbk--shift > span { width: 58px; }
+.mbk--cmd  > span { width: 32px; }
+.mbk--space > span { width: 131px; }
+.mbk--half > span { height: 11px; font-size: 4px; }
+/* esc, tab, caps and left shift label from the bottom-left; delete, return and
+   right shift from the bottom-right — column flex, so align-items is the
+   horizontal one. */
+.mbk--bl > span { align-items: flex-start; justify-content: flex-end; padding: 0 0 2px 4px; }
+.mbk--br > span { align-items: flex-end;   justify-content: flex-end; padding: 0 4px 2px 0; }
+.mbk--pwr > span { padding: 5px; }
+.mbk--pwr > span::before {
+  content: '';
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #211c17 0%, #0a0806 50%, #211c17 95%);
+}
+.mbk-arrows { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; width: 78px; margin-top: 2px; }
+.mbk-arrow-row { display: flex; }
 .mbook__pad {
-  margin: 12px auto; height: 116px; width: 40%;
+  margin: 4px auto; height: 128px; width: 40%;
   border-radius: 12px;
-  box-shadow: 0 0 1px 1px rgba(255, 255, 255, .09) inset;
+  box-shadow: 0 0 1px 1px rgba(255, 255, 255, .07) inset;
 }
 .mbook__lip {
   position: absolute; inset-inline: 0; bottom: 0; margin: 0 auto;
@@ -1229,7 +1282,14 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
         <div class="mbook__bar"></div>
         <div class="mbook__row">
           <div class="mbook__spk"></div>
-          <div class="mbook__keys"></div>
+          <div class="mbook__keys">
+            <div class="mbk-row"><i class="mbk mbk--w40 mbk--bl"><span>esc</span></i><i class="mbk"><span>F1</span></i><i class="mbk"><span>F2</span></i><i class="mbk"><span>F3</span></i><i class="mbk"><span>F4</span></i><i class="mbk"><span>F5</span></i><i class="mbk"><span>F6</span></i><i class="mbk"><span>F7</span></i><i class="mbk"><span>F8</span></i><i class="mbk"><span>F9</span></i><i class="mbk"><span>F10</span></i><i class="mbk"><span>F11</span></i><i class="mbk"><span>F12</span></i><i class="mbk mbk--pwr"><span></span></i></div>
+            <div class="mbk-row"><i class="mbk"><span><b>~</b><b>`</b></span></i><i class="mbk"><span><b>!</b><b>1</b></span></i><i class="mbk"><span><b>@</b><b>2</b></span></i><i class="mbk"><span><b>#</b><b>3</b></span></i><i class="mbk"><span><b>$</b><b>4</b></span></i><i class="mbk"><span><b>%</b><b>5</b></span></i><i class="mbk"><span><b>^</b><b>6</b></span></i><i class="mbk"><span><b>&amp;</b><b>7</b></span></i><i class="mbk"><span><b>*</b><b>8</b></span></i><i class="mbk"><span><b>(</b><b>9</b></span></i><i class="mbk"><span><b>)</b><b>0</b></span></i><i class="mbk"><span><b>_</b><b>-</b></span></i><i class="mbk"><span><b>+</b><b>=</b></span></i><i class="mbk mbk--w40 mbk--br"><span>delete</span></i></div>
+            <div class="mbk-row"><i class="mbk mbk--w40 mbk--bl"><span>tab</span></i><i class="mbk"><span>Q</span></i><i class="mbk"><span>W</span></i><i class="mbk"><span>E</span></i><i class="mbk"><span>R</span></i><i class="mbk"><span>T</span></i><i class="mbk"><span>Y</span></i><i class="mbk"><span>U</span></i><i class="mbk"><span>I</span></i><i class="mbk"><span>O</span></i><i class="mbk"><span>P</span></i><i class="mbk"><span>[</span></i><i class="mbk"><span>]</span></i><i class="mbk"><span>|</span></i></div>
+            <div class="mbk-row"><i class="mbk mbk--caps mbk--bl"><span>caps lock</span></i><i class="mbk"><span>A</span></i><i class="mbk"><span>S</span></i><i class="mbk"><span>D</span></i><i class="mbk"><span>F</span></i><i class="mbk"><span>G</span></i><i class="mbk"><span>H</span></i><i class="mbk"><span>J</span></i><i class="mbk"><span>K</span></i><i class="mbk"><span>L</span></i><i class="mbk"><span>;</span></i><i class="mbk"><span>'</span></i><i class="mbk mbk--ret mbk--br"><span>return</span></i></div>
+            <div class="mbk-row"><i class="mbk mbk--shift mbk--bl"><span>shift</span></i><i class="mbk"><span>Z</span></i><i class="mbk"><span>X</span></i><i class="mbk"><span>C</span></i><i class="mbk"><span>V</span></i><i class="mbk"><span>B</span></i><i class="mbk"><span>N</span></i><i class="mbk"><span>M</span></i><i class="mbk"><span>,</span></i><i class="mbk"><span>.</span></i><i class="mbk"><span>/</span></i><i class="mbk mbk--shift mbk--br"><span>shift</span></i></div>
+            <div class="mbk-row"><i class="mbk"><span>fn</span></i><i class="mbk"><span>control</span></i><i class="mbk"><span>option</span></i><i class="mbk mbk--cmd"><span>command</span></i><i class="mbk mbk--space"><span></span></i><i class="mbk mbk--cmd"><span>command</span></i><i class="mbk"><span>option</span></i><span class="mbk-arrows"><i class="mbk mbk--half"><span>&#9650;</span></i><span class="mbk-arrow-row"><i class="mbk mbk--half"><span>&#9664;</span></i><i class="mbk mbk--half"><span>&#9660;</span></i><i class="mbk mbk--half"><span>&#9654;</span></i></span></span></div>
+          </div>
           <div class="mbook__spk"></div>
         </div>
         <div class="mbook__pad"></div>
