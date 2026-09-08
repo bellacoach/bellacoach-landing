@@ -335,29 +335,38 @@ a.nav-dd__item:hover{background:#faf9f8}
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2400 1400' width='2400' height='1400' role='img' aria-label=''%3E%3Cdefs%3E%3ClinearGradient id='ground' x1='0.1' y1='0' x2='0.9' y2='1'%3E%3Cstop offset='0' stop-color='%23FFFDF8'/%3E%3Cstop offset='0.45' stop-color='%23FBF3E6'/%3E%3Cstop offset='1' stop-color='%23F0E2CC'/%3E%3C/linearGradient%3E%3CradialGradient id='dawn' cx='0.14' cy='0.86' r='0.95'%3E%3Cstop offset='0' stop-color='%23F5C98E' stop-opacity='0.85'/%3E%3Cstop offset='0.35' stop-color='%23EEB77A' stop-opacity='0.42'/%3E%3Cstop offset='1' stop-color='%23EEB77A' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='dusk' cx='0.9' cy='0.12' r='0.8'%3E%3Cstop offset='0' stop-color='%23D9A0A8' stop-opacity='0.5'/%3E%3Cstop offset='1' stop-color='%23D9A0A8' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='glow' cx='0.5' cy='0.5' r='0.5'%3E%3Cstop offset='0' stop-color='%23FFFFFF' stop-opacity='0.9'/%3E%3Cstop offset='1' stop-color='%23FFFFFF' stop-opacity='0'/%3E%3C/radialGradient%3E%3ClinearGradient id='fade' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%23B45309' stop-opacity='0.78'/%3E%3Cstop offset='0.55' stop-color='%23B45309' stop-opacity='0.34'/%3E%3Cstop offset='1' stop-color='%23B45309' stop-opacity='0.05'/%3E%3C/linearGradient%3E%3Cfilter id='soft' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeGaussianBlur stdDeviation='26'/%3E%3C/filter%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' seed='11'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='2400' height='1400' fill='url(%23ground)'/%3E%3Crect width='2400' height='1400' fill='url(%23dawn)'/%3E%3Crect width='2400' height='1400' fill='url(%23dusk)'/%3E%3Cg fill='none' stroke='url(%23fade)' stroke-linecap='round'%3E%3Ccircle cx='-120' cy='1560' r='520' stroke-width='16'/%3E%3Ccircle cx='-120' cy='1560' r='760' stroke-width='13'/%3E%3Ccircle cx='-120' cy='1560' r='1010' stroke-width='11'/%3E%3Ccircle cx='-120' cy='1560' r='1270' stroke-width='9'/%3E%3Ccircle cx='-120' cy='1560' r='1540' stroke-width='7.5'/%3E%3Ccircle cx='-120' cy='1560' r='1820' stroke-width='6'/%3E%3Ccircle cx='-120' cy='1560' r='2110' stroke-width='5'/%3E%3Ccircle cx='-120' cy='1560' r='2410' stroke-width='4'/%3E%3Ccircle cx='-120' cy='1560' r='2720' stroke-width='3'/%3E%3C/g%3E%3Cg filter='url(%23soft)'%3E%3Cellipse cx='1880' cy='1180' rx='620' ry='300' fill='%23E4CDA8' opacity='0.55'/%3E%3Cellipse cx='330' cy='240' rx='480' ry='260' fill='%23FFFFFF' opacity='0.8'/%3E%3C/g%3E%3Cellipse cx='1200' cy='620' rx='900' ry='470' fill='url(%23glow)'/%3E%3Crect width='2400' height='1400' filter='url(%23grain)' opacity='0.05'/%3E%3C/svg%3E");
+  background-image: url('images/hero-header.png');
   background-size: cover;
-  background-position: 32% 72%;
-  opacity: 0.62;
+  background-position: 50% 46%;
+  background-repeat: no-repeat;
+  /* Held back so the photograph reads as the room the product lives in rather
+     than a picture the type is sitting on top of. The wash above it does the
+     legibility work; this sets how present the room is. */
+  opacity: 0.78;
   /* A slow drift, so the page is never completely still. Transform only. */
   animation: heroDrift 38s ease-in-out infinite alternate;
 }
-@keyframes heroDrift {
-  from { transform: scale(1.06) translate3d(0, 0, 0); }
-  to   { transform: scale(1.13) translate3d(0, -1.4%, 0); }
-}
-
-/* Warm wash: opaque at the edges so the nav and the following section meet it
-   cleanly, thinnest behind the headline where the photo should read. */
 .heroV2__wash {
   position: absolute;
   inset: 0;
   z-index: -1;
+  /* Three jobs. The radial keeps the centre light enough for dark ink over the
+     charcoal accent wall the headline lands on. The linear fades the top into
+     the header pill and the bottom into the next section, so the photograph has
+     no visible edge. Values are tuned against measured contrast, not taste. */
   background:
-    radial-gradient(95% 75% at 50% 44%, rgba(250, 250, 249, 0.30) 0%, rgba(250, 250, 249, 0.62) 62%, rgba(250, 250, 249, 0.94) 100%),
-    linear-gradient(180deg, var(--bg) 0%, rgba(250, 250, 249, 0) 22%, rgba(250, 250, 249, 0) 72%, var(--bg) 100%);
+    radial-gradient(78% 62% at 50% 46%,
+      rgba(250, 250, 249, 0.86) 0%,
+      rgba(250, 250, 249, 0.70) 46%,
+      rgba(250, 250, 249, 0.42) 78%,
+      rgba(250, 250, 249, 0.30) 100%),
+    linear-gradient(180deg,
+      var(--bg) 0%,
+      rgba(250, 250, 249, 0.55) 14%,
+      rgba(250, 250, 249, 0.28) 46%,
+      rgba(250, 250, 249, 0.72) 84%,
+      var(--bg) 100%);
 }
-
 .heroV2__inner { max-width: 880px; margin: 0 auto; padding: 0 24px; }
 
 /* Announcement pill */
@@ -532,265 +541,7 @@ a.nav-dd__item:hover{background:#faf9f8}
 .arcband--flip::before { transform: scaleX(-1); }
 .arcband--tight { height: 96px; }
 
-/* ---------- MacBook scroll ------------------------------------------------
-   Ported from Aceternity's MacbookScroll (React + Framer Motion + Tailwind),
-   which cannot be installed into a static page. Geometry and transforms are
-   taken from the real component rather than approximated:
-
-     lid back   12rem x 32rem, rotateX(-25deg), transform-origin BOTTOM
-     screen     768 x 374 (authored at final size), transform-origin TOP,
-                scaleX 0.8 -> 1.0, scaleY 0.4 -> 1.0, rotateX -28deg -> 0
-     base       22rem x 32rem
-     perspective 800px
-
-   The first attempt got the mechanic wrong in two ways that mattered: one lid
-   rotating from the bottom instead of two with the screen unfolding from the
-   top, and a 15px base instead of a 352px deck — which is why it read as a
-   rectangle on a stick rather than a laptop.
-
-   JS writes --q (0..1 across the opening) and --p (0..1 across the whole
-   track); every transform below derives from those. */
-.mbook { position: relative; }
-.mbook__head { max-width: 760px; margin: 0 auto 62px; text-align: center; padding: 0 24px; }
-.mbook__head h2 {
-  font-family: 'Fraunces', Georgia, serif;
-  font-weight: 500;
-  font-size: clamp(32px, 4.4vw, 50px);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  margin: 16px 0 0;
-  text-wrap: balance;
-}
-.mbook__head p {
-  font-size: 17px; line-height: 1.65; color: var(--muted);
-  margin: 20px auto 0; max-width: 56ch; text-wrap: pretty;
-}
-
-.mbook__track {
-  --q: 0; --r: 0; --p: 0;
-  min-height: 2800px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  perspective: 800px;
-  padding: 150px 0 0;
-  overflow: hidden;
-}
-
-/* The unit carries the responsive scale, the way the original does. */
-.mbook__unit { width: 32rem; transform: scale(1); transform-origin: top center; }
-
-.mbook__lidwrap { position: relative; perspective: 800px; }
-
-/* The closed lid, seen from behind. Static. */
-.mbook__lidback {
-  position: relative;
-  height: 374px;
-  width: 32rem;
-  border-radius: 16px;
-  padding: 8px;
-  background: #100d0a;
-  transform: perspective(800px) rotateX(-25deg) translateZ(0);
-  transform-origin: bottom;
-  transform-style: preserve-3d;
-}
-.mbook__lidback span {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  border-radius: 10px;
-  background: #100d0a;
-  box-shadow: 0 2px 0 2px #241f19 inset;
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 26px;
-  color: rgba(255, 255, 255, .82);
-}
-
-/* The screen. Unfolds from the top edge and grows as it comes up. */
-.mbook__screenwrap {
-  position: absolute;
-  top: 0;
-  left: -128px;
-  width: 768px;
-  height: 374px;
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--bg);
-  box-shadow: 0 38px 74px -38px rgba(28, 25, 23, .42);
-  transform-origin: top;
-  transform-style: preserve-3d;
-  transform:
-    translateY(calc(var(--p) * 1900px))
-    scaleX(calc(0.8 + 0.2 * var(--q)))
-    scaleY(calc(0.4 + 0.6 * var(--q)))
-    rotateX(calc(-28deg + 28deg * var(--r)));
-}
-.mbook__screen {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  display: grid;
-  place-items: stretch;
-}
-.mbook__cam { display: none; }
-
-/* The app shell inside the screen, so it reads as the product rather than a
-   card floating on a field. */
-/* ---- The screen's contents ------------------------------------------------
-   A real screenshot of the app, not a rebuild. A hand-built miniature cannot
-   carry the product's own logo or hold up at this size — the type ends up at
-   4-7px and reads as mush — so the shot does the work.
-
-   object-position: left top matches the original component, which anchors the
-   same way. The screen is 16:10 and the source is 1905x929, so cover keeps
-   source x 0..1515 — the full greeting and the huddle's right edge. A source
-   materially wider than ~2.1:1 would start losing that right edge again. */
-.mbook__shotwrap {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: var(--bg);
-}
-.mbook__shot {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: left top;
-}
-
-/* ---- The deck: 22rem tall, not a bar -------------------------------------- */
-.mbook__base {
-  position: relative;
-  z-index: -10;
-  height: 22rem;
-  width: 32rem;
-  overflow: hidden;
-  border-radius: 16px;
-  background: #1c1916;
-}
-/* The dark strip above the keyboard. */
-.mbook__bar { position: relative; height: 40px; width: 100%; }
-.mbook__bar::after {
-  content: '';
-  position: absolute; inset-inline: 0; margin: 0 auto;
-  height: 16px; width: 80%;
-  background: #050505;
-}
-.mbook__row { position: relative; display: flex; align-items: stretch; margin-top: 2px; }
-.mbook__spk {
-  margin: 0 auto; height: auto; width: 10%; overflow: hidden;
-  background-image: radial-gradient(circle, #0a0806 0.5px, transparent 0.6px);
-  background-size: 3px 3px;
-}
-
-/* ---- The keypad ----------------------------------------------------------
-   Every key is a real element, as in the component. The stand-in here used to
-   be two repeating-linear-gradients, which at this size read as a smudge and
-   was the main reason the deck looked unfinished next to the original.
-
-   Sizes are the original's fixed pixels — 24px keys, 2px gaps, 40 for
-   esc/tab/delete, 45/46 caps/return, 58 shift, 32 command, 131 space — so each
-   row lands near 380px inside the 80% column. Flex sizing would drift the rows
-   out of alignment with each other, which is exactly what a keyboard cannot do. */
-.mbook__keys {
-  margin: 0 4px; width: 80%;
-  border-radius: 6px;
-  background: #0b0908;
-  padding: 4px;
-  transform: translateZ(0);
-}
-.mbk-row { display: flex; gap: 2px; width: 100%; flex-shrink: 0; margin-bottom: 2px; }
-.mbk-row:last-child { margin-bottom: 0; }
-.mbk {
-  flex: none;
-  border-radius: 4px;
-  padding: .5px;
-  background: rgba(255, 255, 255, .09);   /* the backlit edge */
-}
-.mbk > span {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 24px;
-  width: 24px;
-  border-radius: 3.5px;
-  background: #17130f;
-  box-shadow: 0 -0.5px 2px 0 #0d0b09 inset, -0.5px 0 2px 0 #0d0b09 inset;
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 5px;
-  line-height: 1.3;
-  color: rgba(255, 255, 255, .78);
-  overflow: hidden;
-}
-.mbk > span > b { font-weight: 400; display: block; }
-.mbk--w40  > span { width: 40px; }
-.mbk--caps > span { width: 45px; }
-.mbk--ret  > span { width: 46px; }
-.mbk--shift > span { width: 58px; }
-.mbk--cmd  > span { width: 32px; }
-.mbk--space > span { width: 131px; }
-.mbk--half > span { height: 11px; font-size: 4px; }
-/* esc, tab, caps and left shift label from the bottom-left; delete, return and
-   right shift from the bottom-right — column flex, so align-items is the
-   horizontal one. */
-.mbk--bl > span { align-items: flex-start; justify-content: flex-end; padding: 0 0 2px 4px; }
-.mbk--br > span { align-items: flex-end;   justify-content: flex-end; padding: 0 4px 2px 0; }
-.mbk--pwr > span { padding: 5px; }
-.mbk--pwr > span::before {
-  content: '';
-  width: 100%; height: 100%;
-  border-radius: 50%;
-  background: linear-gradient(180deg, #211c17 0%, #0a0806 50%, #211c17 95%);
-}
-.mbk-arrows { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; width: 78px; margin-top: 2px; }
-.mbk-arrow-row { display: flex; }
-.mbook__pad {
-  margin: 4px auto; height: 128px; width: 40%;
-  border-radius: 12px;
-  box-shadow: 0 0 1px 1px rgba(255, 255, 255, .07) inset;
-}
-.mbook__lip {
-  position: absolute; inset-inline: 0; bottom: 0; margin: 0 auto;
-  height: 8px; width: 80px;
-  border-radius: 24px 24px 0 0;
-  background: linear-gradient(180deg, #050505, #1c1916);
-}
-
-.mbook__cap {
-  text-align: center;
-  margin-top: -324px;
-  transform: translateY(calc(var(--p) * 1900px));
-  will-change: transform;
-  font-size: 14.5px;
-  color: var(--muted);
-  opacity: calc(var(--q) * 4 - 3);
-}
-.mbook__cap b { color: var(--ink); font-weight: 600; }
-
-/* The original scales the whole assembly rather than reflowing it, because the
-   geometry is fixed in rem. Same approach here. */
-@media (max-width: 1000px) {
-  .mbook__unit  { transform: scale(.84); }
-  .mbook__track { min-height: 2380px; padding-top: 160px; }
-}
-@media (max-width: 720px) {
-  .mbook__unit  { transform: scale(.62); }
-  .mbook__track { min-height: 1830px; padding-top: 90px; }
-}
-@media (max-width: 520px) {
-  .mbook__unit  { transform: scale(.44); }
-  .mbook__track { min-height: 1420px; padding-top: 70px; }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .mbook__track { min-height: 0; padding-bottom: 60px; }
-  .mbook__screenwrap { transform: none; }
-  .mbook__cap { opacity: 1; transform: none; margin-top: 28px; }
   .arcband::before { opacity: 0.6; }
 }
 
@@ -1060,8 +811,8 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
 </div>
 
 <header class="heroV2">
-  <!-- Placeholder until the real photograph lands. A missing file degrades to
-       the warm wash below rather than a broken box. -->
+  <!-- The room the product lives in: a treatment coordinator's office. Held
+       back by the wash so it never competes with the headline. -->
   <div class="heroV2__bg" aria-hidden="true"></div>
   <div class="heroV2__wash" aria-hidden="true"></div>
 
@@ -1187,53 +938,6 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
 </section>
 
 <div class="arcband" aria-hidden="true"></div>
-
-<section id="how" class="mbook">
-  <div class="mbook__track" id="mbookTrack">
-    <div class="mbook__head reveal">
-      <span class="eyebrow">The product</span>
-      <h2>Open it up and it is one loop, not four tools</h2>
-      <p>Rehearse, present, review, improve. A coordinator lives in one place and
-         every part of it feeds the next.</p>
-    </div>
-    <div class="mbook__unit">
-      <div class="mbook__lidwrap">
-        <div class="mbook__lidback" aria-hidden="true"><span>Bella</span></div>
-        <div class="mbook__screenwrap" id="mbookScreen">
-          <span class="mbook__cam" aria-hidden="true"></span>
-          <div class="mbook__screen">
-            <div class="mbook__shotwrap">
-              <img class="mbook__shot"
-                   src="images/app-dashboard.png"
-                   alt="The Bella dashboard: a rail of practice, treatment and progress tools beside the day's coaching thought and the morning huddle."
-                   loading="lazy" decoding="async">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="mbook__base" aria-hidden="true">
-        <div class="mbook__bar"></div>
-        <div class="mbook__row">
-          <div class="mbook__spk"></div>
-          <div class="mbook__keys">
-            <div class="mbk-row"><i class="mbk mbk--w40 mbk--bl"><span>esc</span></i><i class="mbk"><span>F1</span></i><i class="mbk"><span>F2</span></i><i class="mbk"><span>F3</span></i><i class="mbk"><span>F4</span></i><i class="mbk"><span>F5</span></i><i class="mbk"><span>F6</span></i><i class="mbk"><span>F7</span></i><i class="mbk"><span>F8</span></i><i class="mbk"><span>F9</span></i><i class="mbk"><span>F10</span></i><i class="mbk"><span>F11</span></i><i class="mbk"><span>F12</span></i><i class="mbk mbk--pwr"><span></span></i></div>
-            <div class="mbk-row"><i class="mbk"><span><b>~</b><b>`</b></span></i><i class="mbk"><span><b>!</b><b>1</b></span></i><i class="mbk"><span><b>@</b><b>2</b></span></i><i class="mbk"><span><b>#</b><b>3</b></span></i><i class="mbk"><span><b>$</b><b>4</b></span></i><i class="mbk"><span><b>%</b><b>5</b></span></i><i class="mbk"><span><b>^</b><b>6</b></span></i><i class="mbk"><span><b>&amp;</b><b>7</b></span></i><i class="mbk"><span><b>*</b><b>8</b></span></i><i class="mbk"><span><b>(</b><b>9</b></span></i><i class="mbk"><span><b>)</b><b>0</b></span></i><i class="mbk"><span><b>_</b><b>-</b></span></i><i class="mbk"><span><b>+</b><b>=</b></span></i><i class="mbk mbk--w40 mbk--br"><span>delete</span></i></div>
-            <div class="mbk-row"><i class="mbk mbk--w40 mbk--bl"><span>tab</span></i><i class="mbk"><span>Q</span></i><i class="mbk"><span>W</span></i><i class="mbk"><span>E</span></i><i class="mbk"><span>R</span></i><i class="mbk"><span>T</span></i><i class="mbk"><span>Y</span></i><i class="mbk"><span>U</span></i><i class="mbk"><span>I</span></i><i class="mbk"><span>O</span></i><i class="mbk"><span>P</span></i><i class="mbk"><span>[</span></i><i class="mbk"><span>]</span></i><i class="mbk"><span>|</span></i></div>
-            <div class="mbk-row"><i class="mbk mbk--caps mbk--bl"><span>caps lock</span></i><i class="mbk"><span>A</span></i><i class="mbk"><span>S</span></i><i class="mbk"><span>D</span></i><i class="mbk"><span>F</span></i><i class="mbk"><span>G</span></i><i class="mbk"><span>H</span></i><i class="mbk"><span>J</span></i><i class="mbk"><span>K</span></i><i class="mbk"><span>L</span></i><i class="mbk"><span>;</span></i><i class="mbk"><span>'</span></i><i class="mbk mbk--ret mbk--br"><span>return</span></i></div>
-            <div class="mbk-row"><i class="mbk mbk--shift mbk--bl"><span>shift</span></i><i class="mbk"><span>Z</span></i><i class="mbk"><span>X</span></i><i class="mbk"><span>C</span></i><i class="mbk"><span>V</span></i><i class="mbk"><span>B</span></i><i class="mbk"><span>N</span></i><i class="mbk"><span>M</span></i><i class="mbk"><span>,</span></i><i class="mbk"><span>.</span></i><i class="mbk"><span>/</span></i><i class="mbk mbk--shift mbk--br"><span>shift</span></i></div>
-            <div class="mbk-row"><i class="mbk"><span>fn</span></i><i class="mbk"><span>control</span></i><i class="mbk"><span>option</span></i><i class="mbk mbk--cmd"><span>command</span></i><i class="mbk mbk--space"><span></span></i><i class="mbk mbk--cmd"><span>command</span></i><i class="mbk"><span>option</span></i><span class="mbk-arrows"><i class="mbk mbk--half"><span>&#9650;</span></i><span class="mbk-arrow-row"><i class="mbk mbk--half"><span>&#9664;</span></i><i class="mbk mbk--half"><span>&#9660;</span></i><i class="mbk mbk--half"><span>&#9654;</span></i></span></span></div>
-          </div>
-          <div class="mbook__spk"></div>
-        </div>
-        <div class="mbook__pad"></div>
-        <div class="mbook__lip"></div>
-      </div>
-      <p class="mbook__cap"><b>The whole rail, one screen.</b> Practice, treatment and progress in a single place &mdash; with the morning&#8217;s huddle already written before anyone walks in.</p>
-    </div>
-  </div>
-</section>
-
-<div class="arcband arcband--flip" aria-hidden="true"></div>
 
 <section id="voice" class="bento">
   <div class="wrap">
@@ -1506,56 +1210,6 @@ const onScroll=()=>{nav.classList.toggle('scrolled',window.scrollY>40)};
 onScroll();window.addEventListener('scroll',onScroll,{passive:true});
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14,rootMargin:'0px 0px -7% 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-/* MacBook scroll driver.
-   Mirrors the original's three ranges rather than one: the lid SCALES over the
-   first 30% of the track, ROTATES open between 12% and 30%, and the screen
-   keeps travelling for the whole of it. Three custom properties, one write per
-   frame each; every transform is derived from them in CSS, so this never
-   touches layout.
-
-   Progress is measured the way Framer's ["start start", "end start"] offset
-   does — 0 when the track's top reaches the viewport top, 1 when its bottom
-   does — because the geometry above was tuned against that curve. */
-(function () {
-  var track = document.getElementById('mbookTrack');
-  if (!track) return;
-
-  // Reduced motion gets the open, static laptop from CSS; driving it would
-  // fight that.
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  var ticking = false, lastQ = -1, lastR = -1, lastP = -1;
-
-  function frame() {
-    ticking = false;
-    var r = track.getBoundingClientRect();
-    if (r.height <= 0) return;
-
-    var p = (0 - r.top) / r.height;
-    p = p < 0 ? 0 : p > 1 ? 1 : p;
-
-    var q = p / 0.3;                       // scale, 0 -> 0.3
-    q = q > 1 ? 1 : q;
-    var rot = (p - 0.12) / 0.18;           // rotate, 0.12 -> 0.3
-    rot = rot < 0 ? 0 : rot > 1 ? 1 : rot;
-
-    if (Math.abs(q - lastQ) > 0.002) { lastQ = q; track.style.setProperty('--q', q.toFixed(4)); }
-    if (Math.abs(rot - lastR) > 0.002) { lastR = rot; track.style.setProperty('--r', rot.toFixed(4)); }
-    if (Math.abs(p - lastP) > 0.002) { lastP = p; track.style.setProperty('--p', p.toFixed(4)); }
-  }
-
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(frame);
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
-  frame();
-})();
-
 
 // demo modal
 const modal=document.getElementById('demoModal');
