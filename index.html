@@ -569,7 +569,7 @@ a.nav-dd__item:hover{background:#faf9f8}
 
 .mbook__track {
   --q: 0; --r: 0; --p: 0;
-  min-height: 2220px;
+  min-height: 2800px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -587,7 +587,7 @@ a.nav-dd__item:hover{background:#faf9f8}
 /* The closed lid, seen from behind. Static. */
 .mbook__lidback {
   position: relative;
-  height: 12rem;
+  height: 374px;
   width: 32rem;
   border-radius: 16px;
   padding: 8px;
@@ -623,7 +623,7 @@ a.nav-dd__item:hover{background:#faf9f8}
   transform-origin: top;
   transform-style: preserve-3d;
   transform:
-    translateY(calc(var(--p) * 1100px))
+    translateY(calc(var(--p) * 1900px))
     scaleX(calc(0.8 + 0.2 * var(--q)))
     scaleY(calc(0.4 + 0.6 * var(--q)))
     rotateX(calc(-28deg + 28deg * var(--r)));
@@ -763,12 +763,12 @@ a.nav-dd__item:hover{background:#faf9f8}
 
 .mbook__cap {
   text-align: center;
-  margin-top: -142px;
-  transform: translateY(calc(var(--p) * 1100px));
+  margin-top: -324px;
+  transform: translateY(calc(var(--p) * 1900px));
   will-change: transform;
   font-size: 14.5px;
   color: var(--muted);
-  opacity: calc(var(--q) * 2 - 1);
+  opacity: calc(var(--q) * 4 - 3);
 }
 .mbook__cap b { color: var(--ink); font-weight: 600; }
 
@@ -776,22 +776,21 @@ a.nav-dd__item:hover{background:#faf9f8}
    geometry is fixed in rem. Same approach here. */
 @media (max-width: 1000px) {
   .mbook__unit  { transform: scale(.84); }
-  .mbook__track { min-height: 1870px; padding-top: 160px; }
+  .mbook__track { min-height: 2380px; padding-top: 160px; }
 }
 @media (max-width: 720px) {
   .mbook__unit  { transform: scale(.62); }
-  .mbook__track { min-height: 1530px; padding-top: 90px; }
+  .mbook__track { min-height: 1830px; padding-top: 90px; }
 }
 @media (max-width: 520px) {
   .mbook__unit  { transform: scale(.44); }
-  .mbook__track { min-height: 1150px; padding-top: 70px; }
+  .mbook__track { min-height: 1420px; padding-top: 70px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .mbook__track { min-height: 0; padding-bottom: 60px; }
   .mbook__screenwrap { transform: none; }
   .mbook__cap { opacity: 1; transform: none; margin-top: 28px; }
-  .mbook__lidback, .mbook__base { opacity: 1; }
   .arcband::before { opacity: 0.6; }
 }
 
