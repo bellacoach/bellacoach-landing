@@ -16,7 +16,8 @@
 .btn-solid,
 .cta,
 .msubmit,
-.tier-card.featured .tier-cta {
+.tier-card.featured .tier-cta,
+.cta-band a.cta-go {
   /* a white core rather than a warm one: on an amber fill the glint has to
      out-brighten the button to register as a highlight rather than a smudge */
   --star-c: #ffffff;
@@ -32,7 +33,8 @@
 .btn-solid::before, .btn-solid::after,
 .cta::before, .cta::after,
 .msubmit::before, .msubmit::after,
-.tier-card.featured .tier-cta::before, .tier-card.featured .tier-cta::after {
+.tier-card.featured .tier-cta::before, .tier-card.featured .tier-cta::after,
+.cta-band a.cta-go::before, .cta-band a.cta-go::after {
   content: "";
   position: absolute;
   width: 300%;
@@ -40,7 +42,8 @@
   pointer-events: none;
   z-index: -1;
 }
-.btn-solid::before, .cta::before, .msubmit::before, .tier-card.featured .tier-cta::before {
+.btn-solid::before, .cta::before, .msubmit::before, .cta-band a.cta-go::before,
+.tier-card.featured .tier-cta::before {
   top: 0;
   left: -250%;
   background: radial-gradient(96px 54px at 50% 0%, var(--star-c), var(--star-c2) 26%, transparent 76%);
@@ -48,7 +51,8 @@
 }
 /* anchored from the RIGHT: this one travels right-to-left, so starting it
    from the left edge sent it off-screen for the whole cycle instead of across */
-.btn-solid::after, .cta::after, .msubmit::after, .tier-card.featured .tier-cta::after {
+.btn-solid::after, .cta::after, .msubmit::after, .cta-band a.cta-go::after,
+.tier-card.featured .tier-cta::after {
   bottom: 0;
   right: -250%;
   background: radial-gradient(96px 54px at 50% 100%, var(--star-c), var(--star-c2) 26%, transparent 76%);
@@ -69,10 +73,12 @@
    the plan the page is recommending, which is where it earns its keep. */
 
 /* the modal submit is ink rather than amber, so it wants a cooler shine */
-.msubmit { --star-c2: #cfe0ff; --star-speed: 5.4s; }
+.msubmit,
+.cta-band a.cta-go { --star-c2: #cfe0ff; --star-speed: 5.4s; }
 @media (prefers-reduced-motion: reduce) {
   .btn-solid::before, .btn-solid::after,
   .cta::before, .cta::after,
   .msubmit::before, .msubmit::after,
-  .tier-card.featured .tier-cta::before, .tier-card.featured .tier-cta::after { animation: none; opacity: 0; }
+  .tier-card.featured .tier-cta::before, .tier-card.featured .tier-cta::after,
+  .cta-band a.cta-go::before, .cta-band a.cta-go::after { animation: none; opacity: 0; }
 }
