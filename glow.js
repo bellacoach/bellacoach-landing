@@ -20,7 +20,9 @@
     '.bento__cell',   /* index — what nobody else has */
     '.tier-card',     /* pricing — the three plans */
     '.roi-card',      /* pricing — the ROI calculator */
-    '.post-card'      /* blog — the post list */
+    '.post-card',     /* blog — the post list */
+    '.say',           /* blog articles — the quoted line */
+    '.note'           /* blog articles — the aside */
   ];
 
   if (!window.matchMedia || !window.matchMedia('(hover: hover)').matches) return;
@@ -61,9 +63,10 @@
     var card = cards[i];
     if (card.classList.contains('bglow')) continue;
 
-    /* keep the ring on the card's own corner radius rather than a guess */
-    var radius = window.getComputedStyle(card).borderTopLeftRadius;
-    if (radius && radius !== '0px') card.style.setProperty('--glow-r', radius);
+    /* the whole shorthand, not one corner: .say is 0 12px 12px 0, and reading
+       borderTopLeftRadius alone would square off all four of them */
+    var radius = window.getComputedStyle(card).borderRadius;
+    if (radius) card.style.setProperty('--glow-r', radius);
 
     var span = document.createElement('span');
     span.className = 'edge-light';

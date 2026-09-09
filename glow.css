@@ -38,7 +38,6 @@
 .bglow > .edge-light {
   position: absolute;
   inset: calc(var(--glow-padding) * -1);
-  border-radius: calc(var(--glow-r, 20px) + var(--glow-padding));
   pointer-events: none;
   z-index: 2;
   /* only the arc facing the cursor lights up */
@@ -78,6 +77,9 @@
    would otherwise double up with the ring */
 .bento__cell.bglow:hover { border-color: rgba(180, 83, 9, .18); }
 .post-card.bglow:hover { border-color: rgba(180, 83, 9, .18); }
+
+/* the prose callouts are smaller than a card, so the halo is pulled in to match */
+.say.bglow, .note.bglow { --glow-padding: 22px; }
 
 @media (prefers-reduced-motion: reduce) {
   .bglow > .edge-light { transition: none; }
