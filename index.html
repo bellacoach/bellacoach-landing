@@ -666,6 +666,71 @@ a.nav-dd__item:hover{background:#faf9f8}
   .faq__q { padding: 22px 2px; }
 }
 
+/* ---------- Video lightbox -------------------------------------------------
+   Not the Fullscreen API: fullscreen hands the whole screen to the browser
+   chrome and throws the viewer out of the page. This pops the video off the
+   page and keeps the page visible behind it, which is what a one-minute
+   explainer wants - watch it, dismiss it, carry on reading. */
+.vlight {
+  position: fixed;
+  inset: 0;
+  z-index: 140;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  background: rgba(28, 25, 23, .72);
+  backdrop-filter: blur(6px);
+}
+.vlight.open { display: flex; }
+.vlight__box {
+  position: relative;
+  width: 100%;
+  /* whichever runs out first: 1020px of width, or the width a 16:9 video can
+     be and still leave room for the caption and the close button */
+  max-width: min(1020px, calc((100vh - 200px) * 16 / 9));
+  animation: vlightIn .42s cubic-bezier(.16, 1, .3, 1);
+}
+.vlight__box video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 18px;
+  box-shadow: 0 50px 110px -30px rgba(0, 0, 0, .7);
+}
+.vlight__cap {
+  margin: 16px 2px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, .72);
+  text-align: center;
+}
+.vlight__close {
+  position: absolute;
+  top: -46px;
+  right: -2px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, .14);
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background .2s;
+}
+.vlight__close:hover { background: rgba(255, 255, 255, .28); }
+.vlight__close:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+@keyframes vlightIn { from { opacity: 0; transform: translateY(14px) scale(.965); } to { opacity: 1; transform: none; } }
+@media (max-width: 720px) {
+  .vlight { padding: 20px 14px; }
+  .vlight__close { top: -42px; right: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .vlight__box { animation: none; } }
+
 /* ---------- Bento ---------------------------------------------------------
    Three columns, mixed heights: the differentiated capabilities, each with a
    visual built in CSS rather than a screenshot placeholder. Grey boxes read as
@@ -921,7 +986,6 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
           </span>
         </div>
       </div>
-      <a href="/#pillars">How it works</a>
       <a href="/pricing">Pricing</a>
       <a href="/blog">Blog</a>
       <a href="https://app.bellacoach.com">Sign in</a>
@@ -1389,6 +1453,14 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
   </div>
 </footer>
 
+<div class="vlight" id="vLight" role="dialog" aria-modal="true" aria-label="Why Bella — one minute">
+  <div class="vlight__box">
+    <button class="vlight__close" id="vLightClose" type="button" aria-label="Close video">&#10005;</button>
+    <div id="vLightSlot"></div>
+    <p class="vlight__cap">One minute on why treatment coordinators need reps before the case conversation, not after.</p>
+  </div>
+</div>
+
 <div class="modal-overlay" id="demoModal">
   <div class="modal" id="demoModalCard">
     <button class="modal-close" id="demoClose" aria-label="Close">&#10005;</button>
@@ -1418,38 +1490,78 @@ onScroll();window.addEventListener('scroll',onScroll,{passive:true});
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14,rootMargin:'0px 0px -7% 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* "See how it works" -> the video, already playing.
+/* "See how it works" -> the video, popped off the page with sound.
 
-   play() is called SYNCHRONOUSLY inside the click handler, before the scroll.
-   Safari only treats a play() as user-initiated while the gesture is still on
-   the stack, so deferring it until after a smooth scroll would get it blocked
-   there even though Chrome would allow it. Scrolling afterwards costs nothing;
-   playing afterwards costs Safari.
+   The <video> is BUILT IN THE CLICK HANDLER rather than sitting in the markup.
+   A second copy in the DOM would either preload a second time or, if moved
+   between containers, reset playback in some browsers. Created on open and
+   destroyed on close, there is only ever one loading, and the inline copy in
+   the Why Bella section keeps its own preload="metadata".
 
-   The link keeps its href, so without JavaScript it still lands on the video. */
+   play() is called synchronously inside the handler: Safari only counts a
+   play() as user-initiated while the gesture is still on the stack. Sound is
+   deliberate - it is a narrated explainer, and muting it would defeat it. */
 (function () {
   var link = document.getElementById('seeHow');
-  var vid = document.getElementById('whyVideo');
-  var fig = document.getElementById('video');
-  if (!link || !vid || !fig) return;
+  var box = document.getElementById('vLight');
+  var slot = document.getElementById('vLightSlot');
+  var closeBtn = document.getElementById('vLightClose');
+  if (!link || !box || !slot || !closeBtn) return;
 
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
+  var vid = null;
+  var lastFocus = null;
+
+  function open(e) {
+    if (e) e.preventDefault();
+    if (box.classList.contains('open')) return;   /* never stack a second <video> */
+    lastFocus = document.activeElement;
+
+    vid = document.createElement('video');
+    vid.src = '/videos/why-bella.mp4';
+    vid.controls = true;
+    vid.playsInline = true;
+    vid.preload = 'auto';
+    slot.appendChild(vid);
+
+    box.classList.add('open');
+    document.body.style.overflow = 'hidden';
 
     var p = vid.play();
     if (p && typeof p.catch === 'function') {
-      /* blocked, or the file will not decode: leave the user on the video with
-         its own controls rather than throwing an unhandled rejection */
+      /* if a browser blocks it anyway, the controls are right there */
       p.catch(function () {});
     }
+    closeBtn.focus();
+  }
 
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    fig.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+  function close() {
+    if (!box.classList.contains('open')) return;
+    box.classList.remove('open');
+    document.body.style.overflow = '';
+    if (vid) {
+      vid.pause();
+      vid.removeAttribute('src');   /* stop the download, not just the playback */
+      vid.load();
+      vid = null;
+    }
+    /* belt and braces: clear anything the slot is still holding */
+    while (slot.firstChild) slot.removeChild(slot.firstChild);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
 
-    if (history.replaceState) history.replaceState(null, '', '#video');
+  link.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  box.addEventListener('click', function (e) { if (e.target === box) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && box.classList.contains('open')) close();
+    /* two focusable things in here, so a full trap is overkill - just keep Tab
+       from wandering back out into the page behind the overlay */
+    if (e.key === 'Tab' && box.classList.contains('open')) {
+      e.preventDefault();
+      closeBtn.focus();
+    }
   });
 })();
-
 
 // demo modal
 const modal=document.getElementById('demoModal');
