@@ -666,73 +666,6 @@ a.nav-dd__item:hover{background:#faf9f8}
   .faq__q { padding: 22px 2px; }
 }
 
-/* ---------- Star border (CTAs) ---------------------------------------------
-   Ported from React Bits' StarBorder. There is no JavaScript in that component
-   at all — it only writes inline styles from props — so this is the whole of it.
-
-   The original needs THREE layers: two sweeping blobs and an opaque surface
-   above them that hides everything but a sliver at the top and bottom edge.
-   A <button> has two pseudo-elements, not three. Rather than injecting a
-   wrapper into every button, the gradient is anchored TO the edge it lights —
-   a 70x42 ellipse centred on y=0 for the top, y=100% for the bottom — so half
-   of it already sits outside the box and no masking surface is needed. Same
-   look, no markup change, and the buttons keep their existing structure.
-
-   z-index:-1 under isolation puts the sweep above the button's fill but below
-   its label, which is the layer order the third element was there to create. */
-.btn-solid,
-.cta,
-.msubmit {
-  /* a white core rather than a warm one: on an amber fill the glint has to
-     out-brighten the button to register as a highlight rather than a smudge */
-  --star-c: #ffffff;
-  --star-c2: #ffe4b3;
-  --star-speed: 4.6s;
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.btn-solid::before, .btn-solid::after,
-.cta::before, .cta::after,
-.msubmit::before, .msubmit::after {
-  content: "";
-  position: absolute;
-  left: -250%;
-  width: 300%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-}
-.btn-solid::before, .cta::before, .msubmit::before {
-  top: 0;
-  background: radial-gradient(96px 54px at 50% 0%, var(--star-c), var(--star-c2) 26%, transparent 76%);
-  animation: starTop var(--star-speed) linear infinite alternate;
-}
-.btn-solid::after, .cta::after, .msubmit::after {
-  bottom: 0;
-  background: radial-gradient(96px 54px at 50% 100%, var(--star-c), var(--star-c2) 26%, transparent 76%);
-  animation: starBottom var(--star-speed) linear infinite alternate;
-}
-/* the two run opposite ways, so the light is never on the same side twice */
-@keyframes starTop {
-  0%   { transform: translateX(0);    opacity: 1; }
-  100% { transform: translateX(100%); opacity: 0; }
-}
-@keyframes starBottom {
-  0%   { transform: translateX(0);     opacity: 1; }
-  100% { transform: translateX(-100%); opacity: 0; }
-}
-/* the modal submit is ink rather than amber, so it wants a cooler shine */
-.msubmit { --star-c2: #cfe0ff; --star-speed: 5.4s; }
-@media (prefers-reduced-motion: reduce) {
-  .btn-solid::before, .btn-solid::after,
-  .cta::before, .cta::after,
-  .msubmit::before, .msubmit::after { animation: none; opacity: 0; }
-}
-
 /* ---------- Video lightbox -------------------------------------------------
    Not the Fullscreen API: fullscreen hands the whole screen to the browser
    chrome and throws the viewer out of the page. This pops the video off the
@@ -1021,6 +954,7 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
 </script>
 <link rel="stylesheet" href="/glow.css">
 <script src="/glow.js" defer></script>
+<link rel="stylesheet" href="/star.css">
 </head>
 <body>
 <div class="glow"></div>
