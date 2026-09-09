@@ -666,6 +666,65 @@ a.nav-dd__item:hover{background:#faf9f8}
   .faq__q { padding: 22px 2px; }
 }
 
+/* ---------- Border glow ----------------------------------------------------
+   Ported from React Bits' BorderGlow. The component is almost entirely CSS —
+   its JavaScript only writes two custom properties from the pointer, which is
+   the part reproduced below in plain JS.
+
+   Two deliberate departures, both because these cards are opaque and light
+   where the original assumes dark glass:
+
+     the mesh-gradient border (::before) is dropped. It works by showing
+     through a semi-transparent card border; against an opaque white card it
+     is simply invisible.
+     the interior mesh fill (::after, soft-light) is dropped too. It is a
+     glassmorphism device — over white it muddies the text it sits behind.
+
+   What is left is the part that means "border glow": a crisp 1px ring on the
+   edge nearest the cursor plus a layered halo, masked to a cone that follows
+   the pointer angle. Amber, at a lightness that reads against white rather
+   than the original pale glow, which would vanish here. */
+.bento__cell > .edge-light {
+  position: absolute;
+  inset: calc(var(--glow-padding) * -1);
+  border-radius: calc(20px + var(--glow-padding));
+  pointer-events: none;
+  z-index: 2;
+  /* only the arc facing the cursor lights up */
+  mask-image: conic-gradient(from var(--cursor-angle) at center,
+    #000 2.5%, transparent 10%, transparent 90%, #000 97.5%);
+  opacity: calc((var(--edge-proximity) - var(--edge-sensitivity)) / (100 - var(--edge-sensitivity)));
+  transition: opacity .25s ease-out;
+}
+.bento__cell:not(:hover) > .edge-light {
+  opacity: 0;
+  transition: opacity .7s ease-in-out;
+}
+.bento__cell > .edge-light::before {
+  content: "";
+  position: absolute;
+  inset: var(--glow-padding);
+  border-radius: 20px;
+  box-shadow:
+    inset 0 0 0 1px  hsl(28deg 88% 46% / 100%),
+    inset 0 0 1px 0  hsl(28deg 88% 46% / 55%),
+    inset 0 0 3px 0  hsl(28deg 88% 46% / 45%),
+    inset 0 0 6px 0  hsl(28deg 88% 48% / 34%),
+    inset 0 0 15px 0 hsl(30deg 86% 52% / 24%),
+    inset 0 0 25px 2px hsl(32deg 84% 56% / 15%),
+    0 0 1px 0  hsl(28deg 88% 46% / 55%),
+    0 0 3px 0  hsl(28deg 88% 46% / 42%),
+    0 0 6px 0  hsl(28deg 88% 48% / 32%),
+    0 0 15px 0 hsl(30deg 86% 52% / 22%),
+    0 0 25px 2px hsl(32deg 84% 56% / 14%),
+    0 0 50px 2px hsl(34deg 82% 60% / 8%);
+}
+/* the glow is the hover treatment now, so the old border tint would double up */
+.bento__cell:hover { border-color: rgba(180, 83, 9, .18); }
+@media (prefers-reduced-motion: reduce) {
+  .bento__cell > .edge-light { transition: none; }
+}
+
 /* ---------- Video lightbox -------------------------------------------------
    Not the Fullscreen API: fullscreen hands the whole screen to the browser
    chrome and throws the viewer out of the page. This pops the video off the
@@ -770,7 +829,14 @@ a.nav-dd__item:hover{background:#faf9f8}
   display: flex;
   flex-direction: column;
   gap: 18px;
-  overflow: hidden;
+  /* was hidden: the glow sits at inset -34px and would be clipped away.
+     Checked first - nothing inside the card was relying on the clip. */
+  overflow: visible;
+  isolation: isolate;
+  --edge-proximity: 0;
+  --cursor-angle: 45deg;
+  --edge-sensitivity: 26;
+  --glow-padding: 34px;
   transition: border-color .35s cubic-bezier(.16,1,.3,1), transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1);
 }
 .bento__cell:hover {
@@ -1219,6 +1285,7 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
 
       <!-- Tall left -->
       <article class="bento__cell bento__cell--tall">
+        <span class="edge-light" aria-hidden="true"></span>
         <span class="bento__tag">Bella Voice</span>
         <h3>The Rewind</h3>
         <p>
@@ -1248,6 +1315,7 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
 
       <!-- Middle top -->
       <article class="bento__cell">
+        <span class="edge-light" aria-hidden="true"></span>
         <h3>A live read of the room</h3>
         <p>
           The warmth meter moves as the conversation does &#8212; up on discovery
@@ -1265,6 +1333,7 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
 
       <!-- Right tall -->
       <article class="bento__cell bento__cell--tall">
+        <span class="edge-light" aria-hidden="true"></span>
         <span class="bento__tag">Outcomes</span>
         <h3>Case acceptance, actually measured</h3>
         <p>
@@ -1291,6 +1360,7 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
 
       <!-- Middle bottom -->
       <article class="bento__cell">
+        <span class="edge-light" aria-hidden="true"></span>
         <span class="bento__tag">Compliance</span>
         <h3>Built for real patient data</h3>
         <p>
@@ -1489,6 +1559,48 @@ const onScroll=()=>{nav.classList.toggle('scrolled',window.scrollY>40)};
 onScroll();window.addEventListener('scroll',onScroll,{passive:true});
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14,rootMargin:'0px 0px -7% 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+
+/* Border glow: the pointer half of React Bits' BorderGlow.
+
+   Everything visual is CSS. This only answers two questions per frame — how
+   close to an edge the pointer is (0-100) and at what angle it sits — and
+   writes them as custom properties. Reads are batched into a rAF so a pointer
+   crossing four cards cannot force layout on every move.
+
+   Skipped entirely where there is no hover: on touch the glow can never be
+   seen, so there is no reason to run the maths. */
+(function () {
+  var cards = document.querySelectorAll('.bento__cell');
+  if (!cards.length) return;
+  if (!window.matchMedia('(hover: hover)').matches) return;
+
+  var queued = false, target = null, px = 0, py = 0;
+
+  function frame() {
+    queued = false;
+    if (!target) return;
+    var r = target.getBoundingClientRect();
+    var cx = r.width / 2, cy = r.height / 2;
+    var dx = (px - r.left) - cx, dy = (py - r.top) - cy;
+    var kx = dx !== 0 ? cx / Math.abs(dx) : Infinity;
+    var ky = dy !== 0 ? cy / Math.abs(dy) : Infinity;
+    var edge = Math.min(Math.max(1 / Math.min(kx, ky), 0), 1);
+    var deg = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+    if (deg < 0) deg += 360;
+    target.style.setProperty('--edge-proximity', (edge * 100).toFixed(2));
+    target.style.setProperty('--cursor-angle', deg.toFixed(2) + 'deg');
+  }
+
+  for (var i = 0; i < cards.length; i++) {
+    cards[i].addEventListener('pointermove', function (e) {
+      target = e.currentTarget; px = e.clientX; py = e.clientY;
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(frame);
+    }, { passive: true });
+  }
+})();
 
 /* "See how it works" -> the video, popped off the page with sound.
 
