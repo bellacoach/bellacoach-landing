@@ -33,6 +33,7 @@
   --ink:#1c1917; --text:#292524; --muted:#57534e; --faint:#78716c;
   --amber:#b45309; --amber-strong:#78350f; --amber-text:#92400e; --amber-soft:#fef6e7;
   --border:#e7e5e4; --border-soft:#f5f5f4; --halo:#e7ce92;
+  --sec-y:100px;   /* the single vertical rhythm between sections */
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -118,7 +119,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
   background:linear-gradient(135deg,#f4a6b8,#f6c896,#a8dfc1,#9fc9e8,#c9b3e0);opacity:.16}
 
 /* SECTIONS */
-.s-pad{padding:118px 0}
+.s-pad{padding:var(--sec-y) 0}
 .s-head{max-width:42ch}
 .s-head .eyebrow{display:block;margin-bottom:18px}
 .s-head h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(30px,3.9vw,46px);line-height:1.1;letter-spacing:-.012em;color:var(--ink)}
@@ -169,7 +170,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .step p{font-size:14.5px;color:var(--muted);padding-right:14px}
 
 /* TESTIMONIAL */
-.quote-s{padding:130px 0}
+.quote-s{padding:var(--sec-y) 0}
 .q-flag{display:block;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--amber-text);margin-bottom:28px}
 .bigquote{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(26px,3.6vw,44px);line-height:1.22;letter-spacing:-.012em;max-width:22ch;color:var(--ink)}
 .bigquote .g{color:var(--amber);font-style:italic}
@@ -198,13 +199,9 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 @media(prefers-reduced-motion:reduce){.q-slide{transition:none}}
 
 /* METHOD */
-.method{padding:90px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center}
-.method .lbl{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:32px}
-.method .terms span{font-family:'Fraunces',serif;font-size:clamp(18px,2vw,25px);padding:0 30px;position:relative;color:var(--ink)}
-.method .terms span+span::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:1px;height:20px;background:var(--border)}
 
 /* FINAL */
-.final{padding:140px 0;text-align:center}
+.final{padding:var(--sec-y) 0;text-align:center}
 .final h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(32px,4.4vw,58px);line-height:1.05;letter-spacing:-.016em;max-width:17ch;margin:0 auto 20px;color:var(--ink)}
 .final h2 .g{color:var(--amber);font-style:italic}
 .final .sub{font-size:17px;color:var(--muted);margin:0 auto 38px;max-width:40ch}
@@ -226,6 +223,7 @@ footer{border-top:1px solid var(--border);padding:54px 0 46px;background:var(--c
 .foot-bottom a:hover{color:var(--ink)}
 
 @media(max-width:880px){
+  :root{--sec-y:72px}
   .wrap{padding:0 22px}
   .hero{padding:150px 0 70px}
   .hero-grid{grid-template-columns:1fr;gap:46px}
@@ -322,7 +320,7 @@ a.nav-dd__item:hover{background:#faf9f8}
   display: grid;
   place-items: center;
   text-align: center;
-  padding: 168px 0 96px;
+  padding: 168px 0 var(--sec-y);
   overflow: hidden;
   isolation: isolate;
 }
@@ -445,7 +443,7 @@ a.nav-dd__item:hover{background:#faf9f8}
 @keyframes heroRise { to { opacity: 1; transform: none; } }
 
 /* ---------- Pillars (centred 2x2) ----------------------------------------- */
-.pillars { padding: 116px 0; }
+.pillars { padding: var(--sec-y) 0; }
 .pillars__head { max-width: 720px; margin: 0 auto; text-align: center; }
 .pillars__head h2 {
   font-family: 'Fraunces', Georgia, serif;
@@ -506,8 +504,8 @@ a.nav-dd__item:hover{background:#faf9f8}
 .stagger.in > *:nth-child(4) { transition-delay: 0.31s; }
 
 @media (max-width: 880px) {
-  .heroV2 { min-height: auto; padding: 132px 0 76px; }
-  .pillars { padding: 84px 0; }
+  .heroV2 { min-height: auto; padding: 132px 0 var(--sec-y); }
+
   .pillars__grid { grid-template-columns: 1fr; gap: 38px; margin-top: 54px; }
 }
 
@@ -525,8 +523,8 @@ a.nav-dd__item:hover{background:#faf9f8}
    pointer-transparent; nothing depends on it rendering. */
 .arcband {
   position: relative;
-  height: 150px;
-  margin: 0;
+  height: 132px;
+  margin: -66px 0;   /* zero net height: the arcs sit IN the gap, not before it */
   pointer-events: none;
   overflow: hidden;
 }
@@ -539,7 +537,7 @@ a.nav-dd__item:hover{background:#faf9f8}
 }
 /* Alternating so consecutive dividers do not look like a repeat. */
 .arcband--flip::before { transform: scaleX(-1); }
-.arcband--tight { height: 96px; }
+
 
 @media (prefers-reduced-motion: reduce) {
   .arcband::before { opacity: 0.6; }
@@ -554,7 +552,7 @@ a.nav-dd__item:hover{background:#faf9f8}
    1200x700 at (1, 52) inside a 1203x753 frame. object-position is left top
    rather than the original's top, because the screenshot is wider than the
    screen and centring it would crop the sidebar off the left. */
-.shot { padding: 104px 0 116px; }
+.shot { padding: var(--sec-y) 0; }
 .shot .pillars__head { margin-bottom: 52px; }
 .safari {
   position: relative;
@@ -591,14 +589,14 @@ a.nav-dd__item:hover{background:#faf9f8}
 .sfr-dot   { fill: #d9d5d1; }
 .sfr-glyph { fill: #a3a3a3; }
 .sfr-url   { fill: #8a827b; font-size: 12px; font-family: Inter, system-ui, sans-serif; }
-@media (max-width: 720px) { .shot { padding: 76px 0 84px; } }
+
 
 /* ---------- Bento ---------------------------------------------------------
    Three columns, mixed heights: the differentiated capabilities, each with a
    visual built in CSS rather than a screenshot placeholder. Grey boxes read as
    unfinished; these read as intent, and they swap out cleanly for real product
    shots when those exist. */
-.bento { padding: 108px 0 120px; }
+.bento { padding: var(--sec-y) 0; }
 .bento__head { max-width: 720px; margin: 0 auto; text-align: center; }
 .bento__head h2 {
   font-family: 'Fraunces', Georgia, serif;
@@ -716,7 +714,7 @@ a.nav-dd__item:hover{background:#faf9f8}
   .bento__cell--tall { grid-row: span 1; }
 }
 @media (max-width: 720px) {
-  .bento { padding: 76px 0 84px; }
+
   .bento__grid { grid-template-columns: 1fr; margin-top: 48px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1065,7 +1063,7 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
   </div>
 </section>
 
-<div class="arcband arcband--tight" aria-hidden="true"></div>
+<div class="arcband" aria-hidden="true"></div>
 
 <section id="voice" class="bento">
   <div class="wrap">
@@ -1181,7 +1179,7 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
   </div>
 </section>
 
-<div class="arcband arcband--tight" aria-hidden="true"></div>
+<div class="arcband" aria-hidden="true"></div>
 
 
 
@@ -1239,12 +1237,6 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
   </div>
 </section>
 
-<section class="method">
-  <div class="wrap">
-    <div class="lbl reveal">The methodology underneath</div>
-    <div class="terms reveal d1"><span>FUGI</span><span>The Seven Rules</span><span>Feel · Felt · Found</span></div>
-  </div>
-</section>
 
 <section class="final">
   <div class="wrap">
