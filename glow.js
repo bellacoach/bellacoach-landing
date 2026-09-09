@@ -22,7 +22,10 @@
     '.roi-card',      /* pricing — the ROI calculator */
     '.post-card',     /* blog — the post list */
     '.say',           /* blog articles — the quoted line */
-    '.note'           /* blog articles — the aside */
+    '.note',           /* blog articles — the aside */
+    '.prow__vis',     /* product pages — the visual beside each feature */
+    '.pfact',         /* product pages — the plain-facts strip */
+    '.pmore__card'    /* product pages — links to the other products */
   ];
 
   if (!window.matchMedia || !window.matchMedia('(hover: hover)').matches) return;

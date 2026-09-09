@@ -1,0 +1,275 @@
+/* Product pages — shared across /bella-coach, /treatment-desk, /bella-voice.
+   ---------------------------------------------------------------------------
+   Three pages with one identity, so the chrome lives here rather than being
+   pasted three times and drifting the way the nav already has across 17 files.
+
+   Tokens, nav, footer and modal styles still come from each page's own inline
+   <style>, because that is how every other page on this site is built and a
+   product page is not the place to start a second convention. What is here is
+   only what the product pages add. */
+
+/* ---------- Hero ----------------------------------------------------------- */
+.phero {
+  position: relative;
+  padding: 172px 0 var(--sec-y, 100px);
+  overflow: hidden;
+  isolation: isolate;
+}
+/* the homepage's warm wash, without the photograph — a product page leads with
+   the product, not a room */
+.phero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(72% 58% at 50% 0%, rgba(254, 246, 231, .9) 0%, rgba(250, 250, 249, 0) 70%),
+    linear-gradient(180deg, #fdfaf4 0%, var(--bg) 62%);
+}
+.phero__inner { max-width: 780px; margin: 0 auto; padding: 0 40px; text-align: center; }
+.phero__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(180, 83, 9, .22);
+  background: rgba(255, 255, 255, .74);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--amber-text);
+}
+.phero__kicker svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.phero h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(34px, 5.2vw, 58px);
+  line-height: 1.04;
+  letter-spacing: -.022em;
+  color: var(--ink);
+  margin: 24px 0 0;
+  text-wrap: balance;
+}
+.phero h1 em { font-style: italic; color: var(--amber); }
+.phero__lead {
+  font-size: 18px;
+  line-height: 1.62;
+  color: var(--muted);
+  margin: 22px auto 0;
+  max-width: 54ch;
+  text-wrap: pretty;
+}
+.phero__actions { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: center; margin-top: 36px; }
+
+/* the availability line, when a product is not switched on for everyone yet */
+.phero__note {
+  margin: 30px auto 0;
+  max-width: 60ch;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--faint);
+}
+.phero__note b { color: var(--muted); font-weight: 600; }
+
+/* ---------- Section furniture --------------------------------------------- */
+.psec { padding: var(--sec-y, 100px) 0; }
+.psec__head { max-width: 720px; margin: 0 auto 56px; text-align: center; }
+.psec__head h2 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(30px, 4.2vw, 46px);
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin: 16px 0 0;
+  text-wrap: balance;
+}
+.psec__head h2 em { font-style: italic; color: var(--amber); }
+.psec__head p {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 18px auto 0;
+  max-width: 56ch;
+  text-wrap: pretty;
+}
+
+/* ---------- Feature rows: copy beside a visual ---------------------------- */
+.prow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.prow + .prow { margin-top: 96px; }
+/* alternate which side the visual sits on, so a stack of rows has a rhythm
+   rather than reading as a list */
+.prow:nth-child(even) .prow__vis { order: -1; }
+.prow__eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--amber-text); }
+.prow h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(23px, 2.6vw, 30px);
+  line-height: 1.18;
+  color: var(--ink);
+  margin: 14px 0 0;
+  text-wrap: balance;
+}
+.prow p { font-size: 16px; line-height: 1.68; color: var(--muted); margin: 14px 0 0; text-wrap: pretty; }
+.prow p em { font-style: normal; color: var(--amber-text); font-weight: 600; }
+.prow__vis {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 26px;
+  min-height: 232px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* ---------- Numbered steps ------------------------------------------------- */
+.psteps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 34px; max-width: 1040px; margin: 0 auto; }
+.pstep__n {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--amber-soft);
+  color: var(--amber-text);
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid var(--halo);
+}
+.pstep h3 { font-size: 16px; font-weight: 600; color: var(--ink); margin: 16px 0 0; line-height: 1.35; }
+.pstep p { font-size: 14.5px; line-height: 1.62; color: var(--muted); margin: 8px 0 0; text-wrap: pretty; }
+
+/* ---------- The plain-facts strip ------------------------------------------ */
+.pfacts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  max-width: 1040px;
+  margin: 0 auto;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+}
+.pfact { background: var(--card); padding: 28px 26px; }
+.pfact dt { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+.pfact dd { margin: 10px 0 0; font-size: 15.5px; line-height: 1.6; color: var(--ink); }
+.pfact dd b { font-family: 'Fraunces', Georgia, serif; font-weight: 600; }
+
+/* ---------- Cross-links to the other products ----------------------------- */
+.pmore { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 860px; margin: 0 auto; }
+.pmore__card {
+  display: block;
+  text-decoration: none;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 26px 28px;
+  transition: border-color .3s, transform .3s;
+}
+.pmore__card:hover { transform: translateY(-2px); }
+.pmore__card .n { font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 20px; color: var(--ink); }
+.pmore__card .d { font-size: 14.5px; line-height: 1.6; color: var(--muted); margin-top: 8px; }
+.pmore__card .g { font-size: 13.5px; font-weight: 600; color: var(--amber-text); margin-top: 14px; display: inline-block; }
+
+@media (max-width: 900px) {
+  .phero { padding-top: 132px; }
+  .phero__inner { padding: 0 22px; }
+  .prow { grid-template-columns: 1fr; gap: 32px; }
+  .prow + .prow { margin-top: 60px; }
+  /* on one column the visual always follows its copy, so the alternating
+     order would put some visuals above the text that explains them */
+  .prow:nth-child(even) .prow__vis { order: 0; }
+  .psteps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+  .pfacts { grid-template-columns: 1fr; }
+  .pmore { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .psteps { grid-template-columns: 1fr; }
+}
+
+/* ---------- Product visuals ------------------------------------------------
+   The same CSS-built visuals the homepage bento uses. Reused rather than
+   redrawn, and reused rather than replaced with screenshots: there are no
+   product screenshots for Role-Play, the estimate builder or Session Review,
+   and a grey placeholder box would read as unfinished while a mocked-up
+   screenshot would be a picture of something that does not exist. These are
+   honest abstractions of real surfaces. */
+.prow__vis .bento__vis, .prow__vis > .viz-rewind, .prow__vis > .viz-warm,
+.prow__vis > .viz-gates, .prow__vis > .viz-bars { width: 100%; }
+.prow__vis .vis { margin-top: auto; }
+/* --- Rewind: a marked moment becoming a rep --------------------------- */
+.viz-rewind { display: flex; flex-direction: column; gap: 12px; }
+.viz-note {
+  border-left: 3px solid var(--amber);
+  background: var(--soft);
+  border-radius: 0 12px 12px 0;
+  padding: 12px 14px;
+}
+.viz-note .t { font-size: 11px; font-weight: 600; color: var(--amber-text); font-variant-numeric: tabular-nums; }
+.viz-note .q { font-size: 13.5px; font-style: italic; color: var(--ink); margin-top: 5px; line-height: 1.45; }
+.viz-arrow { display: flex; align-items: center; gap: 9px; font-size: 12px; color: var(--faint); }
+.viz-arrow::before, .viz-arrow::after { content: ''; height: 1px; flex: 1; background: var(--border); }
+.viz-persona {
+  display: flex; align-items: center; gap: 11px;
+  border: 1px solid var(--border); border-radius: 12px; padding: 11px 13px; background: var(--card);
+}
+.viz-persona .av {
+  width: 32px; height: 32px; border-radius: 50%; flex: none;
+  background: linear-gradient(140deg, var(--amber), var(--amber-strong));
+  color: #fff; display: grid; place-items: center; font-size: 13px; font-weight: 600;
+}
+.viz-persona .nm { font-size: 13.5px; font-weight: 600; color: var(--ink); }
+.viz-persona .sb { font-size: 11.5px; color: var(--faint); }
+
+/* --- Warmth meter ------------------------------------------------------ */
+.viz-warm { display: flex; flex-direction: column; gap: 10px; }
+.viz-warm__bar { height: 9px; border-radius: 999px; background: var(--soft); overflow: hidden; }
+.viz-warm__fill {
+  height: 100%; width: 72%; border-radius: 999px;
+  background: linear-gradient(90deg, #d9b48a, var(--amber));
+}
+.viz-warm__row { display: flex; justify-content: space-between; align-items: baseline; }
+.viz-warm__n { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 600; color: var(--amber-deep, var(--amber-text)); font-variant-numeric: tabular-nums; }
+.viz-warm__l { font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+
+/* --- Compliance -------------------------------------------------------- */
+.viz-gates { display: flex; flex-direction: column; gap: 8px; }
+.viz-gate {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: var(--text);
+  border: 1px solid var(--border); border-radius: 10px; padding: 9px 12px; background: var(--card);
+}
+.viz-gate svg { width: 15px; height: 15px; flex: none; stroke: var(--amber); fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.viz-gate code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--ink); }
+
+/* --- Case acceptance --------------------------------------------------- */
+.viz-bars { display: flex; align-items: flex-end; gap: 9px; height: 118px; }
+.viz-bars span {
+  flex: 1; border-radius: 5px 5px 2px 2px;
+  background: linear-gradient(180deg, #eddcc4, #e0c9a6);
+}
+.viz-bars span.hi { background: linear-gradient(180deg, var(--amber), var(--amber-strong)); }
+.viz-legend { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--faint); font-variant-numeric: tabular-nums; }
+
+@media (max-width: 1024px) {
+  .bento__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bento__cell--tall { grid-row: span 1; }
+}
+@media (max-width: 720px) {
+
+  .bento__grid { grid-template-columns: 1fr; margin-top: 48px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bento__cell, .bento__cell:hover { transition: none; transform: none; }
+}

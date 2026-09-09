@@ -1,0 +1,459 @@
+/* Base chrome for the product pages — tokens, nav, footer, buttons, and the
+   few shared behaviours they reuse from the homepage (reveal, arcs, FAQ).
+   ---------------------------------------------------------------------------
+   Copied from index.html rather than moved: index.html keeps its own inline
+   copy, because rewiring the homepage to an external stylesheet is a change
+   with its own risk and nothing to do with adding product pages. What this
+   buys is that the THREE NEW pages share one copy instead of adding three more.
+
+   If a token or the nav changes, it has to change in both places. That is the
+   site as it already is — 17 pages each carrying their own nav CSS — not a
+   convention this file introduces. */
+
+:root{
+  --bg:#fafaf9; --card:#ffffff; --soft:#f5f5f4;
+  --ink:#1c1917; --text:#292524; --muted:#57534e; --faint:#78716c;
+  --amber:#b45309; --amber-strong:#78350f; --amber-text:#92400e; --amber-soft:#fef6e7;
+  --border:#e7e5e4; --border-soft:#f5f5f4; --halo:#e7ce92;
+  --sec-y:100px;   /* the single vertical rhythm between sections */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px}
+::selection{background:var(--amber);color:#fff}
+.serif{font-family:'Fraunces',serif}
+.eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--amber-text)}
+
+.glow{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(620px 420px at 82% 4%, rgba(180,83,9,.07), transparent 70%),radial-gradient(700px 520px at 8% 30%, rgba(254,246,231,.7), transparent 72%);}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .95s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}
+
+/* PILL NAV */
+.nav-outer{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;justify-content:center;padding:22px 20px;transition:padding .45s cubic-bezier(.16,1,.3,1)}
+.nav-outer.scrolled{padding:10px 20px}
+.pill{display:flex;align-items:center;justify-content:space-between;gap:34px;width:100%;max-width:1080px;background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:999px;padding:11px 16px 11px 18px;box-shadow:0 1px 2px rgba(28,25,23,.03);transition:all .45s cubic-bezier(.16,1,.3,1)}
+.nav-outer.scrolled .pill{max-width:880px;background:rgba(255,255,255,.92);box-shadow:0 12px 34px -16px rgba(28,25,23,.22);padding:8px 12px 8px 14px}
+/* app-exact brand lockup */
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+/* Sub-mark is PORTRAIT (handle drops below the B) — height-led, width auto. */
+.brand img{height:46px;width:auto;display:block;flex:none;transition:height .45s}
+.nav-outer.scrolled .brand img{height:40px}
+.b-text{display:flex;flex-direction:column;gap:3px;justify-content:center}
+.brand .b-name{font-family:'Fraunces',serif;font-weight:400;font-size:20px;color:var(--ink);line-height:1}
+.brand .b-eyebrow{font-family:'Inter',sans-serif;font-weight:400;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);line-height:1}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{white-space:nowrap;color:var(--muted);text-decoration:none;font-size:14.5px;font-weight:500;transition:color .25s}
+.nav-links a:not(.cta):hover{color:var(--ink)}
+.cta{background:var(--amber);color:#ffffff !important;padding:11px 22px;border-radius:999px;font-size:14px;font-weight:600;transition:.3s}
+.cta:hover{background:var(--amber-strong);transform:translateY(-1px);box-shadow:0 10px 22px -8px rgba(180,83,9,.5)}
+
+/* HERO — now: text left, roleplay card right */
+.hero{padding:184px 0 108px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:60px;align-items:center}
+.hero .eyebrow{display:block;margin-bottom:26px}
+.hero h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(38px,5vw,66px);line-height:1.04;letter-spacing:-.018em;color:var(--ink)}
+.hero h1 .g{color:var(--amber);font-style:italic}
+.hero-lead{font-size:19px;line-height:1.55;color:var(--muted);margin:26px 0 34px;max-width:34ch}
+.hero-actions{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.btn-solid{background:var(--amber);color:#ffffff !important;text-decoration:none;font-size:15px;font-weight:600;padding:15px 30px;border-radius:999px;transition:.3s}
+.btn-solid:hover{background:var(--amber-strong);transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(180,83,9,.5)}
+.link-arrow{font-size:15px;font-weight:600;color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--amber);padding-bottom:3px;transition:.3s}
+.link-arrow:hover{color:var(--amber-text);border-color:var(--amber-text)}
+.hero-note{margin-top:28px;font-size:14px;color:var(--muted)}
+.hero-note b{color:var(--ink);font-weight:600}
+
+/* MEET BELLA — audio intro (hero) */
+.meet{margin-top:30px;max-width:440px}
+.meet-row{display:flex;align-items:center;gap:8px 18px;flex-wrap:wrap}
+/* Play button — the draw. Gentle amber pulse when idle. */
+.meet-btn{display:inline-flex;align-items:center;gap:13px;padding:10px 20px 10px 11px;border-radius:999px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-family:'Inter',sans-serif;min-height:52px;transition:transform .15s,box-shadow .3s,border-color .25s;animation:meetPulse 2.2s ease-in-out infinite}
+.meet-btn:hover{transform:translateY(-1px);border-color:var(--amber)}
+.meet-btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.meet-btn.playing{animation:none;border-color:var(--amber)}
+.meet-ic{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--amber);color:#fff;flex:none}
+.meet-ic svg{width:18px;height:18px;margin-left:1px}
+.meet-btn.playing .meet-ic svg{margin-left:0}
+.meet-txt{display:flex;flex-direction:column;align-items:flex-start;line-height:1.2}
+.meet-title{display:inline-flex;align-items:center;gap:6px;font-family:'Fraunces',serif;font-weight:500;font-size:16px;color:var(--ink)}
+.meet-title .meet-spk{width:14px;height:14px;color:var(--amber-text)}
+.meet-meta{font-size:12.5px;color:var(--faint);font-variant-numeric:tabular-nums;margin-top:2px}
+.meet-read{display:inline-flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;color:var(--muted);padding:6px 4px;transition:color .2s}
+.meet-read:hover{color:var(--amber-text)}
+.meet-read:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:6px}
+.meet-read svg{width:14px;height:14px}
+.meet-progress{height:3px;border-radius:999px;background:var(--border-soft);margin-top:14px;overflow:hidden;opacity:0;transition:opacity .25s}
+.meet-progress.active{opacity:1}
+.meet-progress span{display:block;height:100%;width:0;background:var(--amber);border-radius:999px;transition:width .2s linear}
+.meet-transcript{margin-top:16px;padding-left:16px;border-left:2px solid var(--halo)}
+.meet-transcript p{font-size:14.5px;line-height:1.6;color:var(--muted);margin-bottom:10px}
+.meet-transcript p:last-child{margin-bottom:0}
+/* Slow soft glow — no flashing, no color cycle (a11y). Also killed by the global
+   prefers-reduced-motion rule below. */
+@keyframes meetPulse{0%,100%{box-shadow:0 0 0 0 rgba(180,83,9,0)}50%{box-shadow:0 0 0 6px rgba(180,83,9,.10),0 8px 22px -6px rgba(180,83,9,.30)}}
+
+/* ROLEPLAY CARD (now in hero) */
+.demo{position:relative}
+.demo::before{content:"";position:absolute;width:64px;height:64px;border-radius:16px 16px 0 0;transform:rotate(45deg);top:-22px;right:38px;
+  background:linear-gradient(135deg,#f4a6b8,#f6c896,#a8dfc1,#9fc9e8,#c9b3e0);opacity:.16}
+
+/* SECTIONS */
+.s-pad{padding:var(--sec-y) 0}
+.s-head{max-width:42ch}
+.s-head .eyebrow{display:block;margin-bottom:18px}
+.s-head h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(30px,3.9vw,46px);line-height:1.1;letter-spacing:-.012em;color:var(--ink)}
+.s-head h2 .g{color:var(--amber);font-style:italic}
+.s-head p{font-size:18px;color:var(--muted);margin-top:18px}
+/* "Why Bella" explainer video. Deliberately NOT autoplaying: it carries narration,
+   so an autoplay would either be blocked by the browser or start talking at the
+   visitor unprompted. preload="metadata" keeps the 14MB off the initial page load
+   — the first frame is bright enough to stand in as the poster, so no separate
+   poster image is needed. */
+/* Text and video sit side by side. The video takes the larger share (1.45fr) so
+   it stays big enough to actually watch; the copy column drops its 42ch cap and
+   the heading steps down a size so it fills its column instead of leaving the
+   dead space that a 42ch heading + full-width video underneath produced. */
+.whygrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.45fr);gap:52px;align-items:center}
+.whygrid .s-head{max-width:none}
+.whygrid .s-head h2{font-size:clamp(28px,2.9vw,38px)}
+.whygrid .s-head p{font-size:17px}
+.whyvid{margin:0;max-width:none;scroll-margin-top:104px}
+.whyvid-el{display:block;width:100%;height:auto;aspect-ratio:16/9;background:var(--ink);border:1px solid var(--border);border-radius:20px;box-shadow:0 24px 60px -28px rgba(28,25,23,.45)}
+.whyvid-cap{margin-top:14px;font-size:14px;line-height:1.6;color:var(--faint)}
+/* Stack below 1120px. The wrap caps at 1180px, so the side-by-side video can
+   never exceed ~620px however wide the screen gets; below ~1120px it drops
+   under 585px, which is too small to watch. Under that width the section
+   becomes the full-width layout instead — copy across the top (no 42ch cap, so
+   no dead column) with the video full width beneath, which is bigger than the
+   side-by-side video would have been at the same viewport. */
+@media(max-width:1120px){
+  .whygrid{grid-template-columns:1fr;gap:34px}
+  .whygrid .s-head h2{font-size:clamp(30px,3.9vw,46px)}
+  .whygrid .s-head p{font-size:18px}
+  .whyvid-cap{text-align:center}
+}
+@media(max-width:880px){.whyvid-el{border-radius:14px}}
+
+/* HOW — now without the duplicate card; a fuller steps treatment */
+.figure{padding:118px 0;background:linear-gradient(180deg,transparent,var(--soft),transparent)}
+.how-head{max-width:46ch;margin-bottom:8px}
+.how-head .eyebrow{display:block;margin-bottom:18px}
+.how-head h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,3.6vw,44px);line-height:1.1;letter-spacing:-.012em;color:var(--ink)}
+.how-head h2 .g{color:var(--amber);font-style:italic}
+.how-head p{font-size:17px;color:var(--muted);margin-top:16px;max-width:52ch}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);margin-top:60px}
+.step{padding:32px 28px 0 0;position:relative}
+.step::before{content:"";position:absolute;top:0;left:0;width:34px;height:3px;background:var(--amber)}
+.step .n{font-family:'Fraunces',serif;font-weight:700;font-size:14px;color:var(--amber-text)}
+.step h4{font-family:'Fraunces',serif;font-size:19px;font-weight:600;margin:11px 0 8px;color:var(--ink)}
+.step p{font-size:14.5px;color:var(--muted);padding-right:14px}
+
+/* TESTIMONIAL */
+.quote-s{padding:var(--sec-y) 0;text-align:center}
+.q-flag{display:block;font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--amber-text);margin-bottom:30px}
+.bigquote{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(26px,3.6vw,44px);line-height:1.22;letter-spacing:-.012em;max-width:24ch;margin:0 auto;color:var(--ink);text-wrap:balance}
+.bigquote .g{color:var(--amber);font-style:italic}
+.q-attr{display:flex;align-items:center;justify-content:center;gap:15px;margin-top:40px;text-align:left}
+.q-attr .ba{width:50px;height:50px;border-radius:50%;background-size:cover;background-position:top center;border:2px solid var(--halo)}
+.q-attr .nm{font-weight:600;font-size:15px;color:var(--ink)}
+.q-attr .rl{font-size:14px;color:var(--muted)}
+
+/* Testimonial carousel.
+   Degrades on purpose: with a single slide the controls hide themselves and
+   this renders exactly like the static quote it replaced. Add a .q-slide and
+   it becomes a carousel — no other change needed. */
+.q-track{position:relative}
+.q-slide{opacity:0;visibility:hidden;position:absolute;inset:0;transition:opacity .5s cubic-bezier(.16,1,.3,1)}
+.q-slide.on{opacity:1;visibility:visible;position:relative}
+.q-ctrls{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:44px}
+.q-ctrls[hidden]{display:none}
+.q-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:.25s;flex:none}
+.q-btn:hover{border-color:var(--amber);color:var(--amber-text)}
+.q-btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.q-btn svg{width:17px;height:17px}
+.q-dots{display:flex;gap:9px}
+.q-dot{width:8px;height:8px;padding:0;border-radius:50%;border:none;background:var(--border);cursor:pointer;transition:.25s}
+.q-dot[aria-current="true"]{background:var(--amber);width:22px;border-radius:999px}
+.q-dot:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.q-slide{transition:none}}
+
+/* METHOD */
+
+/* FINAL */
+.final{padding:var(--sec-y) 0;text-align:center}
+.final h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(32px,4.4vw,58px);line-height:1.05;letter-spacing:-.016em;max-width:17ch;margin:0 auto 20px;color:var(--ink)}
+.final h2 .g{color:var(--amber);font-style:italic}
+.final .sub{font-size:17px;color:var(--muted);margin:0 auto 38px;max-width:40ch}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:54px 0 46px;background:var(--card)}
+.foot-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:30px;padding-bottom:36px;border-bottom:1px solid var(--border)}
+.foot-brand{display:flex;align-items:center;gap:12px}
+.foot-brand img{height:48px;width:auto}
+.foot-brand .b-name{font-family:'Fraunces',serif;font-weight:400;font-size:19px;color:var(--ink);line-height:1}
+.foot-brand .b-eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);line-height:1}
+.foot-tag{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--muted);margin-top:14px}
+.socials{display:flex;gap:12px}
+.socials a{width:42px;height:42px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;color:var(--muted);transition:.25s}
+.socials a:hover{color:#fff;background:var(--amber);border-color:var(--amber);transform:translateY(-2px)}
+.socials svg{width:19px;height:19px;fill:currentColor}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding-top:26px;font-size:13px;color:var(--faint)}
+.foot-bottom a{color:var(--muted);text-decoration:none}
+.foot-bottom a:hover{color:var(--ink)}
+
+@media(max-width:880px){
+  :root{--sec-y:72px}
+  .wrap{padding:0 22px}
+  .hero{padding:150px 0 70px}
+  .hero-grid{grid-template-columns:1fr;gap:46px}
+  .steps{grid-template-columns:1fr 1fr}
+  .step{padding-bottom:22px}
+  .foot-top{flex-direction:column}
+}
+/* DEMO MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:120;background:rgba(28,25,23,.55);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;padding:48px 20px;overflow-y:auto}
+.modal-overlay.open{display:flex}
+.modal{background:var(--card);border-radius:22px;max-width:520px;width:100%;padding:40px 40px 36px;position:relative;box-shadow:0 40px 90px -30px rgba(28,25,23,.5);animation:modalIn .4s cubic-bezier(.16,1,.3,1)}
+@keyframes modalIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+.modal h3{font-family:'Fraunces',serif;font-weight:600;font-size:30px;color:var(--ink);letter-spacing:-.01em}
+.modal .msub{font-size:15.5px;color:var(--muted);margin:12px 0 26px;line-height:1.5}
+.modal label{display:block;margin-bottom:14px}
+.modal input,.modal textarea{width:100%;font-family:'Inter',sans-serif;font-size:15px;color:var(--ink);background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;transition:border-color .2s}
+.modal input::placeholder,.modal textarea::placeholder{color:var(--faint)}
+.modal input:focus,.modal textarea:focus{outline:none;border-color:var(--amber)}
+.modal textarea{resize:vertical;min-height:84px}
+.modal .msubmit{width:100%;background:var(--ink);color:#fff !important;border:none;cursor:pointer;font-family:'Inter';font-weight:600;font-size:15px;padding:16px;border-radius:12px;margin-top:6px;transition:.25s}
+.modal .msubmit:hover{background:var(--amber-strong)}
+.modal-close{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;border:none;background:var(--amber-soft);color:var(--amber-text);font-size:16px;cursor:pointer;display:grid;place-items:center;transition:.2s}
+.modal-close:hover{background:var(--amber);color:#fff}
+.modal .mthanks{display:none;text-align:center;padding:18px 0 6px}
+.modal .mthanks h3{margin-bottom:10px}
+.modal .mthanks p{font-size:15.5px;color:var(--muted)}
+.modal.sent .mform{display:none}
+.modal.sent .mthanks{display:block}
+
+@media(max-width:540px){.steps{grid-template-columns:1fr}.modal{padding:32px 24px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+/* --- Mobile nav ----------------------------------------------------------
+   Below the breakpoint the links used to be display:none with NOTHING to
+   replace them, so on a phone the header carried no navigation at all (only
+   the CTA survived, and on most pages not even that). They now collapse into
+   a hamburger. The pill anchors the dropdown, hence position:relative.
+   Literal colors, not var(), because these rules ship into four stylesheets
+   that do not all define the same custom properties. */
+.pill{position:relative}
+
+/* The nav row is centred in a pill whose height comes from the BRAND LOGO,
+   so the row sits well above the pill edge. Stretching it (items stay centred
+   via align-items) makes 100% on the dropdown mean the pill, which is what the
+   menu needs to clear. */
+.nav-links{align-self:stretch}
+/* --- Products dropdown ----------------------------------------------------
+   Click, not hover: hover menus are unusable on a touch screen and skippable by
+   keyboard, and this menu is the only route to three of the four products. */
+.nav-dd{position:relative;display:flex;align-items:center;align-self:stretch}
+.nav-dd__btn{display:inline-flex;align-items:center;gap:5px;background:none;border:0;padding:0;margin:0;font:inherit;font-size:14.5px;font-weight:500;color:var(--muted);cursor:pointer;white-space:nowrap;transition:color .25s}
+.nav-dd__btn:hover,.nav-dd.is-open .nav-dd__btn{color:var(--ink)}
+.nav-dd__btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .22s}
+.nav-dd.is-open .nav-dd__btn svg{transform:rotate(180deg)}
+.nav-dd__menu{position:absolute;top:calc(100% + 20px);left:50%;transform:translateX(-50%);width:360px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:7px;box-shadow:0 22px 48px -22px rgba(28,25,23,.34);display:none;z-index:100;max-height:calc(100vh - 130px);overflow-y:auto}
+.nav-dd.is-open .nav-dd__menu{display:block}
+.nav-dd__item{display:block;padding:11px 13px;border-radius:11px;text-decoration:none}
+a.nav-dd__item:hover{background:#faf9f8}
+.nav-dd__name{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;color:var(--ink);line-height:1.3}
+.nav-dd__desc{display:block;margin-top:3px;font-size:12.5px;line-height:1.5;color:var(--muted);white-space:normal}
+/* Not yet buildable, and it says so rather than looking clickable. */
+.nav-dd__item--soon{cursor:default}
+.nav-dd__item--soon .nav-dd__name{color:var(--muted)}
+.nav-dd__soon{font-size:10px;letter-spacing:.07em;text-transform:uppercase;font-weight:600;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:2px 7px;white-space:nowrap}
+@media(max-width:880px){
+  /* Inside the burger menu the dropdown is just a nested list — an absolutely
+     positioned panel inside an already-absolute menu would sit off-screen. */
+  .nav-dd{display:block}
+  .nav-dd__btn{width:100%;justify-content:space-between;padding:12px 14px;font-size:15px}
+  .nav-dd__menu{position:static;transform:none;width:auto;border:0;box-shadow:none;padding:0 0 6px;background:transparent;max-height:none;overflow:visible}
+  .nav-dd__item{padding:9px 14px 9px 24px}
+  .nav-dd__desc{display:none}
+}
+.nav-burger{display:none;align-items:center;justify-content:center;width:38px;height:38px;flex:0 0 auto;border:1px solid #e7e5e4;border-radius:999px;background:#fff;color:#1c1917;cursor:pointer;padding:0}
+.nav-burger svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round}
+@media(max-width:880px){
+  .nav-burger{display:inline-flex}
+  .nav-links{position:absolute;top:calc(100% + 10px);left:0;right:0;flex-direction:column;align-items:stretch;gap:2px;background:#fff;border:1px solid #e7e5e4;border-radius:18px;padding:8px;box-shadow:0 18px 40px -18px rgba(28,25,23,.3);display:none}
+  .nav-links.is-open{display:flex}
+  .nav-links a{display:block;padding:12px 14px;border-radius:12px;font-size:15px}
+  .nav-links a:hover{background:#faf9f8}
+  .nav-links a.cta{margin-top:4px;text-align:center}
+}
+/* =============================================================================
+   LANDING v2 — hero + pillars
+   Layouts follow the Tailwind UI references; the palette, type and motion are
+   Bella's. Nothing here is Tailwind — the reference was for composition only.
+   ============================================================================= */
+
+
+/* ---------- Load-in motion -----------------------------------------------
+   The hero is above the fold, so an IntersectionObserver would fire everything
+   at once on arrival. A load stagger gives it a sequence instead. */
+.heroV2 .rise {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  animation: heroRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.heroV2 .rise.r1 { animation-delay: 0.05s; }
+.heroV2 .rise.r2 { animation-delay: 0.17s; }
+.heroV2 .rise.r3 { animation-delay: 0.29s; }
+.heroV2 .rise.r4 { animation-delay: 0.41s; }
+.heroV2 .rise.r5 { animation-delay: 0.55s; }
+@keyframes heroRise { to { opacity: 1; transform: none; } }
+
+
+/* ---------- Scroll reveal, with stagger ------------------------------------
+   The page already has .reveal; these add a per-child delay so a grid arrives
+   as a sequence rather than a block. */
+.stagger > * { opacity: 0; transform: translate3d(0, 22px, 0); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
+.stagger.in > * { opacity: 1; transform: none; }
+.stagger.in > *:nth-child(1) { transition-delay: 0.04s; }
+.stagger.in > *:nth-child(2) { transition-delay: 0.13s; }
+.stagger.in > *:nth-child(3) { transition-delay: 0.22s; }
+.stagger.in > *:nth-child(4) { transition-delay: 0.31s; }
+
+@media (max-width: 880px) {
+  .heroV2 { min-height: auto; padding: 132px 0 var(--sec-y); }
+
+  .pillars__grid { grid-template-columns: 1fr; gap: 38px; margin-top: 54px; }
+}
+
+/* Motion is decoration here; the content stands without it. */
+@media (prefers-reduced-motion: reduce) {
+  .heroV2__bg { animation: none; }
+  .heroV2 .rise { opacity: 1; transform: none; animation: none; }
+  .stagger > * { opacity: 1; transform: none; transition: none; }
+}
+
+
+
+/* ---------- Arc divider ---------------------------------------------------
+   The hero motif carried between sections, so the page has one through-line
+   instead of a decorated hero and four plain bands. Purely decorative and
+   pointer-transparent; nothing depends on it rendering. */
+.arcband {
+  position: relative;
+  height: 132px;
+  margin: -66px 0;   /* zero net height: the arcs sit IN the gap, not before it */
+  pointer-events: none;
+  overflow: hidden;
+}
+.arcband::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 220' width='1600' height='220' role='img' aria-label=''%3E%3Cdefs%3E%3ClinearGradient id='dfade' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%23B45309' stop-opacity='0'/%3E%3Cstop offset='0.28' stop-color='%23B45309' stop-opacity='0.34'/%3E%3Cstop offset='0.62' stop-color='%23B45309' stop-opacity='0.20'/%3E%3Cstop offset='1' stop-color='%23B45309' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='none' stroke='url(%23dfade)' stroke-linecap='round'%3E%3Ccircle cx='-260' cy='1180' r='1010' stroke-width='2.4'/%3E%3Ccircle cx='-260' cy='1180' r='1120' stroke-width='2.1'/%3E%3Ccircle cx='-260' cy='1180' r='1240' stroke-width='1.9'/%3E%3Ccircle cx='-260' cy='1180' r='1370' stroke-width='1.7'/%3E%3Ccircle cx='-260' cy='1180' r='1510' stroke-width='1.5'/%3E%3Ccircle cx='-260' cy='1180' r='1660' stroke-width='1.3'/%3E%3C/g%3E%3C/svg%3E') center / 120% 100% no-repeat;
+  opacity: 0.9;
+}
+/* Alternating so consecutive dividers do not look like a repeat. */
+.arcband--flip::before { transform: scaleX(-1); }
+
+
+@media (prefers-reduced-motion: reduce) {
+  .arcband::before { opacity: 0.6; }
+}
+
+
+/* ---------- FAQ -----------------------------------------------------------
+   <details>/<summary>, so it opens with no JavaScript at all and carries the
+   right semantics for a screen reader for free. The open/close transition
+   rides ::details-content where the browser supports it (Chrome, Edge,
+   Safari 18.4+) and is simply instant elsewhere — a progressive nicety, not
+   something the component depends on. */
+.faq { padding: var(--sec-y) 0; }
+.faq__head { max-width: 720px; margin: 0 auto 54px; text-align: center; }
+/* these came from the Pillars block on the homepage, which base.css does not
+   carry - without them the FAQ heading falls back to the body sans */
+.faq__head h2 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(30px, 4.2vw, 46px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 16px 0 0;
+  text-wrap: balance;
+}
+.faq__head p {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 20px auto 0;
+  max-width: 58ch;
+  text-wrap: pretty;
+}
+.faq__list { max-width: 760px; margin: 0 auto; border-top: 1px solid var(--border); }
+.faq__item { border-bottom: 1px solid var(--border); }
+.faq__q {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 26px 4px;
+  cursor: pointer;
+  list-style: none;
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(17px, 1.9vw, 21px);
+  line-height: 1.35;
+  color: var(--ink);
+  transition: color .2s;
+}
+.faq__q::-webkit-details-marker { display: none; }
+.faq__q:hover { color: var(--amber-text); }
+.faq__q:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
+/* the chevron is drawn from two rules so it can cross-fade into a minus */
+.faq__ic {
+  position: relative;
+  flex: none;
+  width: 22px; height: 22px;
+  margin-top: 3px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  transition: border-color .25s, background .25s, transform .35s cubic-bezier(.16,1,.3,1);
+}
+.faq__ic::before, .faq__ic::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 9px; height: 1.5px;
+  background: var(--muted);
+  border-radius: 2px;
+  transform: translate(-50%, -50%);
+  transition: transform .35s cubic-bezier(.16,1,.3,1), background .25s;
+}
+.faq__ic::after { transform: translate(-50%, -50%) rotate(90deg); }
+.faq__item[open] .faq__ic { border-color: var(--amber); background: var(--amber-soft); transform: rotate(180deg); }
+.faq__item[open] .faq__ic::before,
+.faq__item[open] .faq__ic::after { background: var(--amber-text); }
+.faq__item[open] .faq__ic::after { transform: translate(-50%, -50%) rotate(180deg); }
+.faq__a { padding: 0 60px 28px 4px; }
+.faq__a p { font-size: 16px; line-height: 1.65; color: var(--muted); margin: 0; text-wrap: pretty; }
+.faq__a p + p { margin-top: 14px; }
+.faq__a a { color: var(--amber-text); text-underline-offset: 3px; }
+.faq__more { text-align: center; margin-top: 44px; font-size: 15.5px; color: var(--muted); }
+.faq__more a { color: var(--amber-text); font-weight: 600; text-underline-offset: 3px; }
+@supports (interpolate-size: allow-keywords) {
+  :root { interpolate-size: allow-keywords; }
+  .faq__item::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition: block-size .38s cubic-bezier(.16,1,.3,1), content-visibility .38s allow-discrete;
+  }
+  .faq__item[open]::details-content { block-size: auto; }
+}
+@media (max-width: 720px) {
+  .faq__a { padding-right: 34px; }
+  .faq__q { padding: 22px 2px; }
+}
+
