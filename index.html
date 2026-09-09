@@ -138,7 +138,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .whygrid .s-head{max-width:none}
 .whygrid .s-head h2{font-size:clamp(28px,2.9vw,38px)}
 .whygrid .s-head p{font-size:17px}
-.whyvid{margin:0;max-width:none}
+.whyvid{margin:0;max-width:none;scroll-margin-top:104px}
 .whyvid-el{display:block;width:100%;height:auto;aspect-ratio:16/9;background:var(--ink);border:1px solid var(--border);border-radius:20px;box-shadow:0 24px 60px -28px rgba(28,25,23,.45)}
 .whyvid-cap{margin-top:14px;font-size:14px;line-height:1.6;color:var(--faint)}
 /* Stack below 1120px. The wrap caps at 1180px, so the side-by-side video can
@@ -956,7 +956,7 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
 
     <div class="heroV2__actions rise r4">
       <a href="#" class="btn-solid" data-demo>Book a demo</a>
-      <a href="#pillars" class="link-arrow">See how it works &#8594;</a>
+      <a href="#video" class="link-arrow" id="seeHow">See how it works &#8594;</a>
     </div>
 
     <div class="rise r5" style="margin-top:40px;display:flex;justify-content:center">
@@ -1127,8 +1127,8 @@ src="https://www.facebook.com/tr?id=1379062707534315&ev=PageView&noscript=1"
       <h2>Case acceptance turns on <span class="g">one conversation</span> — and most teams never get to practice it.</h2>
       <p>Dental treatment coordinators are the biggest lever on production, yet they learn by shadowing, on real families, with the revenue on the line. Bella moves the reps off your patients.</p>
     </div>
-    <figure class="whyvid reveal d1">
-      <video class="whyvid-el" controls preload="metadata" playsinline width="1280" height="720">
+    <figure class="whyvid reveal d1" id="video">
+      <video class="whyvid-el" id="whyVideo" controls preload="metadata" playsinline width="1280" height="720">
         <source src="/videos/why-bella.mp4" type="video/mp4"/>
         <p>Your browser can&#8217;t play embedded video. <a href="/videos/why-bella.mp4">Download the video</a> instead.</p>
       </video>
@@ -1417,6 +1417,39 @@ const onScroll=()=>{nav.classList.toggle('scrolled',window.scrollY>40)};
 onScroll();window.addEventListener('scroll',onScroll,{passive:true});
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14,rootMargin:'0px 0px -7% 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* "See how it works" -> the video, already playing.
+
+   play() is called SYNCHRONOUSLY inside the click handler, before the scroll.
+   Safari only treats a play() as user-initiated while the gesture is still on
+   the stack, so deferring it until after a smooth scroll would get it blocked
+   there even though Chrome would allow it. Scrolling afterwards costs nothing;
+   playing afterwards costs Safari.
+
+   The link keeps its href, so without JavaScript it still lands on the video. */
+(function () {
+  var link = document.getElementById('seeHow');
+  var vid = document.getElementById('whyVideo');
+  var fig = document.getElementById('video');
+  if (!link || !vid || !fig) return;
+
+  link.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    var p = vid.play();
+    if (p && typeof p.catch === 'function') {
+      /* blocked, or the file will not decode: leave the user on the video with
+         its own controls rather than throwing an unhandled rejection */
+      p.catch(function () {});
+    }
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    fig.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+
+    if (history.replaceState) history.replaceState(null, '', '#video');
+  });
+})();
+
 
 // demo modal
 const modal=document.getElementById('demoModal');
