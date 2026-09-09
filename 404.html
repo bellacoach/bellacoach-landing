@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Page not found — Bella</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="description" content="That page isn't here. Head back to bellacoach.com.">
+<!-- A 404 must never be indexed: it would compete with the real pages and
+     report a soft-404 in Search Console. -->
+<meta name="robots" content="noindex,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fafaf9; --card:#ffffff; --soft:#f5f5f4;
+  --ink:#1c1917; --text:#292524; --muted:#57534e; --faint:#78716c;
+  --amber:#b45309; --amber-strong:#78350f; --amber-text:#92400e; --amber-soft:#fef6e7;
+  --border:#e7e5e4; --halo:#e7ce92;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  display:flex;
+  flex-direction:column;
+}
+::selection{background:var(--amber);color:#fff}
+a{color:inherit}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px;width:100%}
+
+/* A 404 gets the brand as a way home and nothing else. The full nav is ~40
+   lines of markup with a dropdown that needs its own JS, and duplicating it
+   into a sixth file only creates something else to drift. */
+.nf-top{padding:26px 0}
+.brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none}
+.brand img{height:44px;width:auto;display:block;flex:none}
+.brand .b-txt{display:flex;flex-direction:column;gap:3px}
+.brand .b-name{font-family:'Fraunces',serif;font-weight:400;font-size:20px;color:var(--ink);line-height:1}
+.brand .b-eyebrow{font-family:'Inter',sans-serif;font-weight:400;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);line-height:1}
+
+.nf{flex:1;display:grid;place-items:center;padding:40px 0 96px}
+.nf__inner{max-width:640px;margin:0 auto;text-align:center}
+
+.nf__shot{
+  display:block;
+  width:100%;
+  /* the height attribute maps to a presentational hint, so without this the
+     attribute wins the height and aspect-ratio never gets to drive it */
+  height:auto;
+  max-width:520px;
+  margin:0 auto 44px;
+  aspect-ratio:730/488;
+  object-fit:cover;
+  border-radius:18px;
+  border:1px solid var(--border);
+  box-shadow:0 30px 60px -34px rgba(28,25,23,.34);
+}
+
+.eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--amber-text)}
+.nf h1{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:500;
+  font-size:clamp(32px,5vw,52px);
+  line-height:1.06;
+  letter-spacing:-.02em;
+  color:var(--ink);
+  margin:16px 0 0;
+  text-wrap:balance;
+}
+.nf h1 .g{color:var(--amber);font-style:italic}
+.nf__lead{font-size:17px;line-height:1.65;color:var(--muted);margin:20px auto 0;max-width:46ch;text-wrap:pretty}
+
+.nf__actions{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;justify-content:center;margin-top:38px}
+.btn-solid{
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--amber);color:#fff;text-decoration:none;
+  font-weight:600;font-size:15.5px;
+  padding:14px 28px;border-radius:999px;
+  transition:background .25s,transform .25s;
+}
+.btn-solid:hover{background:var(--amber-strong);transform:translateY(-1px)}
+.btn-solid:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.link-arrow{
+  color:var(--amber-text);text-decoration:none;font-weight:600;font-size:15.5px;
+  border-bottom:1px solid rgba(180,83,9,.3);padding-bottom:2px;transition:border-color .25s;
+}
+.link-arrow:hover{border-color:var(--amber)}
+.link-arrow:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+.nf__else{margin-top:44px;font-size:14.5px;color:var(--faint)}
+.nf__else a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border)}
+.nf__else a:hover{color:var(--ink);border-color:var(--amber)}
+
+footer{border-top:1px solid var(--border);padding:26px 0}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--faint)}
+.foot-bottom a{color:var(--faint);text-decoration:none}
+.foot-bottom a:hover{color:var(--ink)}
+
+@media(max-width:880px){
+  .wrap{padding:0 22px}
+  .nf{padding:24px 0 64px}
+  .nf__shot{margin-bottom:34px}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="nf-top">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <img src="/bella-submark.png" alt=""/>
+      <span class="b-txt">
+        <span class="b-name">Bella</span>
+        <span class="b-eyebrow">Real time dental coach</span>
+      </span>
+    </a>
+  </div>
+</div>
+
+<main class="nf">
+  <div class="wrap">
+    <div class="nf__inner">
+      <img class="nf__shot"
+           src="/images/404-page.png"
+           alt="An empty dental operatory: the chair, the light and the monitor, with nobody in the room."
+           width="730" height="488" decoding="async">
+
+      <span class="eyebrow">404</span>
+      <h1>Nobody&#8217;s in <span class="g">this room.</span></h1>
+      <p class="nf__lead">
+        The page you were after has moved, or the link had a typo in it. Nothing
+        is broken &#8212; you just took a wrong turn on the way to the consult.
+      </p>
+
+      <div class="nf__actions">
+        <a class="btn-solid" href="/">Back to the front</a>
+        <a class="link-arrow" href="/pricing">See pricing &#8594;</a>
+      </div>
+
+      <p class="nf__else">
+        Or try <a href="/#pillars">what Bella does</a>, the
+        <a href="/blog">blog</a>, or <a href="mailto:nick@bellacoach.com">email us</a>
+        and we&#8217;ll point you at it.
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-bottom">
+    <div>&copy; 2026 Bella &middot; bellacoach.com</div>
+    <div><a href="/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="/terms">Terms</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
