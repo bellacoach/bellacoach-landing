@@ -1,0 +1,84 @@
+/* Border glow — shared across every page that has cards.
+   ---------------------------------------------------------------------------
+   Ported from React Bits' BorderGlow. The component is almost entirely CSS; its
+   JavaScript only answers two questions per frame — how close to an edge the
+   pointer is, and at what angle — and writes them as custom properties. glow.js
+   does that part, and also tags the cards and injects the .edge-light span, so
+   adding a new card type is one string in that file rather than markup here.
+
+   Two deliberate departures from the original, both because these cards are
+   opaque and light where it assumes dark glass:
+
+     the mesh-gradient border (::before) is dropped. It works by showing through
+     a SEMI-TRANSPARENT card border; against an opaque white card it renders
+     nothing at all.
+
+     the interior mesh fill (::after, soft-light) is dropped too. It is a
+     glassmorphism device — over white it muddies the text sitting on it.
+
+   What remains is the part that means "border glow": a crisp 1px ring on the
+   edge facing the cursor plus a layered halo, masked to a cone that follows the
+   pointer angle. Amber at hsl(28 88% 46%) rather than the original's pale
+   hsl(40 80% 80%), which would disappear against white.
+
+   --glow-r is set per card by glow.js from the card's own computed radius, so
+   the ring follows an 18px card as readily as a 20px one. */
+
+.bglow {
+  position: relative;
+  isolation: isolate;
+  /* the glow lives at inset -34px; a clipping card would cut it away */
+  overflow: visible;
+  --edge-proximity: 0;
+  --cursor-angle: 45deg;
+  --edge-sensitivity: 26;
+  --glow-padding: 34px;
+}
+
+.bglow > .edge-light {
+  position: absolute;
+  inset: calc(var(--glow-padding) * -1);
+  border-radius: calc(var(--glow-r, 20px) + var(--glow-padding));
+  pointer-events: none;
+  z-index: 2;
+  /* only the arc facing the cursor lights up */
+  mask-image: conic-gradient(from var(--cursor-angle) at center,
+    #000 2.5%, transparent 10%, transparent 90%, #000 97.5%);
+  opacity: calc((var(--edge-proximity) - var(--edge-sensitivity)) / (100 - var(--edge-sensitivity)));
+  transition: opacity .25s ease-out;
+}
+
+/* off when the pointer is elsewhere, and slower on the way out than in */
+.bglow:not(:hover) > .edge-light {
+  opacity: 0;
+  transition: opacity .7s ease-in-out;
+}
+
+.bglow > .edge-light::before {
+  content: "";
+  position: absolute;
+  inset: var(--glow-padding);
+  border-radius: var(--glow-r, 20px);
+  box-shadow:
+    inset 0 0 0 1px    hsl(28deg 88% 46% / 100%),
+    inset 0 0 1px 0    hsl(28deg 88% 46% / 55%),
+    inset 0 0 3px 0    hsl(28deg 88% 46% / 45%),
+    inset 0 0 6px 0    hsl(28deg 88% 48% / 34%),
+    inset 0 0 15px 0   hsl(30deg 86% 52% / 24%),
+    inset 0 0 25px 2px hsl(32deg 84% 56% / 15%),
+    0 0 1px 0    hsl(28deg 88% 46% / 55%),
+    0 0 3px 0    hsl(28deg 88% 46% / 42%),
+    0 0 6px 0    hsl(28deg 88% 48% / 32%),
+    0 0 15px 0   hsl(30deg 86% 52% / 22%),
+    0 0 25px 2px hsl(32deg 84% 56% / 14%),
+    0 0 50px 2px hsl(34deg 82% 60% / 8%);
+}
+
+/* the glow is the hover treatment now, so the cards' own hover border tints
+   would otherwise double up with the ring */
+.bento__cell.bglow:hover { border-color: rgba(180, 83, 9, .18); }
+.post-card.bglow:hover { border-color: rgba(180, 83, 9, .18); }
+
+@media (prefers-reduced-motion: reduce) {
+  .bglow > .edge-light { transition: none; }
+}
