@@ -89,7 +89,7 @@
       </div>
       <a href="/pricing">Pricing</a>
       <a href="https://app.bellacoach.com">Sign in</a>
-      <a href="/#demo" class="cta">Book a demo</a>
+      <a href="#" class="cta" data-demo>Book a demo</a>
     </div>
       <button type="button" class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
@@ -101,7 +101,7 @@
     <h1>Coach the consult that <em>actually happened.</em></h1>
     <p class="phero__lead">Role-play prepares a coordinator for a patient who is not there. Bella Voice takes the consult that was &#8212; with everyone&#8217;s consent &#8212; and shows them the moment it turned, quoting their own words back.</p>
     <div class="phero__actions">
-      <a class="btn-solid" href="/#demo">Book a walkthrough</a>
+      <a class="btn-solid" href="#" data-demo>Book a walkthrough</a>
       <a class="link-arrow" href="/pricing">See pricing &#8594;</a>
     </div>
     <p class="phero__note"><b>Availability.</b> Bella Voice is switched on per account, and only once the agreements covering recorded patient audio are in place. We will not turn it on before that, and we do not quote a date we cannot hold.</p>
@@ -270,13 +270,35 @@
   </div>
 </section>
 
-<section class="final" id="demo">
+<section class="final">
   <div class="wrap">
     <h2 class="reveal">Give the team the reps <span class="g">before</span> the stakes are real.</h2>
     <p class="sub reveal d1">A fifteen-minute walkthrough &#8212; a live treatment-plan conversation, scored against your own playbook. No setup.</p>
-    <a href="/#demo" class="btn-solid reveal d2">Book a walkthrough</a>
+    <a href="#" class="btn-solid reveal d2" data-demo>Book a walkthrough</a>
   </div>
 </section>
+
+<div class="modal-overlay" id="demoModal">
+  <div class="modal" id="demoModalCard">
+    <button class="modal-close" id="demoClose" aria-label="Close">&#10005;</button>
+    <div class="mform">
+      <h3>Book a walkthrough</h3>
+      <p class="msub">Tell us a bit about your practice. We&#8217;ll be in touch within 24 hours to schedule 15 minutes.</p>
+      <form id="demoForm" action="https://formspree.io/f/xykvbbjo" method="POST">
+        <label><input type="text" name="name" placeholder="Your name" required></label>
+        <label><input type="email" name="email" placeholder="Email address" required></label>
+        <label><input type="text" name="practice" placeholder="Practice name"></label>
+        <label><input type="text" name="role" placeholder="Role (e.g., Owner, Regional Manager)"></label>
+        <label><textarea name="notes" placeholder="Anything we should know before the call?"></textarea></label>
+        <button type="submit" class="msubmit">Request walkthrough</button>
+      </form>
+    </div>
+    <div class="mthanks">
+      <h3>Thanks — we&#8217;ll be in touch.</h3>
+      <p>We&#8217;ll reach out within 24 hours to schedule your 15 minutes.</p>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="wrap">
@@ -334,6 +356,28 @@
     es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: .14, rootMargin: '0px 0px -7% 0px' });
   document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+// demo modal
+const modal=document.getElementById('demoModal');
+const modalCard=document.getElementById('demoModalCard');
+const openModal=(e)=>{e.preventDefault();modal.classList.add('open');document.body.style.overflow='hidden';};
+const closeModal=()=>{modal.classList.remove('open');document.body.style.overflow='';};
+document.querySelectorAll('[data-demo]').forEach(b=>b.addEventListener('click',openModal));
+document.getElementById('demoClose').addEventListener('click',closeModal);
+modal.addEventListener('click',(e)=>{if(e.target===modal)closeModal();});
+document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeModal();});
+
+// submit to Formspree via fetch so we can show an inline thank-you
+const form=document.getElementById('demoForm');
+form.addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  const btn=form.querySelector('.msubmit');const orig=btn.textContent;btn.textContent='Sending…';btn.disabled=true;
+  try{
+    const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+    if(res.ok){modalCard.classList.add('sent');}
+    else{btn.textContent=orig;btn.disabled=false;alert('Something went wrong — please try again or email us directly.');}
+  }catch(err){btn.textContent=orig;btn.disabled=false;alert('Network error — please try again.');}
+});
 </script>
 
 </body>
