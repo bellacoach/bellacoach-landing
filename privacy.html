@@ -192,7 +192,7 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
   <div class="wrap doc-body">
     <span class="eyebrow">Legal</span>
     <h1>Privacy Policy</h1>
-    <p class="updated">Effective August 6, 2026 · Last updated September 14, 2026</p>
+    <p class="updated">Effective August 6, 2026 · Last updated September 25, 2026</p>
 
     <!--
       MAINTENANCE NOTES (not shown to visitors)
@@ -222,7 +222,7 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
       the Colorado/Virginia/Connecticut laws are not currently met.
     -->
 
-    <p class="lead">This policy explains what Bella collects, why, and who we share it with. It covers our website at bellacoach.com and the Bella coaching application at app.bellacoach.com.</p>
+    <p class="lead">This policy explains what Bella collects, why, and who we share it with. It covers our website at bellacoach.com, the Bella coaching application at app.bellacoach.com, and the Bella Companion browser extension.</p>
 
     <h2>Who we are</h2>
     <p>Bella is operated by Bella Coach LLC ("Bella," "we," "us"). We provide AI-powered coaching software for dental treatment coordinators.</p>
@@ -234,6 +234,7 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
       <li>We use a Meta (Facebook) advertising pixel on our website. We do not use it in the application.</li>
       <li>Bella is a tool for dental staff, not for patients. It is not intended for patients to use directly.</li>
       <li>Where a practice enables patient-data features, that data is governed by a signed Business Associate Agreement, and it is never sent to our AI providers.</li>
+      <li>Our browser extension records a consult only while you are recording, and never reads the page it sits on.</li>
       <li>We do not sell personal information.</li>
     </ul>
 
@@ -266,6 +267,18 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
     </ul>
     <p>If you are a patient and believe a practice has entered your information into Bella, contact that practice directly. They control that record, and we act on their instructions.</p>
 
+    <h2>The Bella browser extension</h2>
+    <p>Bella Companion is an optional Chrome extension for practices that use Bella Voice. It puts a small card on top of the practice management system so a coordinator can record a consult without leaving the chart. It is separate from the website and the application, and installing it changes nothing about either.</p>
+    <ul>
+      <li><strong>It does not read the page it sits on.</strong> The extension draws its own card and never inspects, collects, or transmits the contents of your practice management system, your browsing history, or the addresses of pages you visit.</li>
+      <li><strong>No site is included at install.</strong> You grant the extension permission for one practice management system at a time, by clicking its icon on that site.</li>
+      <li><strong>Microphone audio.</strong> While you are recording, and only then, the extension captures audio from your microphone and uploads it to Bella's storage on Supabase. The recording is attributed to your Bella account and the office you selected. Nothing is captured before you start a recording or after you stop one.</li>
+      <li><strong>Consent is recorded first.</strong> The extension will not open the microphone until you attest that you asked the person in the room, and it stores how you asked.</li>
+      <li><strong>Transcription.</strong> Audio is transcribed by AssemblyAI, our subprocessor, which receives the recording and returns text. Recording is enabled only for practices whose agreement with us covers audio.</li>
+      <li><strong>Authentication.</strong> So you are not asked to sign in twice, the extension reads the session from a Bella tab you are already signed in to and keeps it in the browser's extension storage on your own computer. <em>Disconnect this computer</em>, in the card, removes it.</li>
+      <li>Consult audio and transcripts are patient information, and everything under <em>Patient information</em> above applies to them.</li>
+    </ul>
+
     <h2>Who we share information with</h2>
     <p>We do not sell personal information. We share it with the service providers below, each of which processes it on our behalf:</p>
     <div class="tablewrap">
@@ -279,6 +292,7 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
           <tr><td>Supabase</td><td>Database, authentication, and file storage</td><td>Application only</td></tr>
           <tr><td>Anthropic</td><td>AI coaching, roleplay, and feedback</td><td>Application only</td></tr>
           <tr><td>ElevenLabs</td><td>Text-to-speech audio</td><td>Application only</td></tr>
+          <tr><td>AssemblyAI</td><td>Transcribes recorded consults</td><td>Application and extension</td></tr>
           <tr><td>Resend</td><td>Transactional email, such as invitations</td><td>Application only</td></tr>
         </tbody>
       </table>
@@ -303,6 +317,7 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
       <li><strong>Contact-form submissions</strong> — 24 months from the date you contact us.</li>
       <li><strong>Account and coaching records</strong> — for the life of the subscription, plus 90 days after it ends.</li>
       <li><strong>Treatment and financial records</strong> — governed by the Business Associate Agreement with that practice and by the practice's own retention obligations, which may be longer than the periods above.</li>
+      <li><strong>Consult audio recordings</strong> — deleted 90 days after the recording is made. The transcript is kept with the practice's other records.</li>
       <li><strong>Server logs</strong> — retained on our infrastructure providers' standard schedules.</li>
     </ul>
     <p>Practices may request deletion of their workspace data at any time, and you may ask us to delete your personal information at any time using the contact details above.</p>
