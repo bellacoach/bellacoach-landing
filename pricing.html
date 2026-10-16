@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pricing — Bella | AI coaching for dental teams</title>
+<title>Bella Pricing — Treatment Coordinator Training from $250/mo</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-<meta name="description" content="Simple, early-access pricing for Bella — three tiers tuned to where your dental practice is today. Custom plans for groups of 16+ offices.">
+<meta name="description" content="Bella pricing: AI role-play and coaching for dental treatment coordinators from $250 per user/month. Three plans, from single practices to DSOs.">
 <link rel="canonical" href="https://bellacoach.com/pricing">
 <meta property="og:site_name" content="Bella">
 <meta property="og:title" content="Pricing — Bella">
-<meta property="og:description" content="Three tiers tuned to where your dental practice is today. Custom plans for groups of 16+ offices.">
+<meta property="og:description" content="Bella pricing: AI role-play and coaching for dental treatment coordinators from $250 per user/month. Three plans, from single practices to DSOs.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bellacoach.com/pricing">
 <meta property="og:image" content="https://bellacoach.com/og-image.png">
@@ -21,7 +21,7 @@
 <meta property="og:image:alt" content="Bella — AI Sales Coach. Practice the conversation before it counts.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Pricing — Bella">
-<meta name="twitter:description" content="Three tiers tuned to where your dental practice is today.">
+<meta name="twitter:description" content="Bella pricing: AI role-play and coaching for dental treatment coordinators from $250 per user/month. Three plans, from single practices to DSOs.">
 <meta name="twitter:image" content="https://bellacoach.com/og-image.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -654,24 +654,71 @@ a.nav-dd__item:hover{background:#faf9f8}
       gap: 16px;
     }
   }
+
+  /* Pricing FAQ: same accordion as the homepage FAQ, answers drawn from the Terms. */
+  .pfaq { max-width: 760px; margin: 72px auto 0; padding: 0 24px; }
+  .pfaq h2 { font-family: 'Fraunces', Georgia, serif; font-weight: 400; font-size: clamp(26px, 3.2vw, 36px); color: var(--ink); text-align: center; margin: 0 0 28px; }
+  .pfaq__list { border-top: 1px solid var(--border); }
+  .pfaq details { border-bottom: 1px solid var(--border); }
+  .pfaq summary { cursor: pointer; list-style: none; padding: 22px 4px; font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: clamp(17px, 1.9vw, 20px); color: var(--ink); display: flex; justify-content: space-between; gap: 20px; }
+  .pfaq summary::-webkit-details-marker { display: none; }
+  .pfaq summary::after { content: '+'; color: var(--amber-text); font-family: 'Inter', sans-serif; }
+  .pfaq details[open] summary::after { content: '\2212'; }
+  .pfaq summary:hover { color: var(--amber-text); }
+  .pfaq details p { margin: 0 0 22px; padding: 0 4px; color: var(--muted); line-height: 1.65; }
+  .pfaq details a, .pricing-note a, .tier-features a { color: var(--amber-text); }
 </style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "Bella",
-  "description": "AI coaching software for dental treatment coordinators. Roleplay, feedback, scoring and case review.",
-  "brand": { "@type": "Brand", "name": "Bella" },
-  "url": "https://bellacoach.com/pricing",
-  "image": "https://bellacoach.com/og-image.png",
-  "offers": {
-    "@type": "AggregateOffer",
-    "priceCurrency": "USD",
-    "lowPrice": "250",
-    "highPrice": "1500",
-    "offerCount": "3",
-    "url": "https://bellacoach.com/pricing"
-  }
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://bellacoach.com/#software",
+      "name": "Bella",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "AI coaching software for dental treatment coordinators: role-play, chairside estimates, case-acceptance tracking and consult coaching.",
+      "url": "https://bellacoach.com/",
+      "publisher": { "@type": "Organization", "@id": "https://bellacoach.com/#organization", "name": "Bella" },
+      "offers": [
+        {
+          "@type": "Offer", "name": "Self-Serve", "url": "https://bellacoach.com/pricing",
+          "price": "250", "priceCurrency": "USD",
+          "priceSpecification": { "@type": "UnitPriceSpecification", "price": "250", "priceCurrency": "USD", "unitText": "per user per month", "billingDuration": "P1M" }
+        },
+        {
+          "@type": "Offer", "name": "Customization", "url": "https://bellacoach.com/pricing",
+          "price": "500", "priceCurrency": "USD",
+          "priceSpecification": { "@type": "UnitPriceSpecification", "price": "500", "priceCurrency": "USD", "unitText": "per user per month", "billingDuration": "P1M" }
+        },
+        {
+          "@type": "Offer", "name": "White-Glove", "url": "https://bellacoach.com/pricing",
+          "price": "750", "priceCurrency": "USD",
+          "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": "750", "maxPrice": "1500", "priceCurrency": "USD", "unitText": "per user per month", "billingDuration": "P1M" }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bellacoach.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://bellacoach.com/pricing" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Who counts as a user?", "acceptedAnswer": { "@type": "Answer", "text": "Each person with their own Bella login is one user, usually a treatment coordinator, sometimes an office manager or associate who presents treatment. Your order form sets how many users are covered." } },
+        { "@type": "Question", "name": "Is it billed monthly or annually? Is there a contract?", "acceptedAnswer": { "@type": "Answer", "text": "The term and billing frequency are set in your order form. Subscriptions are billed in advance and renew for the same length unless either party gives notice at least 30 days before the term ends." } },
+        { "@type": "Question", "name": "Is the setup fee refundable?", "acceptedAnswer": { "@type": "Answer", "text": "No. The setup fee is billed once, at the start, and is non-refundable." } },
+        { "@type": "Question", "name": "Can the price change later?", "acceptedAnswer": { "@type": "Answer", "text": "Only for a renewal term, and only with at least 30 days' notice before that term begins." } },
+        { "@type": "Question", "name": "Which plans include Treatment Desk and Bella Voice?", "acceptedAnswer": { "@type": "Answer", "text": "Customization and White-Glove. Self-Serve includes Bella Coach role-play with all 14 personas." } },
+        { "@type": "Question", "name": "What about HIPAA and patient data?", "acceptedAnswer": { "@type": "Answer", "text": "Role-play uses no patient data, so Self-Serve needs no Business Associate Agreement. Features that hold patient information, estimates and recorded consults, stay off until a BAA is signed." } },
+        { "@type": "Question", "name": "What happens to our data if we leave?", "acceptedAnswer": { "@type": "Answer", "text": "You can request an export of your workspace data within 30 days of your subscription ending. Workspace data is deleted 90 days after termination, except where the law or the BAA requires it to be kept longer." } }
+      ]
+    }
+  ]
 }
 </script>
 <link rel="stylesheet" href="/glow.css">
@@ -725,7 +772,7 @@ a.nav-dd__item:hover{background:#faf9f8}
 <section class="pricing-hero">
   <div class="eyebrow">
     <span class="eyebrow-dot"></span>
-    Early-Access Pricing
+    Early-Access Pricing &#183; Treatment Coordinator Training
   </div>
   <h1 class="pricing-headline"><span class="line">Simple pricing.</span><em class="serif">Real coaching.</em></h1>
   <p class="pricing-subhead">Three tiers tuned to where your practice is today. Custom plans available for groups of 16+ offices.</p>
@@ -812,7 +859,7 @@ a.nav-dd__item:hover{background:#faf9f8}
       <div class="tier-divider"></div>
       <ul class="tier-features">
         <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>All specialties</li>
-        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>14 patient personas across difficulty levels</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg><a href="/bella-coach#personas">14 patient personas across difficulty levels</a></li>
         <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Pre-built treatment library</li>
         <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Unlimited practice sessions</li>
         <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Email support (48-hour response)</li>
@@ -836,8 +883,8 @@ a.nav-dd__item:hover{background:#faf9f8}
       <ul class="tier-features">
         <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Everything in Self-Serve</li>
         <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Custom treatments and pricing per office</li>
-        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Treatment Desk &#8212; build and present estimates chairside</li>
-        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Bella Voice &#8212; record real consults and get coached on them</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg><span><a href="/treatment-desk">Treatment Desk</a> &#8212; build and present estimates chairside</span></li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg><span><a href="/bella-voice">Bella Voice</a> &#8212; record real consults and get coached on them</span></li>
         <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Custom personas tailored to your patient population</li>
         <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Role-based reporting for managers and admins</li>
         <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Priority email + Slack support (24-hour response)</li>
@@ -873,6 +920,40 @@ a.nav-dd__item:hover{background:#faf9f8}
   </div>
 
   <p class="pricing-note">Running 16+ offices or need fleet pricing? Let's design a plan that fits. Prefer email? <a href="mailto:nick@bellacoach.com?subject=Bella%20pricing%20inquiry">nick@bellacoach.com</a></p>
+
+  <section class="pfaq" id="faq">
+    <h2>Pricing questions</h2>
+    <div class="pfaq__list">
+      <details>
+        <summary>Who counts as a user?</summary>
+        <p>Each person with their own Bella login is one user &#8212; usually a treatment coordinator, sometimes an office manager or associate who presents treatment. Your order form sets how many users are covered.</p>
+      </details>
+      <details>
+        <summary>Is it billed monthly or annually? Is there a contract?</summary>
+        <p>The term and billing frequency are set in your order form. Subscriptions are billed in advance and renew for the same length unless either of us gives notice at least 30 days before the term ends. See <a href="/terms#fees">sections 8 and 9 of the Terms</a>.</p>
+      </details>
+      <details>
+        <summary>Is the setup fee refundable?</summary>
+        <p>No. The setup fee is billed once, at the start, and is non-refundable.</p>
+      </details>
+      <details>
+        <summary>Can the price change later?</summary>
+        <p>Only for a renewal term, and only with at least 30 days&#8217; notice before that term begins.</p>
+      </details>
+      <details>
+        <summary>Which plans include Treatment Desk and Bella Voice?</summary>
+        <p>Customization and White-Glove. Self-Serve includes Bella Coach role-play with all 14 personas. See <a href="/treatment-desk">Treatment Desk</a> and <a href="/bella-voice">Bella Voice</a>.</p>
+      </details>
+      <details>
+        <summary>What about HIPAA and patient data?</summary>
+        <p>Role-play uses no patient data, so Self-Serve needs no Business Associate Agreement. Features that hold patient information &#8212; estimates and recorded consults &#8212; stay off until a BAA is signed. See <a href="/privacy">how we handle patient information</a>.</p>
+      </details>
+      <details>
+        <summary>What happens to our data if we leave?</summary>
+        <p>You can request an export of your workspace data within 30 days of your subscription ending. We delete workspace data 90 days after termination, except where the law or the BAA requires us to keep it longer.</p>
+      </details>
+    </div>
+  </section>
 
 <script>
 /* ROI calculator.
