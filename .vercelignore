@@ -1,0 +1,5 @@
+# Working files that live in the repo but must not be served on bellacoach.com.
+# Everything else in the root is the site itself (static HTML, no build step).
+.agents
+.claude
+*-prompt.txt

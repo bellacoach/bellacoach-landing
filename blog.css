@@ -30,6 +30,8 @@ a{color:var(--amber-text)}
 .nav-links{display:flex;gap:30px;align-items:center}
 .nav-links a{white-space:nowrap;color:var(--muted);text-decoration:none;font-size:14.5px;font-weight:500;transition:color .25s}
 .nav-links a:hover{color:var(--ink)}
+.nav-links a.cta{background:var(--amber);color:#fff;padding:9px 18px;border-radius:999px;font-weight:600;transition:background .25s}
+.nav-links a.cta:hover{color:#fff;background:var(--amber-strong)}
 
 /* --- Mobile nav ----------------------------------------------------------
    Below the breakpoint the links used to be display:none with NOTHING to

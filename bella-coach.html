@@ -45,13 +45,7 @@
   "offers": { "@type": "Offer", "url": "https://bellacoach.com/pricing" }
 }
 </script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FVZ87TK7H"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-7FVZ87TK7H');
-</script>
+<script src="/tracking.js"></script>
 </head>
 <body>
 
@@ -59,7 +53,7 @@
   <div class="pill">
     <a href="/" class="brand">
       <img src="/bella-submark.png" alt="Bella"/>
-      <span class="b-text"><span class="b-name serif">Bella</span><span class="b-eyebrow">Real Time Dental Coach</span></span>
+      <span class="b-text"><span class="b-name serif">Bella</span><span class="b-eyebrow">Real-Time Dental Coach</span></span>
     </a>
     <div class="nav-links" id="navLinks">
       <div class="nav-dd" id="navProductsWrap">
@@ -284,6 +278,7 @@
       <h3>Book a walkthrough</h3>
       <p class="msub">Tell us a bit about your practice. We&#8217;ll be in touch within 24 hours to schedule 15 minutes.</p>
       <form id="demoForm" action="https://formspree.io/f/xykvbbjo" method="POST">
+        <input type="hidden" name="plan"><input type="hidden" name="source_page">
         <label><input type="text" name="name" placeholder="Your name" required></label>
         <label><input type="email" name="email" placeholder="Email address" required></label>
         <label><input type="text" name="practice" placeholder="Practice name"></label>
@@ -305,7 +300,7 @@
       <div>
         <div class="foot-brand">
           <img src="/bella-submark.png" alt=""/>
-          <span class="b-text"><span class="b-name serif">Bella</span><span class="b-eyebrow">Real Time Dental Coach</span></span>
+          <span class="b-text"><span class="b-name serif">Bella</span><span class="b-eyebrow">Real-Time Dental Coach</span></span>
         </div>
         <div class="foot-tag">Practice the conversation before it counts.</div>
       </div>
@@ -373,7 +368,7 @@ form.addEventListener('submit',async(e)=>{
   const btn=form.querySelector('.msubmit');const orig=btn.textContent;btn.textContent='Sending…';btn.disabled=true;
   try{
     const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
-    if(res.ok){modalCard.classList.add('sent');}
+    if(res.ok){modalCard.classList.add('sent');document.dispatchEvent(new CustomEvent('bella:lead',{detail:{form}}));}
     else{btn.textContent=orig;btn.disabled=false;alert('Something went wrong — please try again or email us directly.');}
   }catch(err){btn.textContent=orig;btn.disabled=false;alert('Network error — please try again.');}
 });

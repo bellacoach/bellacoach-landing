@@ -137,15 +137,7 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
 .foot-bottom a{color:var(--faint);text-decoration:none}
 .foot-bottom a:hover{color:var(--ink)}
 </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FVZ87TK7H"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-7FVZ87TK7H');
-</script>
+<script src="/tracking.js"></script>
 </head>
 <body>
 
@@ -153,7 +145,7 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
   <div class="pill">
     <a href="/" class="brand">
       <img src="/bella-submark.png" alt="Bella"/>
-      <span class="b-text"><span class="b-name serif">Bella</span><span class="b-eyebrow">Real Time Dental Coach</span></span>
+      <span class="b-text"><span class="b-name serif">Bella</span><span class="b-eyebrow">Real-Time Dental Coach</span></span>
     </a>
     <div class="nav-links" id="navLinks">
       <div class="nav-dd" id="navProductsWrap">
@@ -192,10 +184,17 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
   <div class="wrap doc-body">
     <span class="eyebrow">Legal</span>
     <h1>Privacy Policy</h1>
-    <p class="updated">Effective August 6, 2026 · Last updated September 25, 2026</p>
+    <p class="updated">Effective August 6, 2026 · Last updated October 16, 2026</p>
 
     <!--
       MAINTENANCE NOTES (not shown to visitors)
+
+      2026-10-16 (SEO roadmap, NEEDS ATTORNEY REVIEW before deploy): disclosed
+      Google Analytics (it ran site-wide but was missing here), and listed the
+      two hidden fields the booking form now sends (plan, source page). Any
+      new data collection — UTM capture, newsletter, template download,
+      waitlist, Conversions API, consent banner — must update this page in the
+      same release.
 
       Still outstanding:
         1. Postal address. Visitors are pointed at email for now. Note that
@@ -231,7 +230,7 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
     <h2>The short version</h2>
     <ul>
       <li>We collect what you send us through our contact form, and standard analytics about how people use our website.</li>
-      <li>We use a Meta (Facebook) advertising pixel on our website. We do not use it in the application.</li>
+      <li>We use Google Analytics and a Meta (Facebook) advertising pixel on our website. We do not use either in the application.</li>
       <li>Bella is a tool for dental staff, not for patients. It is not intended for patients to use directly.</li>
       <li>Where a practice enables patient-data features, that data is governed by a signed Business Associate Agreement, and it is never sent to our AI providers.</li>
       <li>Our browser extension records a consult only while you are recording, and never reads the page it sits on.</li>
@@ -241,11 +240,12 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
     <h2>Information we collect</h2>
 
     <h3>When you contact us through this website</h3>
-    <p>Our "Book a walkthrough" form collects your name, email address, practice name, role, and anything you write in the notes field. Submissions are delivered to us through Formspree. We use this only to respond to you and to follow up about Bella.</p>
+    <p>Our "Book a walkthrough" form collects your name, email address, practice name, role, and anything you write in the notes field. It also records, without you typing it, which pricing plan you were looking at (if you opened the form from a plan) and which page of our website you opened it from. Submissions are delivered to us through Formspree. We use this only to respond to you and to follow up about Bella.</p>
 
     <h3>Automatically, when you browse this website</h3>
     <ul>
-      <li><strong>Advertising and analytics.</strong> We use the Meta Pixel, which records page views and reports them to Meta along with your IP address, browser and device information, and referring page. Meta may combine this with information it already holds about you to measure and target advertising.</li>
+      <li><strong>Analytics.</strong> We use Google Analytics to understand how visitors use the site. It records the pages you view, what you click (for example, opening the booking form or playing the video), approximate location, device and browser information, and the referring page, and it sets first-party cookies to recognize returning visitors. Google may use this data to measure advertising.</li>
+      <li><strong>Advertising.</strong> We use the Meta Pixel, which records page views and reports them to Meta along with your IP address, browser and device information, and referring page. Meta may combine this with information it already holds about you to measure and target advertising.</li>
       <li><strong>Server logs.</strong> Our host, Vercel, records standard request logs including IP address, user agent, and requested URL.</li>
       <li><strong>Fonts.</strong> Our pages load typefaces from Google Fonts, which means your browser contacts Google and discloses your IP address on each page load.</li>
     </ul>
@@ -285,6 +285,7 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
       <table>
         <thead><tr><th>Provider</th><th>Purpose</th><th>Applies to</th></tr></thead>
         <tbody>
+          <tr><td>Google (Analytics)</td><td>Website analytics and advertising measurement</td><td>Website only</td></tr>
           <tr><td>Meta Platforms</td><td>Advertising and conversion measurement</td><td>Website only</td></tr>
           <tr><td>Formspree</td><td>Delivers contact-form submissions</td><td>Website only</td></tr>
           <tr><td>Google Fonts</td><td>Serves typefaces</td><td>Website only</td></tr>
@@ -304,13 +305,14 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
     </div>
 
     <h2>Cookies and tracking</h2>
-    <p>The Meta Pixel sets cookies on this website in order to recognize returning visitors and attribute advertising. You can limit this in several ways:</p>
+    <p>Google Analytics and the Meta Pixel set cookies on this website in order to recognize returning visitors, measure how the site is used, and attribute advertising. You can limit this in several ways:</p>
     <ul>
+      <li>Install the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out browser add-on</a>.</li>
       <li>Adjust your Meta ad preferences at <a href="https://www.facebook.com/adpreferences" target="_blank" rel="noopener">facebook.com/adpreferences</a>.</li>
       <li>Block third-party cookies in your browser settings.</li>
       <li>Enable your browser's tracking-protection or "Do Not Track" feature. Note that we do not currently respond to Do Not Track signals.</li>
     </ul>
-    <p>The Bella application does not use advertising or analytics trackers. It uses only the cookies required to keep you signed in.</p>
+    <p>The Bella application does not use these advertising or analytics trackers. It uses only the cookies required to keep you signed in.</p>
 
     <h2>How long we keep information</h2>
     <ul>
