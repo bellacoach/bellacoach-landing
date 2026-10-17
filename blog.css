@@ -30,6 +30,8 @@ a{color:var(--amber-text)}
 .nav-links{display:flex;gap:30px;align-items:center}
 .nav-links a{white-space:nowrap;color:var(--muted);text-decoration:none;font-size:14.5px;font-weight:500;transition:color .25s}
 .nav-links a:hover{color:var(--ink)}
+.nav-links a.cta{background:var(--amber);color:#fff;padding:9px 18px;border-radius:999px;font-weight:600;transition:background .25s}
+.nav-links a.cta:hover{color:#fff;background:var(--amber-strong)}
 
 /* --- Mobile nav ----------------------------------------------------------
    Below the breakpoint the links used to be display:none with NOTHING to
@@ -133,3 +135,48 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;background:var(--c
 .foot-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--faint);font-size:13.5px}
 .foot-bottom a{color:var(--faint);text-decoration:none}
 .foot-bottom a:hover{color:var(--ink)}
+
+/* Keep reading: three related posts at the end of every article */
+.related{margin-top:56px;padding-top:28px;border-top:1px solid var(--border)}
+.related h2{font-family:'Fraunces',serif;font-weight:400;font-size:22px;color:var(--ink);margin:0 0 14px}
+.related ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.related a{display:block;padding:14px 16px;border:1px solid var(--border);border-radius:12px;background:#fff;color:var(--ink);text-decoration:none;font-weight:500;line-height:1.4}
+.related a:hover{border-color:var(--halo)}
+.related .c{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-text);margin-bottom:4px}
+
+.foot-social{width:100%;margin-top:6px}
+.foot-social a{color:inherit}
+
+.byline-index{color:var(--faint);font-size:14px;margin-top:10px}
+
+/* Tables and quick-answer accordions inside articles */
+.article-body .tablewrap{overflow-x:auto;margin:18px 0 26px}
+.article-body table{width:100%;border-collapse:collapse;font-size:14.5px;line-height:1.5}
+.article-body th,.article-body td{border-bottom:1px solid var(--border);padding:10px 8px;text-align:left;vertical-align:top}
+.article-body th{color:var(--ink);font-weight:600}
+.article-body .qa{border-bottom:1px solid var(--border);padding:12px 0}
+.article-body .qa summary{cursor:pointer;font-weight:600;color:var(--ink)}
+.article-body .qa p{margin:8px 0 0}
+
+.byline a.tag{text-decoration:none}
+.byline a.tag:hover{text-decoration:underline}
+.topics{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.topics a{font-size:13.5px;padding:6px 14px;border:1px solid var(--halo);border-radius:999px;background:#fff;color:var(--amber-text);text-decoration:none}
+.topics a:hover{background:var(--amber-soft)}
+
+/* Illustrations built in HTML (printout vs. take-home summary; take-home card).
+   Sample data only — they show the shape of the documents, not a real patient. */
+.figure{margin:26px 0 30px}
+.figure figcaption{font-size:13.5px;color:var(--faint);margin-top:10px}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.compare{grid-template-columns:1fr}}
+.doc{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px;font-size:13px;line-height:1.5;color:var(--text)}
+.doc h4{margin:0 0 10px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.doc .ln{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--border);padding:4px 0;font-variant-numeric:tabular-nums}
+.doc .ln span:first-child{font-family:ui-monospace,Consolas,monospace;font-size:12px}
+.doc--plain .ln span:first-child{font-family:inherit;font-size:13px}
+.doc .sum{margin-top:10px;font-weight:600;display:flex;justify-content:space-between}
+.circled{border:2px solid var(--amber);border-radius:999px;padding:1px 10px;color:var(--amber-text)}
+.card-home{max-width:360px;background:#fff;border:1px solid var(--halo);border-radius:14px;padding:18px 20px;box-shadow:0 8px 24px rgba(120,53,15,.08)}
+.card-home p{margin:0 0 8px;font-size:14.5px}
+.card-home .big{font-family:'Fraunces',serif;font-size:26px;color:var(--ink);margin:4px 0 10px}

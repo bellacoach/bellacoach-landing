@@ -4,10 +4,10 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Terms of Service — Bella</title>
-<link rel="icon" type="image/svg+xml" href="./favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta name="description" content="The terms governing use of Bella, AI coaching software for dental treatment coordinators.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://bellacoach.com/terms">
@@ -19,13 +19,12 @@
 <meta property="og:image" content="https://bellacoach.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Bella — AI Sales Coach. Practice the conversation before it counts.">
+<meta property="og:image:alt" content="Bella — AI coaching for dental treatment coordinators. Practice the conversation before it counts.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://bellacoach.com/og-image.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
 <style>
 :root{
   --bg:#fafaf9; --card:#ffffff; --soft:#f5f5f4;
@@ -132,23 +131,15 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
 .foot-bottom a{color:var(--faint);text-decoration:none}
 .foot-bottom a:hover{color:var(--ink)}
 </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FVZ87TK7H"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-7FVZ87TK7H');
-</script>
+<script src="/tracking.js"></script>
 </head>
 <body>
 
 <div class="nav-outer" id="nav">
   <div class="pill">
     <a href="/" class="brand">
-      <img src="/bella-submark.png" alt="Bella"/>
-      <span class="b-text"><span class="b-name serif">Bella</span><span class="b-eyebrow">Real Time Dental Coach</span></span>
+      <img src="/bella-submark-96.png" alt="Bella" width="47" height="46"/>
+      <span class="b-text"><span class="b-name serif">Bella</span><span class="b-eyebrow">Real-Time Dental Coach</span></span>
     </a>
     <div class="nav-links" id="navLinks">
       <div class="nav-dd" id="navProductsWrap">
@@ -272,7 +263,7 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
       <li>Not upload malicious code, attempt to breach access controls, or interfere with the service's operation.</li>
     </ul>
 
-    <h2><span class="num">5</span>Patient information and HIPAA</h2>
+    <h2 id="patient-information-hipaa"><span class="num">5</span>Patient information and HIPAA</h2>
     <p>Bella is a tool for dental staff. It is not patient-facing, and patients do not have accounts.</p>
     <p><strong>Features that store patient information are disabled by default.</strong> We enable them only for Customers who have signed a Business Associate Agreement ("BAA") with us. Until that is in place, you must not enter patient names, dates of birth, contact details, or other identifying information into Bella.</p>
     <p>Where a BAA is in effect:</p>
@@ -283,7 +274,7 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
     </ul>
     <p>Certain features — including case review — are built without any field for patient identifiers, and must not be used to record them in free-text fields.</p>
 
-    <h2><span class="num">6</span>AI-generated content</h2>
+    <h2 id="ai-content"><span class="num">6</span>AI-generated content</h2>
     <p>Bella uses artificial intelligence to simulate patient conversations and to generate coaching feedback, scores, and suggestions. You should understand how that works before relying on it:</p>
     <ul>
       <li><strong>AI output can be wrong.</strong> It may be inaccurate, incomplete, inconsistent between sessions, or confidently mistaken. It is generated by a statistical model, not verified by a person.</li>
@@ -299,7 +290,7 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
     <p>Some features calculate figures such as estimated patient portions, insurance coverage, and payment plan options. <strong>These are estimates produced from the information entered and from assumptions built into the software. They are not a determination of benefits, a quote, or a guarantee of coverage or price.</strong></p>
     <p>You are responsible for verifying any figure before presenting it to a patient, relying on it in a financial conversation, or using it in a treatment decision. Verify coverage with the payer. Nothing Bella produces creates an obligation on any insurer, and nothing in the service substitutes for the professional judgment of a licensed provider.</p>
 
-    <h2><span class="num">8</span>Fees and payment</h2>
+    <h2 id="fees"><span class="num">8</span>Fees and payment</h2>
     <p>Fees, billing frequency, and the number of Authorized User seats covered are set out in your order form or quote. Unless that document says otherwise:</p>
     <ul>
       <li>Setup fees are billed once, at the start, and are non-refundable.</li>
@@ -309,13 +300,13 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
       <li>We may change pricing for a renewal term with at least 30 days' notice before that term begins.</li>
     </ul>
 
-    <h2><span class="num">9</span>Term, termination, and your data</h2>
+    <h2 id="termination-data"><span class="num">9</span>Term, termination, and your data</h2>
     <p>Your subscription runs for the term stated in your order form and renews for successive terms of the same length unless either of us gives notice of non-renewal at least 30 days before the term ends.</p>
     <p>Either of us may terminate for material breach if the breach is not cured within 30 days of written notice. We may suspend access immediately if your use threatens the security or integrity of the service, or violates law.</p>
     <p><strong>When your subscription ends:</strong> you may request an export of your workspace data within 30 days. We delete workspace data 90 days after termination, except where we are required to keep it longer by law or by the BAA. Aggregate, de-identified information that cannot reasonably identify you or any individual may be retained.</p>
 
     <h2><span class="num">10</span>Ownership</h2>
-    <p><strong>Your data is yours.</strong> You retain all rights to the information you and your staff enter into Bella. You grant us a limited licence to host, process, transmit, and display it solely to operate and support the service for you, and to comply with law.</p>
+    <p><strong>Your data is yours.</strong> You retain all rights to the information you and your staff enter into Bella. You grant us a limited license to host, process, transmit, and display it solely to operate and support the service for you, and to comply with law.</p>
     <p><strong>Our software is ours.</strong> We retain all rights to Bella, including the application, its underlying models and prompts, personas, treatment templates, scoring rubrics, and branding. These terms grant you a non-exclusive, non-transferable right to use the service during your subscription — nothing more.</p>
     <p>We may use aggregate, de-identified information about how the service is used to operate, secure, and improve it. This never includes patient information, and is never presented in a form that identifies you, your organization, or any individual.</p>
     <p>If you send us feedback or suggestions, we may use them without obligation or compensation to you.</p>
@@ -364,7 +355,7 @@ footer{border-top:1px solid var(--border);padding:44px 0 40px;margin-top:70px;ba
 <footer>
   <div class="wrap foot-bottom">
     <div>© 2026 Bella · bellacoach.com</div>
-    <div><a href="/blog">Blog</a> &nbsp;·&nbsp; <a href="/privacy">Privacy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a></div>
+    <div><a href="/about">About</a> &nbsp;·&nbsp; <a href="/blog">Blog</a> &nbsp;·&nbsp; <a href="/privacy">Privacy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a></div>
   </div>
 </footer>
 
