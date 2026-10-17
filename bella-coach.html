@@ -35,14 +35,53 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Bella Coach",
-  "applicationCategory": "BusinessApplication",
-  "description": "Treatment coordinators rehearse the case conversation against AI patients who push back, and every rep is scored against your own playbook.",
-  "url": "https://bellacoach.com/bella-coach",
-  "publisher": { "@id": "https://bellacoach.com/#organization" },
-  "isPartOf": { "@id": "https://bellacoach.com/#website" },
-  "offers": { "@type": "Offer", "url": "https://bellacoach.com/pricing" }
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://bellacoach.com/bella-coach#app",
+      "name": "Bella Coach",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Dental sales training",
+      "operatingSystem": "Web",
+      "description": "Treatment coordinators rehearse the case conversation against AI patients who push back, and every rep is scored against your own playbook.",
+      "url": "https://bellacoach.com/bella-coach",
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://bellacoach.com/#organization",
+        "name": "Bella"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "250",
+        "priceCurrency": "USD",
+        "url": "https://bellacoach.com/pricing",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "250",
+          "priceCurrency": "USD",
+          "unitText": "per user per month",
+          "billingDuration": "P1M"
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://bellacoach.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Bella Coach",
+          "item": "https://bellacoach.com/bella-coach"
+        }
+      ]
+    }
+  ]
 }
 </script>
 <script src="/tracking.js"></script>
@@ -83,7 +122,7 @@
       </div>
       <a href="/pricing">Pricing</a>
       <a href="https://app.bellacoach.com">Sign in</a>
-      <a href="#" class="cta" data-demo>Book a demo</a>
+      <a href="#book-demo" class="cta" data-demo>Book a demo</a>
     </div>
       <button type="button" class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
@@ -95,7 +134,7 @@
     <h1>Rehearse the consult against a patient who <em>pushes back.</em></h1>
     <p class="phero__lead">Your coordinators get one shot at the conversation that decides the case. Bella gives them the reps first &#8212; against patients who hesitate, deflect and ask about money the way real families do.</p>
     <div class="phero__actions">
-      <a class="btn-solid" href="#" data-demo>Book a walkthrough</a>
+      <a class="btn-solid" href="#book-demo" data-demo>Book a walkthrough</a>
       <a class="link-arrow" href="/pricing">See pricing &#8594;</a>
     </div>
     
@@ -235,7 +274,7 @@
       <h2>What you are actually buying</h2>
     </div>
     <dl class="pfacts reveal d1">
-        <div class="pfact"><dt>Sessions</dt><dd><b>Unlimited.</b> Practice is not metered, because a coordinator who is counting reps is not practising.</dd></div>
+        <div class="pfact"><dt>Sessions</dt><dd><b>Unlimited.</b> Practice is not metered, because a coordinator who is counting reps is not practicing.</dd></div>
         <div class="pfact"><dt>Coverage</dt><dd><b>All specialties.</b> Fourteen personas as standard; custom ones tailored to your patient population on Customization and above.</dd></div>
         <div class="pfact"><dt>Patient data</dt><dd><b>None involved.</b> Role-play is entirely synthetic, so it needs no BAA and no consent workflow to start.</dd></div>
     </dl>
@@ -262,6 +301,14 @@
         <details class="faq__item">
           <summary class="faq__q">Who on the team is it for?<span class="faq__ic" aria-hidden="true"></span></summary>
           <div class="faq__a"><p>Treatment coordinators first, but anyone who presents treatment &#8212; office managers, associates stepping into case presentation, front desk covering a consult.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Which patient personas are included?<span class="faq__ic" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>Fourteen, across three difficulty levels &#8212; from Price-Focused and Insurance-Focused to the Protective Parent and the Procrastinator. <a href="#personas">See the full list</a>. On Customization and White-Glove you can add personas built around your own patient population.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">How do managers see progress?<span class="faq__ic" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>On Customization and White-Glove, role-based reporting shows each manager their own offices and an admin the whole group. See <a href="/pricing">what each plan includes</a>.</p></div>
         </details>
     </div>
   </div>
@@ -293,7 +340,7 @@
   <div class="wrap">
     <h2 class="reveal">Give the team the reps <span class="g">before</span> the stakes are real.</h2>
     <p class="sub reveal d1">A fifteen-minute walkthrough &#8212; a live treatment-plan conversation, scored against your own playbook. No setup.</p>
-    <a href="#" class="btn-solid reveal d2" data-demo>Book a walkthrough</a>
+    <a href="#book-demo" class="btn-solid reveal d2" data-demo>Book a walkthrough</a>
   </div>
 </section>
 
@@ -340,7 +387,7 @@
     </div>
     <div class="foot-bottom">
       <div>© 2026 Bella · bellacoach.com</div>
-      <div><a href="/blog">Blog</a> &nbsp;·&nbsp; <a href="/privacy">Privacy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a></div>
+      <div><a href="/about">About</a> &nbsp;·&nbsp; <a href="/blog">Blog</a> &nbsp;·&nbsp; <a href="/privacy">Privacy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a></div>
     </div>
   </div>
 </footer>

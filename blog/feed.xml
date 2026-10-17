@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated from the post files. Run "node scripts/build-feed.js" from the repo root after publishing a post. -->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bella — the treatment coordinator blog</title>
+    <link>https://bellacoach.com/blog</link>
+    <atom:link href="https://bellacoach.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Practical writing on case acceptance, treatment presentation, and the treatment coordinator role.</description>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Aug 2026 12:00:00 GMT</lastBuildDate>
+    <item>
+      <title>What to say when a parent says “I need to think about it”</title>
+      <link>https://bellacoach.com/blog/parent-needs-to-think-about-it</link>
+      <guid isPermaLink="true">https://bellacoach.com/blog/parent-needs-to-think-about-it</guid>
+      <pubDate>Fri, 07 Aug 2026 12:00:00 GMT</pubDate>
+      <category>Objections</category>
+      <description>It is rarely about thinking. Four things that sentence usually means, and how to find out which one you are hearing.</description>
+    </item>
+    <item>
+      <title>When to stop selling and get the doctor</title>
+      <link>https://bellacoach.com/blog/when-to-stop-selling-and-get-the-doctor</link>
+      <guid isPermaLink="true">https://bellacoach.com/blog/when-to-stop-selling-and-get-the-doctor</guid>
+      <pubDate>Thu, 06 Aug 2026 12:00:00 GMT</pubDate>
+      <category>The role</category>
+      <description>Some objections are financial. Some are clinical. Continuing to work a clinical objection as a coordinator is the fastest way to lose a family for good.</description>
+    </item>
+    <item>
+      <title>Treatment coordinator bonus structures that don’t distort behavior</title>
+      <link>https://bellacoach.com/blog/bonus-structures-that-dont-distort-behavior</link>
+      <guid isPermaLink="true">https://bellacoach.com/blog/bonus-structures-that-dont-distort-behavior</guid>
+      <pubDate>Wed, 05 Aug 2026 12:00:00 GMT</pubDate>
+      <category>The role</category>
+      <description>Pay a coordinator on case acceptance and you will get case acceptance — including the cases that should not have been accepted. How to design a bonus that does not backfire.</description>
+    </item>
+    <item>
+      <title>What to look for when hiring a treatment coordinator</title>
+      <link>https://bellacoach.com/blog/hiring-a-treatment-coordinator</link>
+      <guid isPermaLink="true">https://bellacoach.com/blog/hiring-a-treatment-coordinator</guid>
+      <pubDate>Mon, 03 Aug 2026 12:00:00 GMT</pubDate>
+      <category>The role</category>
+      <description>Most practices hire for dental experience and end up disappointed. The traits that actually predict a good coordinator, and how to test for them in an interview.</description>
+    </item>
+    <item>
+      <title>Presenting pediatric treatment when the child isn’t in pain</title>
+      <link>https://bellacoach.com/blog/when-the-child-isnt-in-pain</link>
+      <guid isPermaLink="true">https://bellacoach.com/blog/when-the-child-isnt-in-pain</guid>
+      <pubDate>Wed, 29 Jul 2026 12:00:00 GMT</pubDate>
+      <category>Presentation</category>
+      <description>The hardest case in pediatric dentistry: a parent looking at a happy, comfortable child and being told they need to spend two thousand dollars.</description>
+    </item>
+    <item>
+      <title>Stop handing over the printout</title>
+      <link>https://bellacoach.com/blog/stop-handing-over-the-printout</link>
+      <guid isPermaLink="true">https://bellacoach.com/blog/stop-handing-over-the-printout</guid>
+      <pubDate>Fri, 24 Jul 2026 12:00:00 GMT</pubDate>
+      <category>Presentation</category>
+      <description>The treatment plan printout is a summary of a conversation, not a substitute for one. What happens when you lead with paper — and what to do instead.</description>
+    </item>
+    <item>
+      <title>Build the value before you say the price. Actually do it.</title>
+      <link>https://bellacoach.com/blog/value-before-price</link>
+      <guid isPermaLink="true">https://bellacoach.com/blog/value-before-price</guid>
+      <pubDate>Mon, 20 Jul 2026 12:00:00 GMT</pubDate>
+      <category>Presentation</category>
+      <description>Everyone agrees with this in principle and almost nobody does it in the room. What building value looks like in a real treatment presentation.</description>
+    </item>
+    <item>
+      <title>The silence after you say the number</title>
+      <link>https://bellacoach.com/blog/the-silence-after-you-say-the-number</link>
+      <guid isPermaLink="true">https://bellacoach.com/blog/the-silence-after-you-say-the-number</guid>
+      <pubDate>Tue, 14 Jul 2026 12:00:00 GMT</pubDate>
+      <category>Objections</category>
+      <description>Most coordinators lose the case in the four seconds after they state the price. Why the pause feels unbearable, and what happens when you let it sit.</description>
+    </item>
+    <item>
+      <title>How to explain PPO and HMO without using the words PPO or HMO</title>
+      <link>https://bellacoach.com/blog/ppo-hmo-explained-without-jargon</link>
+      <guid isPermaLink="true">https://bellacoach.com/blog/ppo-hmo-explained-without-jargon</guid>
+      <pubDate>Sat, 11 Jul 2026 12:00:00 GMT</pubDate>
+      <category>Insurance</category>
+      <description>Parents do not care what their plan is called. They care what it pays. A plain-language way through the insurance conversation that avoids the usual traps.</description>
+    </item>
+    <item>
+      <title>“Can we just do the one tooth?”</title>
+      <link>https://bellacoach.com/blog/can-we-just-do-the-one-tooth</link>
+      <guid isPermaLink="true">https://bellacoach.com/blog/can-we-just-do-the-one-tooth</guid>
+      <pubDate>Wed, 08 Jul 2026 12:00:00 GMT</pubDate>
+      <category>Objections</category>
+      <description>Phasing treatment is legitimate. Cherry-picking is not. How to tell which one a parent is asking for, and what to say when the answer is no.</description>
+    </item>
+    <item>
+      <title>“Let me check with my husband”</title>
+      <link>https://bellacoach.com/blog/let-me-check-with-my-husband</link>
+      <guid isPermaLink="true">https://bellacoach.com/blog/let-me-check-with-my-husband</guid>
+      <pubDate>Thu, 02 Jul 2026 12:00:00 GMT</pubDate>
+      <category>Objections</category>
+      <description>Usually true, usually fatal. The case does not die in your office — it dies at a kitchen table you are not sitting at. Here is how to survive that conversation.</description>
+    </item>
+  </channel>
+</rss>

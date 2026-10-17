@@ -28,10 +28,30 @@
     : /^\/(privacy|terms)$/.test(path) ? 'legal' : 'other';
   var slug = path === '/' ? 'home' : path.split('/').pop();
 
+  /* Privacy signals. There is no consent banner, so visitors who have not
+     been asked are treated by where they are and what their browser says:
+     - Global Privacy Control on  → no ad cookies, no Meta Pixel at all.
+     - EEA, UK, Switzerland       → Consent Mode denies everything (GA sends
+       cookieless pings only); the Pixel is not loaded. Location comes from
+       Google's own region handling for GA, and from the browser time zone
+       for the Pixel (a heuristic — a banner would replace it). */
+  var gpc = navigator.globalPrivacyControl === true;
+  var tz = '';
+  try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+  var euLike = /^Europe\//.test(tz) || tz === 'Atlantic/Reykjavik' || tz === 'Atlantic/Canary';
+  var allowAds = !gpc && !euLike;
+
   /* GA4 */
   window.dataLayer = window.dataLayer || [];
   function gtag() { dataLayer.push(arguments); }
   window.gtag = gtag;
+  var DENY = { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' };
+  gtag('consent', 'default', Object.assign({}, DENY, {
+    region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH']
+  }));
+  gtag('consent', 'default', gpc
+    ? { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' }
+    : { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
   gtag('js', new Date());
   gtag('config', GA_ID, { content_group: group });
   var g = document.createElement('script');
@@ -39,8 +59,29 @@
   g.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
   document.head.appendChild(g);
 
-  /* Meta Pixel (standard base code) */
-  !function (f, b, e, v, n, t, s) {
+  /* First touch: where this visit came from, kept for the session so a lead
+     that converts three pages later still carries its source. Copied into
+     the booking form's hidden fields when the form opens. */
+  var FT_KEY = 'bella_ft';
+  var ft = null;
+  try {
+    ft = JSON.parse(sessionStorage.getItem(FT_KEY) || 'null');
+    if (!ft) {
+      var q = new URLSearchParams(location.search);
+      ft = {
+        utm_source: q.get('utm_source') || '', utm_medium: q.get('utm_medium') || '',
+        utm_campaign: q.get('utm_campaign') || '', landing_page: location.pathname,
+        referrer: document.referrer && document.referrer.indexOf(location.host) < 0 ? document.referrer.slice(0, 200) : ''
+      };
+      sessionStorage.setItem(FT_KEY, JSON.stringify(ft));
+    }
+    if (group === 'blog_post') sessionStorage.setItem('bella_article', slug);
+  } catch (e) { ft = ft || {}; }
+  function lastArticle() { try { return sessionStorage.getItem('bella_article') || ''; } catch (e) { return ''; } }
+
+  /* Meta Pixel (standard base code) — skipped entirely without ad consent. */
+  if (!allowAds) { window.fbq = function () {}; }
+  else !function (f, b, e, v, n, t, s) {
     if (f.fbq) return; n = f.fbq = function () {
       n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
     };
@@ -78,6 +119,13 @@
       if (form) {
         if (form.plan) form.plan.value = plan;
         if (form.source_page) form.source_page.value = slug;
+        var extra = Object.assign({ entry_article: lastArticle() }, ft || {});
+        Object.keys(extra).forEach(function (k) {
+          if (!extra[k]) return;
+          var el = form.elements[k];
+          if (!el) { el = document.createElement('input'); el.type = 'hidden'; el.name = k; form.appendChild(el); }
+          el.value = extra[k];
+        });
       }
       track('demo_modal_open', { cta_location: where(a), plan: plan, page: slug });
       if (plan) track('select_plan', { plan: plan }, 'InitiateCheckout', { content_name: plan });
@@ -85,6 +133,14 @@
     }
 
     var href = a.getAttribute('href') || '';
+    if (a.classList.contains('heroV2__pill')) {
+      track('select_promotion', { promotion_name: 'bella_voice_new', creative_slot: 'home_hero_pill' });
+    } else if (a.closest('.post-list, .posts, .post-card, article.card') || (group === 'blog_index' && /^\/blog\//.test(href))) {
+      var cards = Array.prototype.slice.call(document.querySelectorAll('a[href^="/blog/"]'));
+      track('select_content', { content_type: 'blog_post', item_id: href.split('/').pop(), index: cards.indexOf(a) + 1 });
+    } else if (href === '/pricing' && group !== 'pricing') {
+      track('select_content', { content_type: 'cta', item_id: 'see_pricing_from_' + slug });
+    }
     if (/^mailto:/.test(href)) {
       track('contact_email_click', { link_location: where(a), page: slug }, 'Contact');
     } else if (/^https:\/\/app\.bellacoach\.com/.test(href)) {
@@ -100,11 +156,44 @@
     var value = PLAN_VALUE[plan] || 0;
     track('generate_lead', {
       lead_type: 'demo_request', plan: plan, source_page: slug,
-      currency: 'USD', value: value
+      entry_article: lastArticle(), currency: 'USD', value: value
     }, 'Lead', { currency: 'USD', value: value, content_name: plan || 'demo' });
   });
 
+  // Owner-intent readers (the two posts written for practice owners) get a
+  // user property and a Meta event, so they can be retargeted separately
+  // from coordinators.
+  var OWNER_POSTS = ['bonus-structures-that-dont-distort-behavior', 'hiring-a-treatment-coordinator'];
+  if (group === 'blog_post') {
+    var owner = OWNER_POSTS.indexOf(slug) > -1;
+    if (owner) gtag('set', 'user_properties', { reader_type: 'owner' });
+    fbq('trackCustom', 'ReadArticle', { article: slug, audience: owner ? 'owner' : 'coordinator' });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    // ROI calculator (/pricing): one event per visit, after the visitor stops dragging.
+    var roi = ['roi-prod', 'roi-lift', 'roi-seats'].map(function (id) { return document.getElementById(id); });
+    if (roi[0] && roi[1] && roi[2]) {
+      var roiSent = false, roiT;
+      roi.forEach(function (el) {
+        el.addEventListener('change', function () {
+          clearTimeout(roiT);
+          roiT = setTimeout(function () {
+            track('roi_calculated', { production: +roi[0].value, lift: +roi[1].value, seats: +roi[2].value });
+            if (!roiSent) { fbq('trackCustom', 'ROICalculated'); roiSent = true; }
+            var form = document.getElementById('demoForm');
+            if (form) {
+              [['roi_production', roi[0].value], ['roi_lift', roi[1].value], ['roi_seats', roi[2].value]].forEach(function (kv) {
+                var el2 = form.elements[kv[0]];
+                if (!el2) { el2 = document.createElement('input'); el2.type = 'hidden'; el2.name = kv[0]; form.appendChild(el2); }
+                el2.value = kv[1];
+              });
+            }
+          }, 800);
+        });
+      });
+    }
+
     var v = document.getElementById('whyVideo');
     if (v) v.addEventListener('play', function () { track('video_start', { video_title: 'why-bella' }); }, { once: true });
     var au = document.getElementById('meetAudio');

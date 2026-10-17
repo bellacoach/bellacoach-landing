@@ -35,14 +35,58 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Bella Voice",
-  "applicationCategory": "BusinessApplication",
-  "description": "With everyone’s consent, Bella listens to a real treatment presentation and shows the coordinator where it turned, in their own words.",
-  "url": "https://bellacoach.com/bella-voice",
-  "publisher": { "@id": "https://bellacoach.com/#organization" },
-  "isPartOf": { "@id": "https://bellacoach.com/#website" },
-  "offers": { "@type": "Offer", "url": "https://bellacoach.com/pricing" }
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://bellacoach.com/bella-voice#app",
+      "name": "Bella Voice",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Call recording and coaching",
+      "operatingSystem": "Web",
+      "description": "With everyone’s consent, Bella listens to a real treatment presentation and shows the coordinator where it turned, in their own words.",
+      "url": "https://bellacoach.com/bella-voice",
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://bellacoach.com/#organization",
+        "name": "Bella"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "500",
+        "priceCurrency": "USD",
+        "url": "https://bellacoach.com/pricing",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "500",
+          "priceCurrency": "USD",
+          "unitText": "per user per month",
+          "billingDuration": "P1M"
+        }
+      },
+      "isRelatedTo": [
+        {
+          "@id": "https://bellacoach.com/bella-coach#app"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://bellacoach.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Bella Voice",
+          "item": "https://bellacoach.com/bella-voice"
+        }
+      ]
+    }
+  ]
 }
 </script>
 <script src="/tracking.js"></script>
@@ -83,7 +127,7 @@
       </div>
       <a href="/pricing">Pricing</a>
       <a href="https://app.bellacoach.com">Sign in</a>
-      <a href="#" class="cta" data-demo>Book a demo</a>
+      <a href="#book-demo" class="cta" data-demo>Book a demo</a>
     </div>
       <button type="button" class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
@@ -95,10 +139,10 @@
     <h1>Coach the consult that <em>actually happened.</em></h1>
     <p class="phero__lead">Role-play prepares a coordinator for a patient who is not there. Bella Voice takes the consult that was &#8212; with everyone&#8217;s consent &#8212; and shows them the moment it turned, quoting their own words back.</p>
     <div class="phero__actions">
-      <a class="btn-solid" href="#" data-demo>Book a walkthrough</a>
+      <a class="btn-solid" href="#book-demo" data-demo>Book a walkthrough</a>
       <a class="link-arrow" href="/pricing">See pricing &#8594;</a>
     </div>
-    <p class="phero__note"><b>Availability.</b> Bella Voice is switched on per account, and only once the agreements covering recorded patient audio are in place. We will not turn it on before that, and we do not quote a date we cannot hold.</p>
+    <p class="phero__note"><b>Availability.</b> Bella Voice is included in the <a href="/pricing">Customization and White-Glove plans</a>. It is switched on per account, and only once the agreements covering recorded patient audio are in place. We will not turn it on before that, and we do not quote a date we cannot hold.</p>
   </div>
 </header>
 
@@ -116,7 +160,7 @@
         <div class="prow__copy">
           <span class="prow__eyebrow">The Rewind</span>
           <h3>A marked moment becomes the next rehearsal</h3>
-          <p>A manager marks where the consult turned and quotes the objection in the patient&#8217;s own words. One press turns it into a role-play &#8212; the same sentence, from a patient who will not let it go. <em><a href="/blog/parent-needs-to-think-about-it">Practising against the line that actually stopped you</a></em> beats practising against a generic one.</p>
+          <p>A manager marks where the consult turned and quotes the objection in the patient&#8217;s own words. One press turns it into a role-play &#8212; the same sentence, from a patient who will not let it go. <em><a href="/blog/parent-needs-to-think-about-it">Practicing against the line that actually stopped you</a></em> beats practicing against a generic one.</p>
         </div>
         <div class="prow__vis">
           <div class="bento__vis viz-rewind" aria-hidden="true">
@@ -239,6 +283,14 @@
           <summary class="faq__q">Can we use the rest of Bella without it?<span class="faq__ic" aria-hidden="true"></span></summary>
           <div class="faq__a"><p>Yes, and most practices will start that way. Role-play needs no patient data at all, so Bella Coach runs on day one while the agreements for Voice are still being worked through.</p></div>
         </details>
+        <details class="faq__item">
+          <summary class="faq__q">How is a consult recorded?<span class="faq__ic" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>With Bella Companion, a Chrome extension that puts a small card on top of your practice management system. It records from the computer&#8217;s microphone only while the coordinator is recording, will not start until consent has been attested, and never reads the page it sits on. <a href="/privacy#browser-extension">How the extension handles data</a>.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Who can see the recordings and transcripts?<span class="faq__ic" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>Only authorized staff at your practice. Access is enforced per practice and per role in the database, not just hidden in the interface.</p></div>
+        </details>
     </div>
   </div>
 </section>
@@ -269,7 +321,7 @@
   <div class="wrap">
     <h2 class="reveal">Hear where your last lost case <span class="g">turned</span>.</h2>
     <p class="sub reveal d1">A fifteen-minute walkthrough of a recorded consult, the Rewind, and the consent and BAA gates &#8212; before anything is switched on for your account.</p>
-    <a href="#" class="btn-solid reveal d2" data-demo>Book a walkthrough</a>
+    <a href="#book-demo" class="btn-solid reveal d2" data-demo>Book a walkthrough</a>
   </div>
 </section>
 
@@ -316,7 +368,7 @@
     </div>
     <div class="foot-bottom">
       <div>© 2026 Bella · bellacoach.com</div>
-      <div><a href="/blog">Blog</a> &nbsp;·&nbsp; <a href="/privacy">Privacy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a></div>
+      <div><a href="/about">About</a> &nbsp;·&nbsp; <a href="/blog">Blog</a> &nbsp;·&nbsp; <a href="/privacy">Privacy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a></div>
     </div>
   </div>
 </footer>
