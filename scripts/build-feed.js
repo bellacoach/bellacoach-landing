@@ -2,7 +2,7 @@
 // <link rel="alternate"> on the blog index and every post. Re-run after adding a post.
 const fs=require('fs');
 const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-const posts=fs.readdirSync('blog').filter(f=>f.endsWith('.html')).map(f=>{
+const posts=fs.readdirSync('blog').filter(f=>f.endsWith('.html')&&fs.readFileSync('blog/'+f,'utf8').includes('"@type": "BlogPosting"')).map(f=>{
   const h=fs.readFileSync('blog/'+f,'utf8');
   return {slug:f.replace('.html',''),
     title:(h.match(/"headline": "([^"]+)"/)||[])[1],

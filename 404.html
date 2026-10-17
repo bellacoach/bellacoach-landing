@@ -12,9 +12,9 @@
 <!-- A 404 must never be indexed: it would compete with the real pages and
      report a soft-404 in Search Console. -->
 <meta name="robots" content="noindex,follow">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
 <style>
 :root{
   --bg:#fafaf9; --card:#ffffff; --soft:#f5f5f4;
@@ -116,14 +116,14 @@ footer{border-top:1px solid var(--border);padding:26px 0}
   *{animation:none!important;transition:none!important}
 }
 </style>
-<link rel="stylesheet" href="/star.css">
+<link rel="stylesheet" href="/star.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/star.css"></noscript>
 </head>
 <body>
 
 <div class="nf-top">
   <div class="wrap">
     <a class="brand" href="/">
-      <img src="/bella-submark.png" alt=""/>
+      <img src="/bella-submark-96.png" alt="" width="47" height="46"/>
       <span class="b-txt">
         <span class="b-name">Bella</span>
         <span class="b-eyebrow">Real time dental coach</span>

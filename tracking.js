@@ -20,9 +20,10 @@
   var PLAN_VALUE = { 'self-serve': 250, 'customization': 500, 'white-glove': 750 };
 
   var path = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+  var HUBS = ['/blog/objections', '/blog/treatment-presentation', '/blog/treatment-coordinator-role'];
   var group = path === '/' ? 'home'
+    : (path === '/blog' || HUBS.indexOf(path) > -1) ? 'blog_index'
     : /^\/blog\//.test(path) ? 'blog_post'
-    : path === '/blog' ? 'blog_index'
     : /^\/(bella-coach|treatment-desk|bella-voice)$/.test(path) ? 'product'
     : path === '/pricing' ? 'pricing'
     : /^\/(privacy|terms)$/.test(path) ? 'legal' : 'other';
