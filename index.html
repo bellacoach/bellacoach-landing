@@ -927,14 +927,7 @@ a.nav-dd__item:hover{background:#faf9f8}
       "operatingSystem": "Web",
       "url": "https://app.bellacoach.com",
       "description": "Dental treatment coordinators rehearse treatment-plan conversations with realistic AI patients and receive coaching feedback. Built for dental practices, groups and DSOs.",
-      "publisher": { "@id": "https://bellacoach.com/#organization" },
-      "offers": {
-        "@type": "AggregateOffer",
-        "priceCurrency": "USD",
-        "lowPrice": "250",
-        "highPrice": "1500",
-        "offerCount": "3"
-      }
+      "publisher": { "@id": "https://bellacoach.com/#organization" }
     }
   ]
 }
@@ -943,6 +936,29 @@ a.nav-dd__item:hover{background:#faf9f8}
 <script src="/glow.js" defer></script>
 <link rel="stylesheet" href="/star.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/star.css"></noscript>
 <script src="/tracking.js"></script>
+<link rel="stylesheet" href="/nav.css">
+<style>
+/* ---- What a better conversation is worth (value only; was on /pricing) ---- */
+.worth{padding:var(--sec-y) 0}
+.worth-card{display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:28px;padding:44px;box-shadow:0 30px 70px -40px rgba(120,53,15,.28)}
+.worth-intro h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,3.4vw,40px);line-height:1.12;letter-spacing:-.012em;color:var(--ink);text-wrap:balance}
+.worth-intro>p{margin:12px 0 28px;font-size:15.5px;line-height:1.6;color:var(--muted);max-width:46ch}
+.roi-field{margin-bottom:22px}
+.roi-label{display:flex;align-items:baseline;justify-content:space-between;gap:12px;font-size:13.5px;font-weight:500;color:var(--muted);margin-bottom:10px}
+.roi-label output{font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:var(--amber-text);font-variant-numeric:tabular-nums}
+.roi-range{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:999px;background:linear-gradient(to right,var(--amber) 0%,var(--amber) var(--fill,20%),var(--border) var(--fill,20%),var(--border) 100%);outline:none}
+.roi-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid var(--amber);box-shadow:0 2px 8px rgba(28,25,23,.18);cursor:grab}
+.roi-range::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid var(--amber);box-shadow:0 2px 8px rgba(28,25,23,.18);cursor:grab}
+.roi-range:focus-visible{outline:2px solid var(--amber);outline-offset:4px}
+.roi-ticks{display:flex;justify-content:space-between;margin-top:7px;font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.worth-result{text-align:center;padding:36px 30px;border-radius:20px;background:radial-gradient(120% 90% at 50% 0%,#fff7ea 0%,var(--amber-soft) 55%,#fbeee6 100%);border:1px solid #f3dfbf}
+.worth-figure{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(40px,5.5vw,58px);line-height:1;letter-spacing:-.02em;color:var(--amber-text);font-variant-numeric:tabular-nums}
+.worth-sub{margin-top:10px;font-size:13px;color:var(--muted)}
+.worth-year{margin-top:18px;padding-top:18px;border-top:1px solid #f0d9b5;font-size:15.5px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.worth-result .btn-solid{display:inline-block;margin-top:22px}
+.worth-foot{margin:16px auto 0;max-width:72ch;text-align:center;font-size:12.5px;line-height:1.6;color:var(--faint)}
+@media(max-width:900px){.worth-card{grid-template-columns:1fr;gap:30px;padding:30px 22px}}
+</style>
 </head>
 <body>
 <div class="glow"></div>
@@ -954,32 +970,24 @@ a.nav-dd__item:hover{background:#faf9f8}
       <span class="b-text"><span class="b-name serif">Bella</span><span class="b-eyebrow">Real-Time Dental Coach</span></span>
     </a>
     <div class="nav-links" id="navLinks">
-      <div class="nav-dd" id="navProductsWrap">
-        <button type="button" class="nav-dd__btn" id="navProducts" aria-expanded="false" aria-controls="navProductsMenu">Products <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="nav-dd__menu" id="navProductsMenu" role="menu">
-          <a class="nav-dd__item" role="menuitem" href="/bella-coach">
-            <span class="nav-dd__name">Bella Coach</span>
-            <span class="nav-dd__desc">Real-time AI coaching that helps treatment coordinators present treatment and handle objections.</span>
-          </a>
-          <a class="nav-dd__item" role="menuitem" href="/treatment-desk">
-            <span class="nav-dd__name">Bella Treatment Desk</span>
-            <span class="nav-dd__desc">Estimates, treatment follow-ups and case-acceptance tracking, in one place.</span>
-          </a>
-          <a class="nav-dd__item" role="menuitem" href="/bella-voice">
-            <span class="nav-dd__name">Bella Voice</span>
-            <span class="nav-dd__desc">Listens to a real consult, with everyone&#8217;s consent, and turns it into specific coaching afterwards.</span>
-          </a>
-          <span class="nav-dd__item nav-dd__item--soon" role="menuitem" aria-disabled="true">
-            <span class="nav-dd__name">Bella Onboard <span class="nav-dd__soon">Coming soon</span></span>
-            <span class="nav-dd__desc">Structured training that gets a new hire productive without tying up your best person.</span>
-          </span>
-          <span class="nav-dd__item nav-dd__item--soon" role="menuitem" aria-disabled="true">
-            <span class="nav-dd__name">Bella Credentials <span class="nav-dd__soon">Coming soon</span></span>
-            <span class="nav-dd__desc">Track provider credentialing and payer enrollment so nothing lapses unnoticed.</span>
-          </span>
+      <div class="nav-mm" data-menu>
+        <button type="button" class="nav-mm__btn" aria-expanded="false" aria-controls="menuProducts">Products <svg class="nav-mm__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-mm__panel nav-mm__panel--wide" id="menuProducts">
+          <div class="nav-mm__groups"><div class="nav-mm__group"><p class="nav-mm__label">Practice the conversation</p><a class="nav-mm__item" href="/bella-coach"><span class="nav-mm__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg></span><span class="nav-mm__txt"><span class="nav-mm__name">Bella Coach</span><span class="nav-mm__desc">Rehearse consults against AI patients who push back, with coaching after every rep.</span></span></a><span class="nav-mm__item nav-mm__item--soon" aria-disabled="true"><span class="nav-mm__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span><span class="nav-mm__txt"><span class="nav-mm__name">Bella Onboard <span class="nav-mm__soon">Coming soon</span></span><span class="nav-mm__desc">Structured training that gets a new hire productive without tying up your best person.</span></span></span></div><div class="nav-mm__group"><p class="nav-mm__label">Present and follow up</p><a class="nav-mm__item" href="/treatment-desk"><span class="nav-mm__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></svg></span><span class="nav-mm__txt"><span class="nav-mm__name">Bella Treatment Desk</span><span class="nav-mm__desc">Chairside estimates from your own fees, then follow-ups to a yes.</span></span></a></div><div class="nav-mm__group"><p class="nav-mm__label">Learn from real consults</p><a class="nav-mm__item" href="/bella-voice"><span class="nav-mm__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg></span><span class="nav-mm__txt"><span class="nav-mm__name">Bella Voice</span><span class="nav-mm__desc">Turn a recorded consult, with consent, into specific coaching.</span></span></a></div><div class="nav-mm__group"><p class="nav-mm__label">Run the office</p><span class="nav-mm__item nav-mm__item--soon" aria-disabled="true"><span class="nav-mm__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="nav-mm__txt"><span class="nav-mm__name">Bella Credentials <span class="nav-mm__soon">Coming soon</span></span><span class="nav-mm__desc">Track credentialing and payer enrollment so nothing lapses unnoticed.</span></span></span></div></div><a class="nav-mm__feature" href="/blog/the-silence-after-you-say-the-number"><span class="nav-mm__fkicker">From the blog</span><span class="nav-mm__ftitle">The silence after you say the number</span><span class="nav-mm__fdesc">Why the pause after the price is where the case is decided.</span><span class="nav-mm__fmore">Read it &#8594;</span></a>
         </div>
       </div>
-      <a href="/pricing">Pricing</a>
+      <div class="nav-mm" data-menu>
+        <button type="button" class="nav-mm__btn" aria-expanded="false" aria-controls="menuLearn">Learn <svg class="nav-mm__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-mm__panel" id="menuLearn">
+          <div class="nav-mm__groups"><div class="nav-mm__group"><a class="nav-mm__item" href="/blog"><span class="nav-mm__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></span><span class="nav-mm__txt"><span class="nav-mm__name">Blog</span><span class="nav-mm__desc">Case acceptance, treatment presentation and objections.</span></span></a><a class="nav-mm__item" href="/blog/objections"><span class="nav-mm__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg></span><span class="nav-mm__txt"><span class="nav-mm__name">Handling objections</span><span class="nav-mm__desc">What to say, one objection at a time.</span></span></a><a class="nav-mm__item" href="/blog/treatment-presentation"><span class="nav-mm__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h20M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3M7 21l5-5 5 5"/></svg></span><span class="nav-mm__txt"><span class="nav-mm__name">Presenting treatment</span><span class="nav-mm__desc">From the photo to the number.</span></span></a><a class="nav-mm__item" href="/blog/treatment-coordinator-role"><span class="nav-mm__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="nav-mm__txt"><span class="nav-mm__name">The treatment coordinator role</span><span class="nav-mm__desc">Hiring, training and paying a TC, for owners.</span></span></a></div></div>
+        </div>
+      </div>
+      <div class="nav-mm" data-menu>
+        <button type="button" class="nav-mm__btn" aria-expanded="false" aria-controls="menuCompany">Company <svg class="nav-mm__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-mm__panel" id="menuCompany">
+          <div class="nav-mm__groups"><div class="nav-mm__group"><a class="nav-mm__item" href="/about"><span class="nav-mm__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span><span class="nav-mm__txt"><span class="nav-mm__name">About Bella</span><span class="nav-mm__desc">Who builds it, and who writes the blog.</span></span></a><a class="nav-mm__item" href="mailto:nick@bellacoach.com?subject=Hello%20from%20bellacoach.com"><span class="nav-mm__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><span class="nav-mm__txt"><span class="nav-mm__name">Contact</span><span class="nav-mm__desc">nick@bellacoach.com</span></span></a></div></div>
+        </div>
+      </div>
       <a href="https://app.bellacoach.com">Sign in</a>
       <a href="#book-demo" class="cta" data-demo>Book a demo</a>
     </div>
@@ -1376,6 +1384,40 @@ a.nav-dd__item:hover{background:#faf9f8}
 </section>
 
 
+<section class="worth" id="worth" aria-labelledby="worthTitle">
+  <div class="wrap">
+    <div class="worth-card reveal">
+      <div class="worth-intro">
+        <h2 id="worthTitle">What is one better conversation worth?</h2>
+        <p>Case acceptance is the whole job. Move the sliders to see what a small improvement is worth to your practice.</p>
+        <div class="roi-field">
+          <label class="roi-label" for="roi-prod">Monthly production per office <output id="roi-prod-out" for="roi-prod">$50,000</output></label>
+          <input class="roi-range" type="range" id="roi-prod" min="10000" max="500000" step="5000" value="50000">
+          <div class="roi-ticks"><span>$10k</span><span>$250k</span><span>$500k</span></div>
+        </div>
+        <div class="roi-field">
+          <label class="roi-label" for="roi-lift">Case acceptance improvement <output id="roi-lift-out" for="roi-lift">2%</output></label>
+          <input class="roi-range" type="range" id="roi-lift" min="0.5" max="15" step="0.5" value="2">
+          <div class="roi-ticks"><span>0.5%</span><span>5%</span><span>10%</span><span>15%</span></div>
+        </div>
+        <div class="roi-field">
+          <label class="roi-label" for="roi-offices">Offices <output id="roi-offices-out" for="roi-offices">1</output></label>
+          <input class="roi-range" type="range" id="roi-offices" min="1" max="12" step="1" value="1">
+          <div class="roi-ticks"><span>1</span><span>6</span><span>12</span></div>
+        </div>
+      </div>
+      <div class="worth-result" aria-live="polite">
+        <div class="worth-figure" id="roi-gain">+$1,000</div>
+        <div class="worth-sub">additional production per month</div>
+        <div class="worth-year" id="roi-year">$12,000 over a year</div>
+        <a class="btn-solid" href="#book-demo" data-demo>See what it costs for your offices</a>
+      </div>
+    </div>
+    <p class="worth-foot">This is your arithmetic, not a forecast: the improvement is the figure you choose. It applies the improvement to the production each office already presents, and counts production rather than collections.</p>
+  </div>
+</section>
+
+
 <section id="faq" class="faq">
   <div class="wrap">
     <div class="faq__head reveal">
@@ -1411,7 +1453,7 @@ a.nav-dd__item:hover{background:#faf9f8}
       </details>
       <details class="faq__item">
         <summary class="faq__q">What does it cost?<span class="faq__ic" aria-hidden="true"></span></summary>
-        <div class="faq__a"><p>Pricing is per office (one practice location, with every login there included), across three tiers &#8212; Self-Serve, Customization and White-Glove. The full breakdown, including an ROI calculator you can run against your own production, is on the <a href="/pricing">pricing page</a>.</p></div>
+        <div class="faq__a"><p>It depends on how many offices you have and which products you use. <a href="#book-demo" data-demo>Book a demo</a> and we&#8217;ll put together a plan and a quote for your practice.</p></div>
       </details>
     </div>
 
@@ -1722,6 +1764,29 @@ form.addEventListener('submit',async(e)=>{
   wrap.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});
 })();
 
+</script>
+<script src="/nav.js" defer></script>
+<script>
+/* What a better conversation is worth: value only, no cost side (the
+   pricing page is gone). Production is per office and scales with offices. */
+(function () {
+  var prod = document.getElementById('roi-prod'), lift = document.getElementById('roi-lift'), offices = document.getElementById('roi-offices');
+  if (!prod || !lift || !offices) return;
+  var usd0 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+  function paint(el) { var min = +el.min, max = +el.max; el.style.setProperty('--fill', ((+el.value - min) / (max - min)) * 100 + '%'); }
+  function render() {
+    var p = +prod.value, l = +lift.value, n = parseInt(offices.value, 10);
+    var gain = p * (l / 100) * n;
+    document.getElementById('roi-prod-out').textContent = usd0.format(p);
+    document.getElementById('roi-lift-out').textContent = (Number.isInteger(l) ? l : l.toFixed(1)) + '%';
+    document.getElementById('roi-offices-out').textContent = String(n);
+    document.getElementById('roi-gain').textContent = '+' + usd0.format(gain);
+    document.getElementById('roi-year').textContent = usd0.format(gain * 12) + ' over a year' + (n > 1 ? ', across ' + n + ' offices' : '');
+    paint(prod); paint(lift); paint(offices);
+  }
+  [prod, lift, offices].forEach(function (el) { el.addEventListener('input', render); });
+  render();
+})();
 </script>
 </body>
 </html>

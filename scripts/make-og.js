@@ -12,7 +12,6 @@ const posts=fs.readdirSync(path.join(repo,'blog')).filter(f=>f.endsWith('.html')
   return {slug:f.replace('.html',''),kicker:(h.match(/"articleSection": "([^"]+)"/)||[])[1],title:(h.match(/"headline": "([^"]+)"/)||[])[1].replace(/\\"/g,'"'),foot:'The treatment coordinator blog'};
 });
 const cards=[
- {slug:'pricing',kicker:'Pricing',title:'From $99 per office / month. Three plans, from single practices to DSOs.',foot:'Bella pricing'},
  {slug:'bella-coach',kicker:'Bella Coach',title:'Rehearse the consult against a patient who pushes back.',foot:'AI role-play for dental treatment coordinators'},
  {slug:'treatment-desk',kicker:'Bella Treatment Desk',title:'Build the estimate at the chair, not after the family leaves.',foot:'Chairside estimates and case-acceptance tracking'},
  {slug:'bella-voice',kicker:'Bella Voice',title:'Coach the consult that actually happened.',foot:'Consult recording and coaching, BAA-backed'},

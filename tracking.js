@@ -15,9 +15,10 @@
   var GA_ID = 'G-7FVZ87TK7H';
   var PIXEL_ID = '1379062707534315';
 
-  // Monthly list price per office, sent as the lead's value so reports show
-  // pipeline rather than a bare count. White-Glove is a range; use the floor.
-  var PLAN_VALUE = { 'self-serve': 99, 'customization': 199, 'white-glove': 249 };
+  // Lead value by plan. Empty since the public pricing page was removed
+  // (2026-10-18): no CTA carries a data-plan now, so leads go in as a count.
+  // Add a plan here if a priced CTA ever comes back.
+  var PLAN_VALUE = {};
 
   var path = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
   var HUBS = ['/blog/objections', '/blog/treatment-presentation', '/blog/treatment-coordinator-role'];
