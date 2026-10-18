@@ -353,24 +353,41 @@ a.nav-dd__item:hover{background:#faf9f8}
      charcoal accent wall the headline lands on. The linear fades the top into
      the header pill and the bottom into the next section, so the photograph has
      no visible edge. Values are tuned against measured contrast, not taste. */
+  /* The top fades into the header pill. The white glows sit above the foot
+     (not ON the bottom edge, where they drew a line against the next section,
+     Nick 2026-10-18). */
   background:
-    radial-gradient(70% 34% at 30% 100%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 70%),
-    radial-gradient(60% 30% at 78% 98%, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0) 72%),
-    radial-gradient(60% 46% at 50% 44%, rgba(255, 252, 247, 0.70) 0%, rgba(255, 252, 247, 0) 75%),
-    linear-gradient(180deg, var(--bg) 0%, rgba(250, 250, 249, 0) 16%, rgba(250, 250, 249, 0) 80%, var(--bg) 100%);
+    linear-gradient(180deg, var(--bg) 0%, rgba(250, 250, 249, 0) 16%),
+    radial-gradient(70% 30% at 30% 80%, rgba(255, 255, 255, 0.90) 0%, rgba(255, 255, 255, 0) 70%),
+    radial-gradient(60% 28% at 78% 78%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 72%),
+    radial-gradient(60% 46% at 50% 44%, rgba(255, 252, 247, 0.70) 0%, rgba(255, 252, 247, 0) 75%);
 }
-/* The dune: one long, soft white curve near the foot of the hero. */
+/* The dune: one long, soft white curve near the foot of the hero. It ENDS at
+   the hero's bottom edge, already the page colour; it used to hang 18% below
+   and get cut off while still nearly white. */
 .heroV2__wash::after {
   content: "";
   position: absolute;
   left: -10%;
   right: -10%;
-  bottom: -18%;
-  height: 46%;
+  bottom: 0;
+  height: 40%;
   border-radius: 50% 50% 0 0 / 70% 70% 0 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.55) 40%, var(--bg) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.5) 45%, var(--bg) 88%, var(--bg) 100%);
   box-shadow: 0 -40px 80px -40px rgba(180, 83, 9, 0.10);
-  filter: blur(2px);
+}
+/* Belt and braces: the last 140px always fade to exactly the page colour, on
+   top of every layer above, so the next section starts with no seam. */
+.heroV2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 140px;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(250, 250, 249, 0) 0%, var(--bg) 100%);
 }
 .heroV2__inner { max-width: 880px; margin: 0 auto; padding: 0 24px; }
 
