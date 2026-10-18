@@ -315,7 +315,7 @@ a.nav-dd__item:hover{background:#faf9f8}
 /* ---------- Hero (centred, full-bleed) ------------------------------------ */
 .heroV2 {
   position: relative;
-  min-height: 92vh;
+  min-height: 96vh;
   display: grid;
   place-items: center;
   text-align: center;
@@ -330,16 +330,18 @@ a.nav-dd__item:hover{background:#faf9f8}
    placeholder, so a missing file degrades to a warm wash rather than a hole. */
 .heroV2__bg {
   position: absolute;
-  inset: 0;
+  inset: -12% -8% 0;
   z-index: -2;
-  background-image: url('/images/hero-header.png');
-  background-size: cover;
-  background-position: 50% 46%;
-  background-repeat: no-repeat;
-  /* Held back so the photograph reads as the room the product lives in rather
-     than a picture the type is sitting on top of. The wash above it does the
-     legibility work; this sets how present the room is. */
-  opacity: 0.78;
+  /* Light, not a photograph (2026-10-18, after Pearl): soft blooms of the
+     brand's warm tones on cream. The office photo is retired; it still lives
+     at /images/hero-header.png. */
+  background:
+    radial-gradient(38% 46% at 22% 30%, rgba(253, 226, 196, 0.85) 0%, rgba(253, 226, 196, 0) 70%),
+    radial-gradient(34% 40% at 80% 24%, rgba(249, 222, 214, 0.80) 0%, rgba(249, 222, 214, 0) 70%),
+    radial-gradient(46% 42% at 60% 70%, rgba(254, 240, 214, 0.90) 0%, rgba(254, 240, 214, 0) 72%),
+    radial-gradient(30% 34% at 12% 78%, rgba(250, 228, 220, 0.65) 0%, rgba(250, 228, 220, 0) 70%),
+    var(--bg);
+  filter: saturate(1.05);
   /* A slow drift, so the page is never completely still. Transform only. */
   animation: heroDrift 38s ease-in-out infinite alternate;
 }
@@ -352,17 +354,23 @@ a.nav-dd__item:hover{background:#faf9f8}
      the header pill and the bottom into the next section, so the photograph has
      no visible edge. Values are tuned against measured contrast, not taste. */
   background:
-    radial-gradient(78% 62% at 50% 46%,
-      rgba(250, 250, 249, 0.86) 0%,
-      rgba(250, 250, 249, 0.70) 46%,
-      rgba(250, 250, 249, 0.42) 78%,
-      rgba(250, 250, 249, 0.30) 100%),
-    linear-gradient(180deg,
-      var(--bg) 0%,
-      rgba(250, 250, 249, 0.55) 14%,
-      rgba(250, 250, 249, 0.28) 46%,
-      rgba(250, 250, 249, 0.72) 84%,
-      var(--bg) 100%);
+    radial-gradient(70% 34% at 30% 100%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 70%),
+    radial-gradient(60% 30% at 78% 98%, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0) 72%),
+    radial-gradient(60% 46% at 50% 44%, rgba(255, 252, 247, 0.70) 0%, rgba(255, 252, 247, 0) 75%),
+    linear-gradient(180deg, var(--bg) 0%, rgba(250, 250, 249, 0) 16%, rgba(250, 250, 249, 0) 80%, var(--bg) 100%);
+}
+/* The dune: one long, soft white curve near the foot of the hero. */
+.heroV2__wash::after {
+  content: "";
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -18%;
+  height: 46%;
+  border-radius: 50% 50% 0 0 / 70% 70% 0 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.55) 40%, var(--bg) 100%);
+  box-shadow: 0 -40px 80px -40px rgba(180, 83, 9, 0.10);
+  filter: blur(2px);
 }
 .heroV2__inner { max-width: 880px; margin: 0 auto; padding: 0 24px; }
 
@@ -398,10 +406,10 @@ a.nav-dd__item:hover{background:#faf9f8}
 
 .heroV2 h1 {
   font-family: 'Fraunces', Georgia, serif;
-  font-weight: 500;
-  font-size: clamp(42px, 6.4vw, 78px);
+  font-weight: 400;
+  font-size: clamp(44px, 6.8vw, 86px);
   line-height: 1.02;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   color: var(--ink);
   margin: 30px 0 0;
   text-wrap: balance;
@@ -423,8 +431,17 @@ a.nav-dd__item:hover{background:#faf9f8}
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 38px;
+  margin-top: 42px;
 }
+/* Pearl's glowing pill, in amber: a soft warm halo that breathes. */
+.heroV2__actions .btn-solid {
+  padding: 17px 34px;
+  box-shadow: 0 0 0 6px rgba(253, 226, 196, 0.55), 0 18px 44px -14px rgba(180, 83, 9, 0.55), 0 0 60px -6px rgba(249, 200, 170, 0.75);
+}
+.heroV2__actions .btn-solid:hover {
+  box-shadow: 0 0 0 8px rgba(253, 226, 196, 0.65), 0 22px 50px -14px rgba(180, 83, 9, 0.6), 0 0 80px -4px rgba(249, 200, 170, 0.85);
+}
+.nav-links a.cta { box-shadow: 0 0 0 4px rgba(253, 226, 196, 0.5), 0 8px 26px -10px rgba(180, 83, 9, 0.55); }
 
 /* ---------- Load-in motion -----------------------------------------------
    The hero is above the fold, so an IntersectionObserver would fire everything
