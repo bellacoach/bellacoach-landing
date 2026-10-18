@@ -339,9 +339,14 @@ a.nav-dd__item:hover{background:#faf9f8}
     radial-gradient(38% 46% at 22% 30%, rgba(253, 226, 196, 0.85) 0%, rgba(253, 226, 196, 0) 70%),
     radial-gradient(34% 40% at 80% 24%, rgba(249, 222, 214, 0.80) 0%, rgba(249, 222, 214, 0) 70%),
     radial-gradient(46% 42% at 60% 70%, rgba(254, 240, 214, 0.90) 0%, rgba(254, 240, 214, 0) 72%),
-    radial-gradient(30% 34% at 12% 78%, rgba(250, 228, 220, 0.65) 0%, rgba(250, 228, 220, 0) 70%),
-    var(--bg);
+    radial-gradient(30% 34% at 12% 78%, rgba(250, 228, 220, 0.65) 0%, rgba(250, 228, 220, 0) 70%);
   filter: saturate(1.05);
+  /* NO solid base, and the blooms fade to TRANSPARENT at the foot: the page's
+     fixed .glow layer shows through below the hero, so fading to solid cream
+     drew a line where it starts showing (Nick, 2026-10-18). Transparent at the
+     edge means the same backdrop on both sides of it. */
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
   /* A slow drift, so the page is never completely still. Transform only. */
   animation: heroDrift 38s ease-in-out infinite alternate;
 }
@@ -349,22 +354,20 @@ a.nav-dd__item:hover{background:#faf9f8}
   position: absolute;
   inset: 0;
   z-index: -1;
-  /* Three jobs. The radial keeps the centre light enough for dark ink over the
-     charcoal accent wall the headline lands on. The linear fades the top into
-     the header pill and the bottom into the next section, so the photograph has
-     no visible edge. Values are tuned against measured contrast, not taste. */
-  /* The top fades into the header pill. The white glows sit above the foot
-     (not ON the bottom edge, where they drew a line against the next section,
-     Nick 2026-10-18). */
+  /* The top fades into the header pill; white glows and the dune sit near the
+     foot. The whole layer (dune included) fades to TRANSPARENT at the bottom
+     edge, like .heroV2__bg, so the page's fixed .glow shows through on both
+     sides of the edge and there is no seam (Nick, 2026-10-18). */
   background:
     linear-gradient(180deg, var(--bg) 0%, rgba(250, 250, 249, 0) 16%),
     radial-gradient(70% 30% at 30% 80%, rgba(255, 255, 255, 0.90) 0%, rgba(255, 255, 255, 0) 70%),
     radial-gradient(60% 28% at 78% 78%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 72%),
     radial-gradient(60% 46% at 50% 44%, rgba(255, 252, 247, 0.70) 0%, rgba(255, 252, 247, 0) 75%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
 }
-/* The dune: one long, soft white curve near the foot of the hero. It ENDS at
-   the hero's bottom edge, already the page colour; it used to hang 18% below
-   and get cut off while still nearly white. */
+/* The dune: one long, soft white curve near the foot of the hero, fading out
+   (the wash's mask takes it to transparent at the edge). */
 .heroV2__wash::after {
   content: "";
   position: absolute;
@@ -373,21 +376,8 @@ a.nav-dd__item:hover{background:#faf9f8}
   bottom: 0;
   height: 40%;
   border-radius: 50% 50% 0 0 / 70% 70% 0 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.5) 45%, var(--bg) 88%, var(--bg) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.5) 45%, rgba(255, 255, 255, 0) 100%);
   box-shadow: 0 -40px 80px -40px rgba(180, 83, 9, 0.10);
-}
-/* Belt and braces: the last 140px always fade to exactly the page colour, on
-   top of every layer above, so the next section starts with no seam. */
-.heroV2::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 140px;
-  z-index: -1;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(250, 250, 249, 0) 0%, var(--bg) 100%);
 }
 .heroV2__inner { max-width: 880px; margin: 0 auto; padding: 0 24px; }
 
