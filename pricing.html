@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bella Pricing — Treatment Coordinator Training from $250/mo</title>
+<title>Bella Pricing — Treatment Coordinator Training from $99/mo</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<meta name="description" content="Bella pricing: AI role-play and coaching for dental treatment coordinators from $250 per user/month. Three plans, from single practices to DSOs.">
+<meta name="description" content="Bella pricing: AI role-play and coaching for dental treatment coordinators from $99 per office/month. Three plans, from single practices to DSOs.">
 <link rel="canonical" href="https://bellacoach.com/pricing">
 <meta property="og:site_name" content="Bella">
 <meta property="og:title" content="Pricing — Bella">
-<meta property="og:description" content="Bella pricing: AI role-play and coaching for dental treatment coordinators from $250 per user/month. Three plans, from single practices to DSOs.">
+<meta property="og:description" content="Bella pricing: AI role-play and coaching for dental treatment coordinators from $99 per office/month. Three plans, from single practices to DSOs.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bellacoach.com/pricing">
 <meta property="og:image" content="https://bellacoach.com/images/og/pricing.png">
@@ -21,7 +21,7 @@
 <meta property="og:image:alt" content="Pricing — Bella">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Pricing — Bella">
-<meta name="twitter:description" content="Bella pricing: AI role-play and coaching for dental treatment coordinators from $250 per user/month. Three plans, from single practices to DSOs.">
+<meta name="twitter:description" content="Bella pricing: AI role-play and coaching for dental treatment coordinators from $99 per office/month. Three plans, from single practices to DSOs.">
 <meta name="twitter:image" content="https://bellacoach.com/images/og/pricing.png">
 
 <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -685,17 +685,17 @@ a.nav-dd__item:hover{background:#faf9f8}
         {
           "@type": "Offer", "name": "Self-Serve", "url": "https://bellacoach.com/pricing",
           "price": "250", "priceCurrency": "USD",
-          "priceSpecification": { "@type": "UnitPriceSpecification", "price": "250", "priceCurrency": "USD", "unitText": "per user per month", "billingDuration": "P1M" }
+          "priceSpecification": { "@type": "UnitPriceSpecification", "price": "99", "priceCurrency": "USD", "unitText": "per office per month", "billingDuration": "P1M" }
         },
         {
           "@type": "Offer", "name": "Customization", "url": "https://bellacoach.com/pricing",
           "price": "500", "priceCurrency": "USD",
-          "priceSpecification": { "@type": "UnitPriceSpecification", "price": "500", "priceCurrency": "USD", "unitText": "per user per month", "billingDuration": "P1M" }
+          "priceSpecification": { "@type": "UnitPriceSpecification", "price": "199", "priceCurrency": "USD", "unitText": "per office per month", "billingDuration": "P1M" }
         },
         {
           "@type": "Offer", "name": "White-Glove", "url": "https://bellacoach.com/pricing",
           "price": "750", "priceCurrency": "USD",
-          "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": "750", "maxPrice": "1500", "priceCurrency": "USD", "unitText": "per user per month", "billingDuration": "P1M" }
+          "priceSpecification": { "@type": "UnitPriceSpecification", "price": "249", "priceCurrency": "USD", "unitText": "per office per month", "billingDuration": "P1M" }
         }
       ]
     },
@@ -709,7 +709,7 @@ a.nav-dd__item:hover{background:#faf9f8}
     {
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "Who counts as a user?", "acceptedAnswer": { "@type": "Answer", "text": "Each person with their own Bella login is one user, usually a treatment coordinator, sometimes an office manager or associate who presents treatment. Your order form sets how many users are covered." } },
+        { "@type": "Question", "name": "What counts as an office?", "acceptedAnswer": { "@type": "Answer", "text": "One office is one practice location. Its price covers everyone there who uses Bella, from treatment coordinators to office managers and associates who present treatment, with no charge per login." } },
         { "@type": "Question", "name": "Is it billed monthly or annually? Is there a contract?", "acceptedAnswer": { "@type": "Answer", "text": "The term and billing frequency are set in your order form. Subscriptions are billed in advance and renew for the same length unless either party gives notice at least 30 days before the term ends." } },
         { "@type": "Question", "name": "Is the setup fee refundable?", "acceptedAnswer": { "@type": "Answer", "text": "No. The setup fee is billed once, at the start, and is non-refundable." } },
         { "@type": "Question", "name": "Can the price change later?", "acceptedAnswer": { "@type": "Answer", "text": "Only for a renewal term, and only with at least 30 days' notice before that term begins." } },
@@ -788,7 +788,7 @@ a.nav-dd__item:hover{background:#faf9f8}
 
       <div class="roi-field">
         <label class="roi-label" for="roi-prod">
-          Monthly production per coordinator
+          Monthly production per office
           <output id="roi-prod-out" for="roi-prod">$50,000</output>
         </label>
         <input class="roi-range" type="range" id="roi-prod"
@@ -807,11 +807,11 @@ a.nav-dd__item:hover{background:#faf9f8}
       </div>
 
       <div class="roi-field">
-        <label class="roi-label" for="roi-seats">
-          Coordinators using Bella
-          <output id="roi-seats-out" for="roi-seats">1</output>
+        <label class="roi-label" for="roi-offices">
+          Offices using Bella
+          <output id="roi-offices-out" for="roi-offices">1</output>
         </label>
-        <input class="roi-range" type="range" id="roi-seats"
+        <input class="roi-range" type="range" id="roi-offices"
                min="1" max="12" step="1" value="1">
         <div class="roi-ticks"><span>1</span><span>6</span><span>12</span></div>
         <div class="roi-tier">
@@ -832,12 +832,12 @@ a.nav-dd__item:hover{background:#faf9f8}
 
   <p class="roi-foot">
     This is your arithmetic, not a forecast &#8212; the improvement figure is the one
-    you choose. Production is <strong>per coordinator</strong>, so the return and
-    the cost both scale with seats: a second coordinator brings their own cases,
-    not a second share of the same ones. It assumes the improvement applies to
-    treatment those coordinators present, compares against Bella&#8217;s per-user
-    price at the tier selected, excludes setup, and counts production rather than
-    collections.
+    you choose. Production is <strong>per office</strong>, so the return and the
+    cost both scale with offices: a second office brings its own patients, and
+    every coordinator in an office is covered by its one price. It assumes the
+    improvement applies to treatment that office presents, compares against
+    Bella&#8217;s per-office price at the tier selected, excludes setup, and
+    counts production rather than collections.
   </p>
 </section>
 
@@ -855,7 +855,7 @@ a.nav-dd__item:hover{background:#faf9f8}
       </div>
       <div class="tier-price">
         <div class="setup">Setup <span>$500</span></div>
-        <div class="monthly"><span class="amount">$250</span><span class="unit">per user / month</span></div>
+        <div class="monthly"><span class="amount">$99</span><span class="unit">per office / month</span></div>
       </div>
       <div class="tier-divider"></div>
       <ul class="tier-features">
@@ -878,7 +878,7 @@ a.nav-dd__item:hover{background:#faf9f8}
       </div>
       <div class="tier-price">
         <div class="setup">Setup <span>$1,500</span></div>
-        <div class="monthly"><span class="amount">$500</span><span class="unit">per user / month</span></div>
+        <div class="monthly"><span class="amount">$199</span><span class="unit">per office / month</span></div>
       </div>
       <div class="tier-divider"></div>
       <ul class="tier-features">
@@ -902,7 +902,7 @@ a.nav-dd__item:hover{background:#faf9f8}
       </div>
       <div class="tier-price">
         <div class="setup">Setup <span>$5,000–$15,000</span></div>
-        <div class="monthly"><span class="amount">$750–$1,500</span><span class="unit">per user / month</span></div>
+        <div class="monthly"><span class="amount">$249</span><span class="unit">per office / month</span></div>
       </div>
       <div class="tier-divider"></div>
       <ul class="tier-features">
@@ -926,8 +926,8 @@ a.nav-dd__item:hover{background:#faf9f8}
     <h2>Pricing questions</h2>
     <div class="pfaq__list">
       <details>
-        <summary>Who counts as a user?</summary>
-        <p>Each person with their own Bella login is one user &#8212; usually a treatment coordinator, sometimes an office manager or associate who presents treatment. Your order form sets how many users are covered.</p>
+        <summary>What counts as an office?</summary>
+        <p>One office is one practice location. Its price covers everyone there who uses Bella &#8212; treatment coordinators, office managers, and associates who present treatment &#8212; with no charge per login.</p>
       </details>
       <details>
         <summary>Is it billed monthly or annually? Is there a contract?</summary>
@@ -964,19 +964,19 @@ a.nav-dd__item:hover{background:#faf9f8}
 (function () {
   var prod  = document.getElementById('roi-prod');
   var lift  = document.getElementById('roi-lift');
-  var seats = document.getElementById('roi-seats');
-  if (!prod || !lift || !seats) return;
+  var offices = document.getElementById('roi-offices');
+  if (!prod || !lift || !offices) return;
 
   var prodOut  = document.getElementById('roi-prod-out');
   var liftOut  = document.getElementById('roi-lift-out');
-  var seatsOut = document.getElementById('roi-seats-out');
+  var officesOut = document.getElementById('roi-offices-out');
   var gainEl   = document.getElementById('roi-gain');
   var yearEl   = document.getElementById('roi-year');
   var verdict  = document.getElementById('roi-verdict');
   var btnSS    = document.getElementById('roi-tier-ss');
   var btnCU    = document.getElementById('roi-tier-cu');
 
-  var PRICE = { ss: 250, cu: 500 };
+  var PRICE = { ss: 99, cu: 199 }; /* per office per month (2026-10-18) */
   /* Customization is the featured tier and the one most visitors land on, so
      the comparison defaults there. Defaulting to Self-Serve would quietly halve
      the cost side of the sum and flatter the result. */
@@ -996,26 +996,25 @@ a.nav-dd__item:hover{background:#faf9f8}
   function render() {
     var p = parseFloat(prod.value);
     var l = parseFloat(lift.value);
-    var s = parseInt(seats.value, 10);
+    var s = parseInt(offices.value, 10);
     var cost = PRICE[tier] * s;
-    /* Per coordinator, so it scales with seats. Reading the slider as the
-       OFFICE total and then multiplying by seats would claim a practice can
-       double its revenue by buying a second licence — two coordinators split
-       the same production, they do not each bring another office. Read as
-       per-coordinator, both sides of the sum scale together and the ratio
-       stays honest. */
+    /* Per office, on both sides: pricing is per office (2026-10-18), and an
+       office's production is its own, so a second office brings its own
+       patients. Every coordinator in an office shares its one price, so
+       counting coordinators here would multiply the gain without the cost.
+       Both sides scale together and the ratio stays honest. */
     var gain = p * (l / 100) * s;
 
     prodOut.textContent  = usd0.format(p);
     liftOut.textContent  = (Number.isInteger(l) ? l : l.toFixed(1)) + '%';
-    seatsOut.textContent = String(s);
+    officesOut.textContent = String(s);
 
     gainEl.textContent = '+' + usd0.format(gain);
     yearEl.textContent = usd0.format(gain * 12) + ' over a year';
 
     var net = gain - cost;
     var costLine = usd0.format(cost) + '/month for ' + s +
-      (s === 1 ? ' coordinator' : ' coordinators');
+      (s === 1 ? ' office' : ' offices');
 
     if (net < 0) {
       verdict.innerHTML = 'At this level Bella costs ' + costLine +
@@ -1031,7 +1030,7 @@ a.nav-dd__item:hover{background:#faf9f8}
         '&#215; over</strong> &#8212; ' + usd0.format(net) + ' a month you keep.';
     }
 
-    paint(prod); paint(lift); paint(seats);
+    paint(prod); paint(lift); paint(offices);
   }
 
   function setTier(next) {
@@ -1041,7 +1040,7 @@ a.nav-dd__item:hover{background:#faf9f8}
     render();
   }
 
-  [prod, lift, seats].forEach(function (el) {
+  [prod, lift, offices].forEach(function (el) {
     el.addEventListener('input', render);
   });
   btnSS.addEventListener('click', function () { setTier('ss'); });

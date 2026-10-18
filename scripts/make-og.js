@@ -1,7 +1,7 @@
 // Renders 1200x630 share cards with headless Chrome into the repo's images/og/.
 // Usage (repo root): node scripts/make-og.js . — re-run after adding a post, then point its og:image at images/og/blog-<slug>.png
 const fs=require('fs'),path=require('path'),{execFileSync}=require('child_process');
-const repo=process.argv[2];
+const repo=path.resolve(process.argv[2]); // absolute: Chrome writes a relative --screenshot path somewhere else, silently (2026-10-18)
 const chrome='C:/Program Files/Google/Chrome/Application/chrome.exe';
 const out=path.join(repo,'images','og'); fs.mkdirSync(out,{recursive:true});
 const work=path.join(require('os').tmpdir(),'bella-og'); fs.mkdirSync(work,{recursive:true});
@@ -12,7 +12,7 @@ const posts=fs.readdirSync(path.join(repo,'blog')).filter(f=>f.endsWith('.html')
   return {slug:f.replace('.html',''),kicker:(h.match(/"articleSection": "([^"]+)"/)||[])[1],title:(h.match(/"headline": "([^"]+)"/)||[])[1].replace(/\\"/g,'"'),foot:'The treatment coordinator blog'};
 });
 const cards=[
- {slug:'pricing',kicker:'Pricing',title:'From $250 per user / month. Three plans, from single practices to DSOs.',foot:'Bella pricing'},
+ {slug:'pricing',kicker:'Pricing',title:'From $99 per office / month. Three plans, from single practices to DSOs.',foot:'Bella pricing'},
  {slug:'bella-coach',kicker:'Bella Coach',title:'Rehearse the consult against a patient who pushes back.',foot:'AI role-play for dental treatment coordinators'},
  {slug:'treatment-desk',kicker:'Bella Treatment Desk',title:'Build the estimate at the chair, not after the family leaves.',foot:'Chairside estimates and case-acceptance tracking'},
  {slug:'bella-voice',kicker:'Bella Voice',title:'Coach the consult that actually happened.',foot:'Consult recording and coaching, BAA-backed'},

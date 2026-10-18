@@ -15,9 +15,9 @@
   var GA_ID = 'G-7FVZ87TK7H';
   var PIXEL_ID = '1379062707534315';
 
-  // Monthly list price per user, sent as the lead's value so reports show
+  // Monthly list price per office, sent as the lead's value so reports show
   // pipeline rather than a bare count. White-Glove is a range; use the floor.
-  var PLAN_VALUE = { 'self-serve': 250, 'customization': 500, 'white-glove': 750 };
+  var PLAN_VALUE = { 'self-serve': 99, 'customization': 199, 'white-glove': 249 };
 
   var path = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
   var HUBS = ['/blog/objections', '/blog/treatment-presentation', '/blog/treatment-coordinator-role'];
@@ -173,18 +173,18 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     // ROI calculator (/pricing): one event per visit, after the visitor stops dragging.
-    var roi = ['roi-prod', 'roi-lift', 'roi-seats'].map(function (id) { return document.getElementById(id); });
+    var roi = ['roi-prod', 'roi-lift', 'roi-offices'].map(function (id) { return document.getElementById(id); });
     if (roi[0] && roi[1] && roi[2]) {
       var roiSent = false, roiT;
       roi.forEach(function (el) {
         el.addEventListener('change', function () {
           clearTimeout(roiT);
           roiT = setTimeout(function () {
-            track('roi_calculated', { production: +roi[0].value, lift: +roi[1].value, seats: +roi[2].value });
+            track('roi_calculated', { production: +roi[0].value, lift: +roi[1].value, offices: +roi[2].value });
             if (!roiSent) { fbq('trackCustom', 'ROICalculated'); roiSent = true; }
             var form = document.getElementById('demoForm');
             if (form) {
-              [['roi_production', roi[0].value], ['roi_lift', roi[1].value], ['roi_seats', roi[2].value]].forEach(function (kv) {
+              [['roi_production', roi[0].value], ['roi_lift', roi[1].value], ['roi_offices', roi[2].value]].forEach(function (kv) {
                 var el2 = form.elements[kv[0]];
                 if (!el2) { el2 = document.createElement('input'); el2.type = 'hidden'; el2.name = kv[0]; form.appendChild(el2); }
                 el2.value = kv[1];
