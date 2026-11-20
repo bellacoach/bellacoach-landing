@@ -13,9 +13,10 @@
    Lead tracking is unchanged: tracking.js fills the form's hidden fields on
    any [data-demo] click and fires generate_lead on the "bella:lead" event. */
 (function () {
-  // Google Calendar appointment schedule (booking page) for nick@bellacoach.com.
+  // Google Calendar "Book a Demo" schedule (15 min) for nick@bellacoach.com, linked
+  // directly so visitors don't land on the page that also lists "30 min with Nick".
   // Empty = no calendar option; the form works on its own.
-  var BOOKING_URL = 'https://calendar.app.google/GdYjaptiq4LRoq389';
+  var BOOKING_URL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1JFmJC2-HYtzhejjlS4WhJ44fM8Kl3tkZ6oLjo4dbFra9QWrxFGvhAi1QWIoRAEFXhUQwxBzJ9';
 
   var CSS =
     '.bk-overlay{position:fixed;inset:0;z-index:120;background:rgba(28,25,23,.55);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;padding:48px 20px;overflow-y:auto}' +
