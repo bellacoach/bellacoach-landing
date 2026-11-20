@@ -20,3 +20,6 @@ Thumbs.db
 # Deliberately NOT ignored here: node_modules, dist, .env. This site is
 # hand-written static HTML with inline styles — no package.json, no build step,
 # no secrets. Add those rules if that ever stops being true.
+
+# Marketing context with prices, sales numbers and customer counts (repo is public)
+.agents/*.private.md

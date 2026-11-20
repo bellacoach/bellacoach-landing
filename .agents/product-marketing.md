@@ -1,19 +1,24 @@
 # Product Marketing Context
 
-**Document version:** v1
-**Last updated:** 2026-10-16
+**Document version:** v3
+**Last updated:** 2026-11-20
 
 Drafted from the live site copy (index, pricing, product pages, blog, privacy, terms) plus the decisions in the 16 Oct 2026 SEO roadmap. Items marked **[confirm]** are inferred, not stated by the team.
+
+**Private half:** this repo is public, so prices, sales numbers and customer counts live in `.agents/product-marketing.private.md` (git-ignored, on Nick's machine only). Read both. Never copy anything from the private file into this one, the site, or a commit.
+
+**The one KPI (Nick, 2026-11-19):** get leads and convert them to sales. Every marketing task is judged by whether it moves **walkthroughs booked per week**, then **walkthroughs held**, then **offices paying**. The lead log is `bella-projects/outreach/leads.csv`.
 
 ## Product Overview
 **One-liner:** Bella lets dental treatment coordinators rehearse the treatment-plan conversation against a realistic AI patient, then coaches them on the consults they actually had.
 **What it does:** Three products in one loop (rehearse, present, review, improve). **Bella Coach**: AI role-play with 14 patient personas across specialties and three difficulty levels, a live warmth meter, and scoring against the practice's own playbook. **Bella Treatment Desk**: chairside estimates (treatment, insurance, patient portion, monthly options) from the practice's fee schedule, with follow-ups and case-acceptance tracking by coordinator and office. **Bella Voice**: with everyone's consent, records real consults and shows the coordinator where the case turned; the Rewind turns a moment into a new rep. Coming soon: **Bella Onboard** (new-hire training) and **Bella Credentials** (credentialing and payer enrollment).
 **Product category:** Treatment coordinator training and coaching software; dental case acceptance software. Searches use "treatment coordinator training", "dental case presentation", "objection handling", "case acceptance".
 **Product type:** B2B SaaS (web app at app.bellacoach.com, optional Chrome extension "Bella Companion" for Voice).
-**Business model:** Per-user monthly subscription plus a one-time setup fee, three tiers (early-access pricing): Self-Serve $250/user/mo + $500 setup (1–3 offices); Customization $500/user/mo + $1,500 setup (4–15 offices, includes Treatment Desk and Bella Voice); White-Glove $750–$1,500/user/mo + $5,000–$15,000 setup (16+ offices, DSOs). Pricing unit is **"per user"** (one login, usually a coordinator).
+**Business model:** Monthly subscription, three tiers (Self-Serve, Customization, White-Glove). On 2026-10-18 Nick moved pricing to **per office** (figures in the private file) and then removed the public pricing page the same day: /pricing redirects to Book a demo, and the price is quoted after the walkthrough. **Never put a price in public copy, schema, cold email or reply drafts.** [confirm the current price list before quoting]
 
 ## Target Audience
 **Target companies:** US dental practices, multi-location groups and DSOs. Lead specialty is pediatric (first partner: Children's Dental FunZone), but sold to all specialties (pediatric, orthodontics, oral surgery, general per the original brief) **[confirm list]**.
+**Outbound ICP (cold email, since 2026-11-04):** pediatric dentists and orthodontists in Southern California, found city by city (`outreach/cities.json`). Existing customers are on the do-not-contact list.
 **Decision-makers:** Practice owners, COOs and regional/office managers (buyers); treatment coordinators (users).
 **Primary use case:** Giving coordinators reps on the conversation that decides the case before they have it with a real family.
 **Jobs to be done:**
@@ -45,7 +50,9 @@ Drafted from the live site copy (index, pricing, product pages, blog, privacy, t
 **Emotional tension:** Coordinators feel guilt saying a big number to a parent; owners fear pushy selling that damages trust.
 
 ## Competitive Landscape
-**Direct:** Other dental treatment-coordinator training or AI role-play tools **[confirm named competitors]**: fall short if they're courses or generic scripts not tied to outcomes.
+**Direct:** Other dental treatment-coordinator training or AI role-play tools: fall short if they're courses or generic scripts not tied to outcomes. Seen in search results on 2026-11-19 (third-party SEO audit; not yet profiled, so treat as a list of names, not facts about them):
+- AI role-play and coaching: Trainio, RepLab, Dentra AI, Rilla, Bilanx Voice Coach.
+- Courses and coaching: All-Star Dental Academy, DDS Success, The Team Training Institute, OrthoTeam University, Dental A Team.
 **Secondary:** Dental sales/consulting programs and live coaching: expensive, episodic, not measured on accepted-and-paid.
 **Indirect:** Shadowing an experienced coordinator; doing nothing and hiring "the friendliest person at the front desk".
 
@@ -84,7 +91,7 @@ Drafted from the live site copy (index, pricing, product pages, blog, privacy, t
 **How they describe us:**
 - "The coordinators who rehearse in Bella walk into the consult ready. You can hear it in the first thirty seconds." (Evelyn Lahiji, COO, Children's Dental FunZone)
 **Words to use:** treatment coordinator, case acceptance, treatment presentation, rehearse, reps, objection, playbook, accepted and paid, chairside, consent, BAA, HIPAA.
-**Words to avoid:** "HIPAA certified" (no such certification), "close" as pressure language, "platform" (unconfirmed), UK spellings.
+**Words to avoid:** "HIPAA certified" (no such certification), "close" as pressure language, "platform" (unconfirmed), UK spellings, any promised result such as "increase case acceptance 10–15%" (no evidence yet; ask about their numbers instead).
 **Glossary:**
 | Term | Meaning |
 |------|---------|
@@ -112,11 +119,11 @@ Drafted from the live site copy (index, pricing, product pages, blog, privacy, t
 **Terms we own:** reps, the Rewind, warmth meter, "practice the conversation before it counts".
 **Never use (and why):** "HIPAA certified" (doesn't exist); "AI Sales Coach" for the company (old naming).
 **Spelling:** US English throughout ("practice" as noun and verb, "behavior", "itemize", "Mom").
-**Naming:** company = **Bella**; products = **Bella Coach**, **Bella Treatment Desk**, **Bella Voice**. Don't call the company "Bella Coach". Legal entity: Bella Coach LLC (legal pages only).
+**Naming:** company = **Bella**; products = **Bella Coach**, **Bella Treatment Desk**, **Bella Voice**. Don't call the company "Bella Coach". Legal entity: Bella Coach LLC (legal pages only). For search engines and AI answers the Organization schema is named **"Bella Dental Coach"** (alternateName "Bella"), because "Bella" and "Bellacoach" alone collide with unrelated companies. Visible copy still says "Bella".
 
 ## Proof Points
 **Metrics:** None published yet **[need real numbers]**.
-**Customers:** Children's Dental FunZone (partner, named with consent **[confirm written consent per Terms §17]**).
+**Customers:** Children's Dental FunZone (partner; Evelyn Lahiji's testimonial approved 2026-09-08). Other customers are listed in the private file; never name one publicly without its written OK.
 **Testimonials:**
 > "The coordinators who rehearse in Bella walk into the consult ready. You can hear it in the first thirty seconds." — Evelyn Lahiji, COO, Children's Dental FunZone
 **Value themes:**
@@ -127,18 +134,30 @@ Drafted from the live site copy (index, pricing, product pages, blog, privacy, t
 | Safe with patient data | BAA gate, consent first, 90-day audio deletion |
 
 ## Goals
-**Business goal:** Early-access customer acquisition among US dental practices and groups.
-**Conversion action:** Book a 15-minute walkthrough (demo form, Formspree). Secondary: newsletter/template sign-ups (planned).
-**Current metrics:** Unknown; lead conversions aren't tracked yet (roadmap Phase 1).
+**Business goal:** New paying offices (Nick's reasoning is in the private file).
+**Conversion action:** Book a 15-minute walkthrough. Two ways in, on every page since 2026-11-19 (`book.js`):
+- **Pick a time:** Nick's 15-minute "Book a Demo" Google Calendar schedule (`BOOKING_URL` in `book.js`), live since 2026-11-20, with a Meet link added to each booking. Saturdays are open on purpose.
+- **Leave details:** the short Formspree form; Nick replies within 24 hours.
+
+**Funnel and where each number comes from:**
+| Stage | Source of truth |
+|-------|-----------------|
+| Lead | `outreach/leads.csv`: cold-email replies, Formspree submissions, calendar bookings, referrals |
+| Walkthrough booked | Google Calendar invite, or a time agreed by email, logged in leads.csv |
+| Walkthrough held | leads.csv (Nick marks it) |
+| Paying | leads.csv (Nick marks it) |
+
+**Current metrics:** in the private file. Count from `outreach/leads.csv`, not GA4.
 
 ## Paid Ads (optional)
 **Target CPA / ROAS:** [unknown]
 **Conversions that count:**
 | Action | Means | Value | Feeds bidding? |
 |--------|-------|-------|----------------|
-| generate_lead (demo) | Walkthrough requested | Tier monthly price | Yes (once live) |
+| generate_lead (demo) | Walkthrough requested through the form | 0 (no public price) | Yes |
+| booking_calendar_open | Opened the Google Calendar booking page | none | No: intent only, not a booking |
 | sign_up | Newsletter / template / waitlist | 0 | No |
-**Known tracking weaknesses:** Meta Pixel missing on product pages; no lead event (fixed in roadmap Phase 1).
+**Known tracking weaknesses:** Calendar bookings happen on Google's site, so neither GA4 nor the Pixel sees them; count them from the calendar invites in leads.csv. The Pixel and lead events are live (fixed in roadmap Phase 1).
 **Agent may:** read, compare, flag, draft, recommend
 **Agent may not (without approval):** change budgets or bids, pause or launch, edit tracking, publish ads
 
@@ -146,10 +165,17 @@ Drafted from the live site copy (index, pricing, product pages, blog, privacy, t
 *Decisions and tested lessons. Newest first. Keep it to about 20 active entries.*
 | Date | Learning | Evidence | Applies to | Status |
 |------|----------|----------|------------|--------|
+| 2026-11-19 | Only email addresses Reoon marks "verified" are safe to cold-email; "risky" ones bounce | Risky addresses bounced far more often than verified ones (2026-11-16; counts in the private file); Nick made it the rule 2026-11-20 | cold-email, prospecting | active |
+| 2026-11-19 | Organization schema says "Bella Dental Coach" (alternateName "Bella"); visible brand stays "Bella" | SEO audit: "Bella" alone is ambiguous in search | schema, about page | active |
+| 2026-11-15 | Every cold email is about case acceptance; never promise a lift | Nick's direction; FTC substantiation | cold-email, ads, copy | active |
+| 2026-11-10 | No links or web addresses in emails sent through the Gmail connector | It rewrote bellacoach.com into a dead google.com redirect | cold-email, reply drafts | active |
+| 2026-10-18 | No public pricing; the price comes after the walkthrough | Nick removed the pricing page | site, schema, emails | active |
 | 2026-10-16 | Company is "Bella"; "Bella Coach" is only the role-play product | SEO audit: brand/product name collision | all copy, titles, schema | active |
-| 2026-10-16 | Price unit is "per user" everywhere | Terms say seats, pricing says user, home said coordinator | pricing, schema, copy | active |
+| 2026-10-16 | Price unit is "per user" everywhere | Terms say seats, pricing says user, home said coordinator | pricing, schema, copy | retired: pricing moved to per office, then off the site (2026-10-18) |
 | 2026-10-16 | Say "BAA-backed, built to support HIPAA"; never "HIPAA certified" | No certification exists | product, privacy copy | active |
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v3 (2026-11-20) — Split for a public repo: prices, current metrics, customer count and Nick's quote moved to the git-ignored private file. Calendar booking live; cold email resumed verified-only.
+- v2 (2026-11-19) — Set the one KPI (walkthroughs booked → held → paying) and the lead log; pricing now off the site; outbound ICP; competitor names from the Nov 19 audit; "Bella Dental Coach" in schema; real current metrics; new learnings from cold email.
 - v1 (2026-10-16) — Initial context, auto-drafted from site copy plus SEO-roadmap decisions.
