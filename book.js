@@ -15,7 +15,7 @@
 (function () {
   // Google Calendar appointment schedule (booking page) for nick@bellacoach.com.
   // Empty = no calendar option; the form works on its own.
-  var BOOKING_URL = '';
+  var BOOKING_URL = 'https://calendar.app.google/GdYjaptiq4LRoq389';
 
   var CSS =
     '.bk-overlay{position:fixed;inset:0;z-index:120;background:rgba(28,25,23,.55);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;padding:48px 20px;overflow-y:auto}' +
