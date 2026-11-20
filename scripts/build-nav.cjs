@@ -2,7 +2,7 @@
 // can't drift (there were seven variants on 2026-10-18).
 //   node scripts/build-nav.cjs
 // Replaces each page's <div class="nav-outer" id="nav"> ... </div> block, and
-// makes sure the page loads /nav.css and /nav.js. Re-run after editing MENU.
+// makes sure the page loads /nav.css, /nav.js and /book.js. Re-run after editing MENU.
 //
 // Products-first, Videa-style (Nick, 2026-10-18): products grouped by the job
 // they do, each with an icon and a one-line description. No pricing link: the
@@ -68,7 +68,7 @@ const MENU = [
 
 // Which pages get which Book-a-demo button, and which item is "here".
 //   modal: the page has the demo form (#book-demo opens it in place)
-//   link:  the form lives on the homepage
+//   link:  /#book-demo, opened in place by book.js (falls back to the homepage without JS)
 //   none:  legal and about pages stay quiet
 function pageOptions(rel) {
   const blog = rel.startsWith('blog/') || rel === 'blog.html'
@@ -103,7 +103,7 @@ function menu(m, current) {
 
 function nav(opts) {
   const cta = opts.cta === 'modal' ? '\n      <a href="#book-demo" class="cta" data-demo>Book a demo</a>'
-    : opts.cta === 'link' ? '\n      <a href="/#book-demo" class="cta" data-cta="nav">Book a demo</a>' : ''
+    : opts.cta === 'link' ? '\n      <a href="/#book-demo" class="cta" data-demo data-cta="nav">Book a demo</a>' : ''
   return `<div class="nav-outer" id="nav">
   <div class="pill">
     <a href="/" class="brand">
@@ -135,6 +135,8 @@ for (const rel of pages) {
   s = s.slice(0, start) + nav(pageOptions(rel)) + s.slice(end + '\n</div>'.length)
   if (!s.includes('href="/nav.css"')) s = s.replace('</head>', '<link rel="stylesheet" href="/nav.css">\n</head>')
   if (!s.includes('src="/nav.js"')) s = s.replace('</body>', '<script src="/nav.js" defer></script>\n</body>')
+  // The booking modal (and the Google Calendar option) on every page with a nav.
+  if (!s.includes('src="/book.js"')) s = s.replace('<script src="/nav.js" defer></script>', '<script src="/nav.js" defer></script>\n<script src="/book.js" defer></script>')
   if (s !== before) { fs.writeFileSync(file, crlf ? s.replace(/\n/g, '\r\n') : s); changed++ }
 }
 console.log(`nav written to ${changed} of ${pages.length} pages`)
